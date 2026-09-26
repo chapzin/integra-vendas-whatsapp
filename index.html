@@ -1,0 +1,62 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Política de privacidade · Integra Vendas para WhatsApp</title>
+<style>
+  :root { --bg:#fbfcfb; --fg:#1d2621; --mut:#5b6b62; --ac:#0b7a5f; --ln:#dfe7e2; color-scheme: light; }
+  @media (prefers-color-scheme: dark) { :root { --bg:#111815; --fg:#e4ece7; --mut:#9db0a5; --ac:#5fd3ae; --ln:#26332c; color-scheme: dark; } }
+  body { margin:0; background:var(--bg); color:var(--fg); font:16px/1.6 system-ui,-apple-system,"Segoe UI",sans-serif; }
+  main { max-width:720px; margin:0 auto; padding:40px 16px 64px; }
+  h1 { font-size:1.7rem; line-height:1.2; margin:0 0 4px; text-wrap:balance; }
+  h2 { font-size:1.1rem; margin:32px 0 8px; }
+  p, li { color:var(--fg); }
+  .mut { color:var(--mut); font-size:.9rem; }
+  table { width:100%; border-collapse:collapse; font-size:.95rem; }
+  th, td { text-align:left; vertical-align:top; padding:8px 10px; border-bottom:1px solid var(--ln); }
+  th { color:var(--mut); font-weight:600; font-size:.8rem; text-transform:uppercase; letter-spacing:.04em; }
+  .tb { overflow-x:auto; }
+  a { color:var(--ac); }
+</style>
+</head>
+<body>
+<main>
+<h1>Política de privacidade</h1>
+<p class="mut">Extensão “Integra Vendas para WhatsApp” para o Google Chrome · vigente desde 26/09/2026</p>
+
+<p>A extensão é uma ferramenta de trabalho para vendedores de empresas clientes do Integra Vendas. Ela mostra, ao lado de uma conversa do WhatsApp Web, o cadastro do cliente, preços, estoque e pedidos do Integra Vendas, e ajuda o vendedor a montar orçamentos e lembrar retornos. Ela não envia mensagens: todo texto que prepara vai para a caixa de digitação, e quem aperta “Enviar” é o vendedor.</p>
+
+<h2>Que dados a extensão usa</h2>
+<div class="tb"><table>
+  <tr><th>Dado</th><th>Para quê</th><th>Onde fica</th></tr>
+  <tr><td>E-mail e senha do vendedor no Integra Vendas</td><td>Entrar no sistema. A senha é enviada uma vez, por HTTPS, à API do Integra Vendas e não é guardada.</td><td>Não é guardada. O que fica é o token de acesso devolvido pela API, no armazenamento local da extensão.</td></tr>
+  <tr><td>Nome e telefone do contato aberto no WhatsApp</td><td>Achar o cliente no cadastro do Integra Vendas e mostrar compras, preços e pedidos dele.</td><td>No computador do vendedor (armazenamento local da extensão). O telefone é enviado à API do Integra Vendas só para a busca do cliente.</td></tr>
+  <tr><td>Texto das mensagens da conversa aberta</td><td>Ler, no próprio navegador, pedidos de peça (“5 par botão new liberty 3”), a moto citada e pedidos de fechamento, para sugerir itens.</td><td>Lido na tela e descartado. Só os nomes de peça que o vendedor manda cotar vão à API do Integra Vendas, como termo de busca.</td></tr>
+  <tr><td>Anotações do vendedor: etapa da negociação, lembretes de retorno, motos do cliente, orçamentos em andamento, respostas prontas</td><td>Organizar o atendimento e avisar retornos na hora certa.</td><td>No computador do vendedor (armazenamento local da extensão). Orçamento e pedido só vão ao Integra Vendas quando o vendedor clica em salvar ou finalizar.</td></tr>
+</table></div>
+
+<h2>Com quem os dados são compartilhados</h2>
+<p>Só com a API do Integra Vendas da empresa em que o vendedor trabalha, que já é a dona do cadastro de clientes, produtos e pedidos. A extensão não tem servidor próprio, não usa ferramentas de análise ou publicidade, não vende dados e não os repassa a terceiros.</p>
+<p>As fotos de produto são baixadas dos endereços de imagem que o próprio cadastro do Integra Vendas informa. O botão “Pesquisar fora” abre, numa aba nova e só quando o vendedor clica, uma busca pelo nome da peça no Google ou em sites de fabricantes; nenhum dado do cliente vai nessa busca.</p>
+
+<h2>Por quanto tempo</h2>
+<p>Os dados locais ficam no navegador até o vendedor apagá-los em Ajustes → “Apagar dados”, sair da conta ou remover a extensão. Os dados enviados ao Integra Vendas seguem a política de retenção da empresa contratante.</p>
+
+<h2>Segurança</h2>
+<ul>
+  <li>Toda comunicação com a API é feita por HTTPS; a extensão recusa endereço sem HTTPS.</li>
+  <li>O token de acesso fica no processo de fundo da extensão e não é exposto à página do WhatsApp.</li>
+  <li>A extensão não carrega código de fora do pacote publicado na Chrome Web Store.</li>
+</ul>
+
+<h2>Uso limitado</h2>
+<p>O uso das informações recebidas pela extensão obedece à <a href="https://developer.chrome.com/docs/webstore/program-policies/limited-use">Política de Dados do Usuário da Chrome Web Store</a>, incluindo os requisitos de uso limitado.</p>
+
+<h2>Contato</h2>
+<p>Dúvidas ou pedidos sobre dados: <strong>chapzin@gmail.com</strong>.</p>
+
+<p class="mut">WhatsApp é marca da WhatsApp LLC. Esta extensão não é afiliada, patrocinada ou endossada pela WhatsApp LLC nem pela Meta.</p>
+</main>
+</body>
+</html>
