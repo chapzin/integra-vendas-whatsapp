@@ -360,8 +360,11 @@
   <tbody>
     <tr><td><b>A) Chrome da empresa</b><br>o responsável cadastrou o seu computador no painel da empresa</td><td>Nada. A extensão se instala e se atualiza sozinha. Só confira (veja abaixo).</td></tr>
     <tr><td><b>B) Instalador</b><br>você recebeu o arquivo <b>Instalar-IntegraVendas.exe</b></td><td>Roda o instalador uma vez e faz 3 cliques no Chrome. Nas versões novas, roda de novo o instalador novo.</td></tr>
+    <tr><td><b>C) Pasta compactada (.zip)</b><br>qualquer computador, inclusive Mac</td><td>Baixa o .zip, extrai numa pasta fixa e aponta o Chrome para ela. Nas versões novas, troca a pasta pela nova.</td></tr>
   </tbody>
 </table></div>
+
+<p>Para saber se o seu computador já está no caso A, abra <b>chrome://extensions</b>: se o cartão <b>Integra Vendas para WhatsApp</b> diz <b>Instalada pela sua organização</b>, não faça nada. Se não diz, use o B ou o C.</p>
 
 <div class="dica">Na dúvida, pergunte ao responsável: "meu computador está no Chrome da empresa ou eu uso o instalador?". A resposta muda só a instalação; o resto do manual é igual para todo mundo.</div>
 
@@ -389,6 +392,7 @@
 <p>O instalador copia a extensão para uma pasta fixa do seu usuário do Windows (<code>%LOCALAPPDATA%\IntegraVendas\extensao</code>), <b>já deixa o caminho copiado</b> para você colar e abre a página de Extensões do Chrome. Você só faz a parte que o Chrome exige que seja feita à mão.</p>
 
 <ol class="passos">
+  <li>Baixe o instalador em <a href="https://chapzin.github.io/integra-vendas-whatsapp/instalador/Instalar-IntegraVendas.exe"><b>https://chapzin.github.io/integra-vendas-whatsapp/instalador/Instalar-IntegraVendas.exe</b></a> (ou use o arquivo que o responsável mandou).</li>
   <li>Dê dois cliques em <b>Instalar-IntegraVendas.exe</b>. Se o Windows perguntar se quer executar, clique em <b>Mais informações</b> e depois em <b>Executar assim mesmo</b>.</li>
   <li>Abre uma janela preta com as instruções. Deixe ela aberta para consultar.</li>
   <li>O Chrome abre sozinho na página <b>Extensões</b>. Se não abrir, abra o Chrome e digite <b>chrome://extensions</b>.</li>
@@ -421,11 +425,34 @@
 
 <div class="dica">Clicar no ícone da extensão, lá em cima no Chrome, leva você direto para a aba do WhatsApp Web. Se ela não estiver aberta, o Chrome abre uma nova. Um número no ícone mostra quantos retornos já venceram (veja a parte 5).</div>
 
+<h4 id="p1-instalar-zip">C) Com a pasta compactada (.zip)</h4>
+
+<p>Serve para qualquer computador, inclusive quando o instalador não roda (Mac, Windows que bloqueia programas). Você faz à mão o que o instalador faria.</p>
+
+<ol class="passos">
+  <li>Baixe a extensão em <a href="https://chapzin.github.io/integra-vendas-whatsapp/instalador/integra-vendas-extensao.zip"><b>https://chapzin.github.io/integra-vendas-whatsapp/instalador/integra-vendas-extensao.zip</b></a>.</li>
+  <li>Clique com o botão direito no arquivo baixado e escolha <b>Extrair tudo</b> (no Mac, dois cliques no arquivo).</li>
+  <li>Guarde a pasta extraída num lugar fixo, por exemplo <b>Documentos</b>. Dentro dela deve aparecer o arquivo <b>manifest.json</b>.</li>
+  <li>No Chrome, abra <b>chrome://extensions</b> e ligue <b>Modo do desenvolvedor</b>.</li>
+  <li>Clique em <b>Carregar sem compactação</b> e escolha a pasta extraída (a que tem o <b>manifest.json</b>). Clique em <b>Selecionar pasta</b>.</li>
+  <li>Confira o cartão <b>Integra Vendas para WhatsApp</b> com a chave ligada e fixe o ícone (quebra-cabeça → alfinete).</li>
+  <li>Aperte <kbd>F5</kbd> no WhatsApp Web.</li>
+</ol>
+
+<div class="atencao">Não apague nem mova a pasta extraída: o Chrome lê a extensão dela. Se apagar, o painel some.</div>
+
+<p><b>Para atualizar com o .zip:</b> baixe o .zip novo, extraia e <b>substitua o conteúdo da mesma pasta</b> pelos arquivos novos (mesmo lugar, mesmo nome). Depois clique em <b>Recarregar</b> no cartão da extensão e aperte <kbd>F5</kbd> no WhatsApp. Usando a mesma pasta, fichas e retornos continuam.</p>
+
+<div class="atencao">
+  <p><b>Use sempre o mesmo jeito.</b> Quem instalou pelo instalador atualiza pelo instalador; quem instalou pelo .zip atualiza pelo .zip. Misturar cria <b>duas cópias</b> da extensão no Chrome, cada uma com as suas fichas.</p>
+  <p>Se acontecer: faça <b>Exportar backup</b> (aba Ajustes) na cópia que você usava, remova a outra em <b>chrome://extensions</b> e, se precisar, use <b>Importar</b> na que ficou.</p>
+</div>
+
 <h4 id="p1-atualizar">Quando chegar uma versão nova</h4>
 
 <p><b>Chrome da empresa:</b> não faça nada. A versão nova chega sozinha em algumas horas. Quando ela chegar, o painel pode mostrar o aviso vermelho abaixo; aperte <kbd>F5</kbd> no WhatsApp.</p>
 
-<p><b>Instalador:</b> o responsável manda o <b>Instalar-IntegraVendas.exe</b> novo. Faça assim:</p>
+<p><b>Instalador:</b> baixe de novo o <b>Instalar-IntegraVendas.exe</b> pelo mesmo link (ele sempre traz a versão mais nova) ou use o que o responsável mandou. Faça assim:</p>
 
 <ol class="passos">
   <li>Rode o instalador novo. Ele troca os arquivos na mesma pasta. Suas fichas, retornos e o login <b>não se perdem</b>.</li>
