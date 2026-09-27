@@ -1,0 +1,2300 @@
+<title>Manual Integra Vendas no WhatsApp</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..100,500..800&family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&display=swap">
+<style>
+  :root {
+    --bg: #f6f7f4;
+    --surface: #ffffff;
+    --ink: #17231f;
+    --muted: #56655f;
+    --line: #dde3dc;
+    --accent: #00805f;
+    --accent-soft: #e2f3ec;
+    --mark: #d6332f;
+    --mark-soft: #fbe9e7;
+    --tip: #8a5a00;
+    --tip-soft: #fbf1dc;
+    --ex-soft: #eef1f6;
+    --ex-line: #5b6f94;
+    --shadow: 0 1px 2px rgba(20, 35, 30, .08), 0 6px 20px rgba(20, 35, 30, .06);
+  }
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      color-scheme: dark;
+      --bg: #101614; --surface: #17201d; --ink: #e6ece8; --muted: #9aa9a2; --line: #2a3632;
+      --accent: #3fcf9d; --accent-soft: #173a2f; --mark: #ff7a70; --mark-soft: #3a1d1b;
+      --tip: #f0bf5a; --tip-soft: #33291a; --ex-soft: #1b2230; --ex-line: #8da2c8;
+      --shadow: 0 1px 2px rgba(0,0,0,.4);
+    }
+  }
+  :root[data-theme="dark"] {
+    color-scheme: dark;
+    --bg: #101614; --surface: #17201d; --ink: #e6ece8; --muted: #9aa9a2; --line: #2a3632;
+    --accent: #3fcf9d; --accent-soft: #173a2f; --mark: #ff7a70; --mark-soft: #3a1d1b;
+    --tip: #f0bf5a; --tip-soft: #33291a; --ex-soft: #1b2230; --ex-line: #8da2c8;
+    --shadow: 0 1px 2px rgba(0,0,0,.4);
+  }
+  * { box-sizing: border-box; }
+  html { scroll-behavior: smooth; scroll-padding-top: 20px; }
+  @media (prefers-reduced-motion: reduce) { html { scroll-behavior: auto; } }
+  body { background: var(--bg); color: var(--ink); font: 18px/1.6 "Atkinson Hyperlegible", "Segoe UI", system-ui, sans-serif; padding-inline: 16px; }
+  a { color: var(--accent); }
+  a:focus-visible, button:focus-visible, summary:focus-visible { outline: 3px solid var(--accent); outline-offset: 2px; border-radius: 4px; }
+  h1, h2, h3, h4 { font-family: Archivo, "Arial Narrow", system-ui, sans-serif; font-stretch: 88%; line-height: 1.15; text-wrap: balance; letter-spacing: -.01em; }
+
+  .wrap { max-width: 1240px; margin: 0 auto; display: grid; grid-template-columns: 270px minmax(0, 1fr); gap: 48px; padding-block: 32px 80px; }
+  nav.toc { position: sticky; top: calc(env(safe-area-inset-top, 0px) + 16px); align-self: start; max-height: calc(100vh - 32px); overflow-y: auto; font-size: 15px; line-height: 1.35; padding-right: 6px; }
+  nav.toc > ol { list-style: none; margin: 0; padding: 0; display: grid; gap: 14px; }
+  .toc-parte > a { display: block; font-weight: 700; color: var(--ink); text-decoration: none; }
+  .toc-n { display: block; font: 600 11px/1.4 Archivo, system-ui, sans-serif; letter-spacing: .12em; text-transform: uppercase; color: var(--accent); }
+  .toc-parte ol { list-style: none; margin: 6px 0 0; padding: 0 0 0 10px; border-left: 2px solid var(--line); display: grid; gap: 4px; }
+  .toc-parte ol a { color: var(--muted); text-decoration: none; display: block; padding: 1px 0 1px 8px; }
+  .toc-parte ol a:hover, .toc-parte > a:hover { color: var(--accent); }
+  .toc-titulo { font: 700 13px/1 Archivo, system-ui, sans-serif; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); margin: 0 0 14px; }
+
+  main { min-width: 0; }
+  .capa { padding-block: 8px 28px; border-bottom: 1px solid var(--line); margin-bottom: 8px; }
+  .capa .sobre { font: 600 13px/1 Archivo, system-ui, sans-serif; letter-spacing: .14em; text-transform: uppercase; color: var(--accent); margin: 0 0 12px; }
+  .capa h1 { font-size: clamp(34px, 5vw, 54px); font-weight: 800; margin: 0 0 14px; }
+  .capa p { max-width: 64ch; color: var(--muted); margin: 0 0 12px; }
+  .legenda-marca { display: flex; flex-wrap: wrap; gap: 12px 28px; margin-top: 20px; font-size: 16px; }
+  .legenda-marca > span { display: inline-flex; align-items: center; gap: 10px; }
+  .bolinha { display: inline-grid; place-items: center; min-width: 26px; height: 26px; border-radius: 13px; background: #e53935; color: #fff; font: 700 14px/1 system-ui, sans-serif; }
+  .moldura { width: 34px; height: 22px; border: 3px solid #e53935; border-radius: 6px; }
+  .regra-ouro { margin-top: 22px; padding: 16px 18px; background: var(--accent-soft); border-radius: 12px; max-width: 70ch; }
+  .regra-ouro b { color: var(--accent); }
+
+  section { padding-top: 36px; }
+  section > h2 { font-size: clamp(28px, 3.6vw, 40px); font-weight: 800; margin: 0 0 18px; padding-top: 24px; border-top: 4px solid var(--ink); }
+  .parte-n { display: block; font: 600 13px/1.4 Archivo, system-ui, sans-serif; letter-spacing: .14em; text-transform: uppercase; color: var(--accent); margin-bottom: 6px; }
+  h3 { font-size: 26px; font-weight: 700; margin: 48px 0 12px; }
+  h4 { font-size: 20px; font-weight: 700; margin: 28px 0 8px; }
+  main p, main ul, main ol, main dl, main details, main table { max-width: 70ch; }
+  main li + li { margin-top: 6px; }
+
+  ol.passos { list-style: none; counter-reset: passo; padding: 0; display: grid; gap: 10px; }
+  ol.passos > li { counter-increment: passo; position: relative; padding-left: 46px; min-height: 34px; padding-top: 4px; margin: 0; }
+  ol.passos > li::before { content: counter(passo); position: absolute; left: 0; top: 0; display: grid; place-items: center; width: 34px; height: 34px; border-radius: 50%; background: var(--ink); color: var(--bg); font: 700 16px/1 Archivo, system-ui, sans-serif; }
+  ol.passos > li > p { margin: 0; }
+
+  figure { margin: 22px 0 28px; max-width: 1000px; }
+  figure img { display: block; width: auto; max-width: 100%; height: auto; max-height: 80vh; object-fit: contain; border-radius: 10px; border: 1px solid var(--line); box-shadow: var(--shadow); cursor: zoom-in; background: #fff; }
+  figcaption { margin-top: 10px; font-size: 16px; color: var(--muted); max-width: 70ch; }
+
+  .dica, .atencao, .exemplo { max-width: 70ch; margin: 18px 0; padding: 14px 18px 14px 20px; border-radius: 10px; }
+  .dica > :first-child, .atencao > :first-child, .exemplo > :first-child { margin-top: 0; }
+  .dica > :last-child, .atencao > :last-child, .exemplo > :last-child { margin-bottom: 0; }
+  .dica { background: var(--tip-soft); }
+  .dica::before { content: "Dica"; display: block; font: 700 12px/1.6 Archivo, system-ui, sans-serif; letter-spacing: .12em; text-transform: uppercase; color: var(--tip); }
+  .atencao { background: var(--mark-soft); }
+  .atencao::before { content: "Atenção"; display: block; font: 700 12px/1.6 Archivo, system-ui, sans-serif; letter-spacing: .12em; text-transform: uppercase; color: var(--mark); }
+  .exemplo { background: var(--ex-soft); border-left: 4px solid var(--ex-line); border-radius: 4px 10px 10px 4px; }
+  .exemplo::before { content: "Exemplo do balcão"; display: block; font: 700 12px/1.6 Archivo, system-ui, sans-serif; letter-spacing: .12em; text-transform: uppercase; color: var(--ex-line); }
+
+  .tabela { overflow-x: auto; margin: 18px 0; max-width: 100%; }
+  table { border-collapse: collapse; font-size: 16px; min-width: 520px; background: var(--surface); border-radius: 10px; overflow: hidden; box-shadow: var(--shadow); }
+  th, td { text-align: left; vertical-align: top; padding: 10px 14px; border-bottom: 1px solid var(--line); }
+  th { font: 700 13px/1.3 Archivo, system-ui, sans-serif; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); background: var(--bg); }
+  tr:last-child td { border-bottom: 0; }
+
+  kbd { font: 700 .85em/1 "Atkinson Hyperlegible", system-ui, sans-serif; padding: 3px 7px; border: 1px solid var(--line); border-bottom-width: 3px; border-radius: 6px; background: var(--surface); }
+  main b { font-weight: 700; }
+  code { font-size: .9em; background: var(--surface); border: 1px solid var(--line); padding: 1px 5px; border-radius: 4px; }
+
+  details { background: var(--surface); border: 1px solid var(--line); border-radius: 10px; margin: 10px 0; }
+  summary { cursor: pointer; padding: 12px 16px; font-weight: 700; }
+  details > :not(summary) { padding: 0 16px; }
+  details > :last-child { padding-bottom: 12px; margin-bottom: 0; }
+  dl { display: grid; grid-template-columns: max-content 1fr; gap: 10px 20px; }
+  dt { font-weight: 700; }
+  dd { margin: 0; }
+
+  .zoom { position: fixed; inset: 0; z-index: 10; background: rgba(8, 12, 10, .88); display: grid; place-items: center; padding: 16px; cursor: zoom-out; }
+  .zoom img { max-width: 100%; max-height: 100%; border-radius: 8px; background: #fff; }
+  .topo { position: fixed; right: 16px; bottom: calc(env(safe-area-inset-bottom, 0px) + 16px); border: 0; border-radius: 22px; padding: 10px 16px; background: var(--ink); color: var(--bg); font: 700 14px/1 Archivo, system-ui, sans-serif; cursor: pointer; box-shadow: var(--shadow); }
+
+  .versao { display: inline-flex; flex-wrap: wrap; gap: 8px 16px; margin: 0 0 16px; font: 600 14px/1.4 Archivo, system-ui, sans-serif; color: var(--muted); }
+  .versao b { color: var(--accent); }
+  ol.fluxo { list-style: none; padding: 0; margin: 18px 0; display: grid; grid-template-columns: repeat(auto-fill, minmax(190px, 1fr)); gap: 10px; max-width: 900px; }
+  ol.fluxo > li { margin: 0; background: var(--surface); border: 1px solid var(--line); border-top: 4px solid var(--accent); border-radius: 10px; padding: 12px 14px; display: grid; gap: 4px; }
+  ol.fluxo > li b { font-family: Archivo, system-ui, sans-serif; font-size: 17px; }
+  ol.fluxo > li span { font-size: 15px; color: var(--muted); line-height: 1.4; }
+  ol.habitos { padding-left: 1.6em; }
+  ol.habitos > li::marker { font: 800 18px Archivo, system-ui, sans-serif; color: var(--accent); }
+
+
+  @media (max-width: 900px) {
+    body { font-size: 17px; }
+    .wrap { grid-template-columns: minmax(0, 1fr); gap: 0; padding-block: 20px 72px; }
+    nav.toc { position: static; max-height: none; background: var(--surface); border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px; margin-bottom: 8px; }
+    nav.toc:not(.aberto) > ol { display: none; }
+    .toc-titulo { margin: 0; cursor: pointer; }
+    .toc-titulo::after { content: " ▾"; }
+    nav.toc.aberto .toc-titulo { margin-bottom: 14px; }
+    dl { grid-template-columns: 1fr; gap: 2px; } dd { margin-bottom: 10px; }
+  }
+  @page { size: A4; margin: 14mm 13mm 16mm; }
+  @media print {
+    body { font-size: 12.5pt; padding-inline: 0; background: #fff; }
+    .wrap { display: block; max-width: none; padding: 0; }
+    nav.toc:not(.aberto) > ol { display: grid; }
+    .toc-titulo::after { content: none; }
+    dl { grid-template-columns: max-content 1fr; gap: 8px 18px; }
+    nav.toc { position: static; border: 0; padding: 0; background: none; max-height: none; overflow: visible; font-size: 11pt; break-after: page; }
+    nav.toc > ol { gap: 10px; }
+    .toc-parte { break-inside: avoid; }
+    .topo, .zoom { display: none !important; }
+    .capa { break-after: page; border: 0; padding-top: 40mm; }
+    .capa h1 { font-size: 40pt; }
+    section { padding-top: 0; break-before: page; }
+    section > h2 { padding-top: 12px; }
+    h3 { margin-top: 28px; }
+    h2, h3, h4 { break-after: avoid; }
+    figure, .dica, .atencao, .exemplo, ol.fluxo > li, details, tr { break-inside: avoid; }
+    figure img { max-height: 200mm; box-shadow: none; cursor: auto; }
+    table { box-shadow: none; border: 1px solid var(--line); min-width: 0; }
+    .tabela { overflow: visible; }
+    details { border-color: var(--line); }
+    details > summary { list-style: none; }
+    details > summary::-webkit-details-marker { display: none; }
+    a { color: var(--accent); text-decoration: none; }
+    * { -webkit-print-color-adjust: exact; print-color-adjust: exact; }
+  }
+</style>
+
+<div class="wrap">
+  <nav class="toc" id="toc" aria-label="Sumário">
+    <p class="toc-titulo" id="toc-titulo">SUMÁRIO</p>
+    <ol><li class="toc-parte"><a href="#p0"><span class="toc-n">Comece aqui</span>Comece por aqui: guia rápido do vendedor</a><ol><li><a href="#p0-por-que">O que muda no seu dia</a></li><li><a href="#p0-primeiro-dia">Seu primeiro dia em 15 minutos</a></li><li><a href="#p0-caminho">O caminho de uma venda</a></li><li><a href="#p0-habitos">12 hábitos que fazem a diferença</a></li><li><a href="#p0-cola">Cola de bolso</a></li><li><a href="#p0-erros">Erros comuns de quem está começando</a></li><li><a href="#p0-novidades">Novidades recentes (até a versão 0.23.0)</a></li></ol></li><li class="toc-parte"><a href="#p1"><span class="toc-n">Parte 1</span>Primeiros passos e navegação</a><ol><li><a href="#p1-o-que-e">O que é a extensão (e o que ela não faz)</a></li><li><a href="#p1-instalar">Instalar no Chrome</a></li><li><a href="#p1-mapa">Visão geral da tela</a></li><li><a href="#p1-painel">Abrir, fechar e alargar o painel</a></li><li><a href="#p1-entrar">Entrar no Integra Vendas</a></li><li><a href="#p1-ajustes">A aba Ajustes em detalhe</a></li><li><a href="#p1-lista">O que aparece na lista de conversas</a></li><li><a href="#p1-trocar">Quando você troca de conversa</a></li></ol></li><li class="toc-parte"><a href="#p2"><span class="toc-n">Parte 2</span>Vender: busca, orçamento e pedido</a><ol><li><a href="#p2-cliente">Ligar a conversa ao cliente do sistema</a></li><li><a href="#p2-busca">Buscar a peça</a></li><li><a href="#p2-sugestoes">Atalhos para achar peça mais rápido</a></li><li><a href="#p2-arrastar">Arrastar a foto da peça para a conversa</a></li><li><a href="#p2-orcamento">Montar o orçamento</a></li><li><a href="#p2-botoes">Mandar o orçamento e tirar o pedido</a></li><li><a href="#p2-compras">Compras no sistema e Histórico</a></li></ol></li><li class="toc-parte"><a href="#p3"><span class="toc-n">Parte 3</span>Mensagens do cliente: Cotar e avisos</a><ol><li><a href="#p3-botao-cotar">O botão verde "Cotar"</a></li><li><a href="#p3-cotar-lista">A tela "Cotar lista"</a></li><li><a href="#p3-botoes">Os botões da Cotar lista</a></li><li><a href="#p3-quer-fechar">Faixa "Cliente quer fechar"</a></li><li><a href="#p3-moto-citada">Faixa "Cliente citou BROS, que não está na Ficha"</a></li></ol></li><li class="toc-parte"><a href="#p4"><span class="toc-n">Parte 4</span>O cliente: Ficha, etapas e retornos</a><ol><li><a href="#p4-cabecalho">O cabeçalho do cliente</a></li><li><a href="#p4-etapas">A etapa da venda (o funil)</a></li><li><a href="#p4-perdido">Cliente perdido: "Por que perdeu?"</a></li><li><a href="#p4-retornos">Sub-aba Retornos: lembretes para voltar ao cliente</a></li><li><a href="#p4-enviados">Sub-aba Enviados: o que você já mandou</a></li><li><a href="#p4-ficha">Sub-aba Ficha: quem é o cliente e qual a moto dele</a></li><li><a href="#p4-anel">O anel colorido na lista de conversas: por que o cliente "precisa de você"</a></li></ol></li><li class="toc-parte"><a href="#p5"><span class="toc-n">Parte 5</span>Seu dia: Hoje, Respostas e dúvidas</a><ol><li><a href="#p5-hoje">A aba Hoje: sua lista do dia</a></li><li><a href="#p5-respostas">Aba Respostas: mensagens prontas</a></li><li><a href="#p5-seguranca">Regras de segurança: o que a extensão faz e o que não faz</a></li><li><a href="#p5-faq">Perguntas frequentes e problemas</a></li><li><a href="#p5-glossario">Glossário</a></li><li><a href="#p5-um-dia">Um dia no balcão com a extensão</a></li></ol></li></ol>
+  </nav>
+  <main>
+    <header class="capa">
+      <p class="sobre">Manual do vendedor</p>
+      <h1>Integra Vendas no WhatsApp</h1>
+      <p class="versao"><span>Versão da extensão <b>0.23.0</b></span><span>Revisado em <b>26/09/2026</b></span></p>
+      <p>Este manual ensina, passo a passo, a usar o painel do Integra Vendas que aparece do lado direito do WhatsApp Web: entrar no sistema, atender o cliente, cotar a lista que ele mandou, montar o orçamento, tirar o pedido e acompanhar cada cliente até a venda.</p>
+      <p>Todas as telas foram tiradas de um ambiente de demonstração. Os clientes, produtos e preços são de exemplo.</p>
+      <div class="legenda-marca" aria-label="Como ler as imagens">
+        <span><span class="bolinha">1</span> número citado no texto e na legenda</span>
+        <span><span class="moldura"></span> parte da tela que você deve olhar</span>
+      </div>
+      <p class="regra-ouro"><b>Regra de ouro:</b> o painel prepara, você decide. Nenhuma mensagem é enviada, nenhum orçamento é salvo e nenhum pedido é finalizado sem o seu clique.</p>
+    </header>
+<section id="p0" data-titulo="Comece por aqui: guia rápido do vendedor">
+<h2><span class="parte-n">Comece aqui</span>Comece por aqui: guia rápido do vendedor</h2>
+
+<p>Esta parte é para ler no primeiro dia, em 15 minutos. Ela mostra o que a extensão muda no seu atendimento, o caminho de uma venda do começo ao fim, os hábitos que mais dão resultado e uma cola de bolso para consultar no balcão. Os detalhes de cada tela estão nas partes 1 a 5.</p>
+
+<!-- ============================================================ -->
+<h3 id="p0-por-que">O que muda no seu dia</h3>
+
+<div class="tabela"><table>
+  <thead><tr><th>Antes</th><th>Com a extensão</th></tr></thead>
+  <tbody>
+    <tr><td>Copiar a lista do cliente e procurar peça por peça no sistema.</td><td><b>Cotar</b>: um clique na mensagem e o painel procura todas as peças da lista de uma vez.</td></tr>
+    <tr><td>Digitar o orçamento à mão no WhatsApp.</td><td><b>Enviar no chat</b>: o texto do orçamento pronto, com total e condição, cai na caixa de mensagem.</td></tr>
+    <tr><td>Abrir o sistema em outra janela para tirar o pedido.</td><td><b>Finalizar pedido</b> direto do painel, com as regras da empresa conferidas antes.</td></tr>
+    <tr><td>Esquecer de cobrar o orçamento que ficou parado.</td><td><b>Retornos automáticos</b> em 2 horas, 1, 3 e 7 dias, com mensagem pronta.</td></tr>
+    <tr><td>Perder tempo achando o cliente no cadastro.</td><td><b>Busca de cliente</b> sem acento, com erro de digitação e com quem já comprou no topo.</td></tr>
+    <tr><td>Lembrar de cabeça quem está esperando.</td><td>Aba <b>Hoje</b> e o filtro <b>Precisa de você</b> mostram quem chamar agora.</td></tr>
+  </tbody>
+</table></div>
+
+<div class="atencao"><b>Regra de ouro:</b> o painel prepara, você decide. Nenhuma mensagem é enviada, nenhum pedido é salvo ou finalizado sem o seu clique. Pode explorar os botões sem medo: o que grava no sistema sempre pede confirmação.</div>
+
+<!-- ============================================================ -->
+<h3 id="p0-primeiro-dia">Seu primeiro dia em 15 minutos</h3>
+
+<ol class="passos">
+  <li><b>Instale</b> ou confira a instalação (<a href="#p1-instalar">parte 1, Instalar no Chrome</a>). Veja no cartão da extensão se a versão é a <b>0.23.0</b> ou mais nova.</li>
+  <li><b>Entre</b> com o seu e-mail e senha do Integra Vendas (<a href="#p1-entrar">Entrar no Integra Vendas</a>). A bolinha do cabeçalho fica verde.</li>
+  <li><b>Preencha a loja</b> na aba Ajustes: nome da loja, seu nome e a chave Pix (<a href="#p1-ajustes">A aba Ajustes</a>). Eles entram nos textos que o painel escreve.</li>
+  <li><b>Fixe o ícone</b> da extensão no Chrome (quebra-cabeça → alfinete). O número vermelho nele mostra retornos vencidos.</li>
+  <li><b>Treine com você mesmo:</b> abra a conversa com o seu próprio número ("você") e mande para si uma lista, por exemplo "2 kit relacao cg 160" e "1 pastilha freio bros". Clique em <b>Cotar</b> e veja o painel trabalhar. Não finalize nada nesse treino.</li>
+  <li><b>Vincule 3 clientes reais</b> das conversas de hoje (<a href="#p2-cliente">Ligar a conversa ao cliente</a>). Depois disso, o painel já reconhece esses WhatsApps.</li>
+  <li><b>Abra a aba Hoje</b> e veja quem está esperando (<a href="#p5-hoje">A aba Hoje</a>).</li>
+</ol>
+
+<div class="dica">Não tente aprender tudo no primeiro dia. Comece por três coisas: <b>vincular o cliente</b>, <b>Cotar</b> e <b>Enviar no chat + Já enviei</b>. Só isso já economiza a maior parte do tempo. O resto você vai pegando com o uso.</div>
+
+<!-- ============================================================ -->
+<h3 id="p0-caminho">O caminho de uma venda</h3>
+
+<p>Toda venda pelo WhatsApp passa pelas mesmas estações. Em cada uma, a extensão tem um botão que faz o trabalho pesado:</p>
+
+<ol class="fluxo">
+  <li><b>1. Cliente chama</b><span>Abra a conversa. O painel mostra quem é e o que ele já comprou.</span></li>
+  <li><b>2. Vincular</b><span>Se o cliente não aparece, busque pelo nome e clique em Vincular.</span></li>
+  <li><b>3. Cotar</b><span>Passe o mouse na lista dele e clique em Cotar. Confira e ponha no orçamento.</span></li>
+  <li><b>4. Enviar no chat</b><span>O orçamento vai para a caixa de mensagem. Você revisa e aperta Enter.</span></li>
+  <li><b>5. Já enviei</b><span>Etapa vira Orçamento enviado e os retornos são agendados.</span></li>
+  <li><b>6. Cobrar</b><span>A aba Hoje avisa quando cobrar, com a mensagem pronta.</span></li>
+  <li><b>7. Finalizar pedido</b><span>Cliente fechou: confira pagamento e frete e finalize.</span></li>
+  <li><b>8. Pós-venda</b><span>Avise que está pronto, confirme a entrega e cuide da próxima troca de óleo.</span></li>
+</ol>
+
+<figure>
+  <img loading="lazy" width="1600" height="900" src="img/p1-01-mapa-tela.png" alt="Tela inteira do WhatsApp Web com o painel Integra Vendas à direita">
+  <figcaption>A tela de trabalho: conversas à esquerda, conversa aberta no meio e o painel à direita. Os números estão explicados em <a href="#p1-mapa">Visão geral da tela</a>.</figcaption>
+</figure>
+
+<!-- ============================================================ -->
+<h3 id="p0-habitos">12 hábitos que fazem a diferença</h3>
+
+<ol class="habitos">
+  <li><b>Vincule o cliente logo na primeira mensagem.</b> Sem cliente vinculado não sai pedido, e o preço especial dele não aparece.</li>
+  <li><b>Use Cotar em vez de digitar.</b> A lista do cliente já vira busca. Se ele mandou várias mensagens seguidas, o Cotar junta todas.</li>
+  <li><b>Confira as etiquetas da Cotar lista.</b> <b>confere</b> (verde) está certo; <b>confira</b> (amarela), <b>duvidoso</b> e <b>não achei</b> (vermelhas) merecem uma olhada antes de pôr no orçamento.</li>
+  <li><b>Sempre clique em Já enviei</b> depois de mandar o orçamento. É ele que agenda as cobranças. Sem ele, o orçamento cai no esquecimento.</li>
+  <li><b>Mude a etapa quando a venda andar.</b> Aguardando Pix, Pago, Separando: cada etapa muda o lembrete certo na lista de conversas.</li>
+  <li><b>Comece o dia pela aba Hoje</b> e ligue o filtro <b>Precisa de você</b> nos intervalos. Quem espera há mais tempo aparece primeiro.</li>
+  <li><b>Anote a moto na Ficha.</b> Com a moto, a busca prioriza as peças dela e a aba Hoje avisa a troca de óleo.</li>
+  <li><b>Marque o motivo quando perder.</b> "Preço", "Sem estoque", "Comprou em outro lugar": é assim que a loja descobre o que ajustar.</li>
+  <li><b>Peça em falta? Use o sino.</b> A peça entra na lista de espera e a aba Hoje avisa quando chegar ao estoque.</li>
+  <li><b>Arraste a foto da peça</b> para a conversa. Cliente que vê a peça decide mais rápido, e a legenda já vai com o preço.</li>
+  <li><b>Use as Respostas prontas</b> para o que você escreve todo dia: Pix, horário, "pronto pra retirar".</li>
+  <li><b>Faça Exportar backup</b> na aba Ajustes uma vez por semana. Fichas e retornos ficam só neste Chrome.</li>
+</ol>
+
+<!-- ============================================================ -->
+<h3 id="p0-cola">Cola de bolso</h3>
+
+<p>Imprima esta página e deixe perto do teclado.</p>
+
+<div class="tabela"><table>
+  <thead><tr><th>Eu quero…</th><th>Faço assim</th></tr></thead>
+  <tbody>
+    <tr><td>Achar o cliente no sistema</td><td><b>Trocar</b> no cartão do cliente → digite nome, cidade, CNPJ ou telefone → <kbd>Enter</kbd>.</td></tr>
+    <tr><td>Cotar a lista que o cliente mandou</td><td>Mouse em cima da mensagem dele → botão verde <b>Cotar</b>.</td></tr>
+    <tr><td>Cotar um pedaço do texto</td><td>Selecione o texto na conversa → <b>Cotar</b> que aparece ao lado.</td></tr>
+    <tr><td>Buscar uma peça</td><td>Campo <b>Buscar peça</b> → 3 letras ou o código → <kbd>Enter</kbd> põe a primeira no orçamento.</td></tr>
+    <tr><td>Mandar só o preço de uma peça</td><td>Aviãozinho na linha da peça, ou <kbd>Ctrl</kbd>+<kbd>Enter</kbd>.</td></tr>
+    <tr><td>Mandar a foto da peça</td><td>Arraste a miniatura para a conversa. A legenda vai com nome e preço.</td></tr>
+    <tr><td>Mandar o orçamento</td><td><b>Enviar no chat</b> → revise → <kbd>Enter</kbd> no WhatsApp → <b>Já enviei</b>.</td></tr>
+    <tr><td>Guardar o orçamento no sistema</td><td><b>Salvar no sistema</b>. Salvar de novo atualiza o mesmo pedido.</td></tr>
+    <tr><td>Tirar o pedido</td><td><b>Finalizar pedido</b> → confira → <b>Sim, finalizar</b>.</td></tr>
+    <tr><td>Avisar quando a peça chegar</td><td>Sino na linha da peça sem estoque.</td></tr>
+    <tr><td>Lembrar de voltar ao cliente</td><td>Sub-aba <b>Retornos</b> → data e mensagem.</td></tr>
+    <tr><td>Ver quem está esperando</td><td>Aba <b>Hoje</b>, ou o filtro <b>Precisa de você</b> na lista de conversas.</td></tr>
+    <tr><td>Painel sumiu</td><td>Aba verde <b>Integra Vendas</b> na borda direita, ou <kbd>F5</kbd>.</td></tr>
+    <tr><td>Aviso "Extensão recarregada"</td><td><kbd>F5</kbd> na aba do WhatsApp.</td></tr>
+  </tbody>
+</table></div>
+
+<h4>Teclas que economizam tempo</h4>
+<div class="tabela"><table>
+  <thead><tr><th>Tecla</th><th>Onde</th><th>O que faz</th></tr></thead>
+  <tbody>
+    <tr><td><kbd>↑</kbd> <kbd>↓</kbd></td><td>Listas de peça e de cliente</td><td>Anda pela lista sem usar o mouse.</td></tr>
+    <tr><td><kbd>Enter</kbd></td><td>Busca de peça</td><td>Põe a peça marcada no orçamento.</td></tr>
+    <tr><td><kbd>Enter</kbd></td><td>Busca de cliente</td><td>Vincula o cliente marcado.</td></tr>
+    <tr><td><kbd>Ctrl</kbd>+<kbd>Enter</kbd></td><td>Busca de peça</td><td>Escreve o preço da peça no chat.</td></tr>
+    <tr><td><kbd>Esc</kbd></td><td>Campos de busca</td><td>Limpa o campo.</td></tr>
+    <tr><td><kbd>Ctrl</kbd>+<kbd>V</kbd></td><td>Caixa do WhatsApp</td><td>Cola o texto que o painel copiou quando não achou a caixa.</td></tr>
+    <tr><td><kbd>F5</kbd></td><td>Aba do WhatsApp</td><td>Recarrega a página depois de atualizar a extensão.</td></tr>
+  </tbody>
+</table></div>
+
+<!-- ============================================================ -->
+<h3 id="p0-erros">Erros comuns de quem está começando</h3>
+
+<div class="tabela"><table>
+  <thead><tr><th>O que acontece</th><th>Por quê</th><th>Como evitar</th></tr></thead>
+  <tbody>
+    <tr><td>O orçamento foi, mas ninguém cobrou o cliente.</td><td>Faltou clicar em <b>Já enviei</b>.</td><td>Enviou no WhatsApp? Clique em Já enviei na hora.</td></tr>
+    <tr><td>Não deixa finalizar o pedido.</td><td>Cliente não vinculado, item digitado à mão ou quantidade fora do múltiplo.</td><td>Leia a mensagem vermelha embaixo dos botões: ela diz o que falta.</td></tr>
+    <tr><td>O pedido saiu no CNPJ errado.</td><td>O WhatsApp compra por mais de uma empresa.</td><td>Confira <b>Faturar para</b> antes de finalizar.</td></tr>
+    <tr><td>Busca de cliente mostra gente demais.</td><td>Palavra muito comum ("motos", "josé").</td><td>Acrescente o sobrenome ou a cidade.</td></tr>
+    <tr><td>A sessão cai no celular.</td><td>O sistema aceita o mesmo usuário em um lugar só.</td><td>Cada vendedor com o seu usuário.</td></tr>
+    <tr><td>Fichas sumiram no computador novo.</td><td>Elas ficam só no Chrome onde foram criadas.</td><td><b>Exportar backup</b> no antigo e <b>Importar</b> no novo.</td></tr>
+  </tbody>
+</table></div>
+
+<!-- ============================================================ -->
+<h3 id="p0-novidades">Novidades recentes (até a versão 0.23.0)</h3>
+
+<ul>
+  <li><b>Busca de cliente refeita.</b> Ignora acento e palavras como "da", "de" e "ltda"; aceita as palavras em qualquer ordem e com erro de digitação; mostra os 20 mais parecidos e quantos existem; coloca no topo quem já comprou por este WhatsApp. Veja <a href="#p2-busca-cliente">Como achar o cliente pelo nome</a>.</li>
+  <li><b>Instalação nova.</b> Computadores no Chrome da empresa recebem e atualizam a extensão sozinhos. Os demais usam o <b>Instalar-IntegraVendas.exe</b>, que copia a pasta e deixa o caminho pronto para colar. Veja <a href="#p1-instalar">Instalar no Chrome</a>.</li>
+  <li><b>Filtro "Precisa de você"</b> na lista de conversas, com a fila de quem está esperando, da mais urgente para a menos.</li>
+  <li><b>Moto citada na conversa</b> mais precisa: não confunde mais "pode fazer por 50?" com a Fazer, nem "dar um start" com a Start, nem links do YouTube com modelos.</li>
+</ul>
+
+</section>
+
+<section id="p1" data-titulo="Primeiros passos e navegação">
+<h2><span class="parte-n">Parte 1</span>Primeiros passos e navegação</h2>
+
+<p>Esta parte mostra como instalar a extensão, entrar no Integra Vendas, achar cada coisa na tela e entender as marcas coloridas que aparecem na lista de conversas do WhatsApp. Leia com calma uma vez. Depois disso, o resto do manual fica bem mais fácil.</p>
+
+<!-- ============================================================ -->
+<h3 id="p1-o-que-e">O que é a extensão (e o que ela não faz)</h3>
+
+<p>A <b>Integra Vendas para WhatsApp</b> é um painel que aparece do lado direito do WhatsApp Web, no computador do balcão. Ele funciona como um caderno de clientes e como uma tela de vendas ao mesmo tempo:</p>
+<ul>
+  <li>guarda a <b>ficha</b> de cada cliente: a moto, o que ele já pediu, os retornos que você combinou;</li>
+  <li>busca peça, preço e estoque no <b>sistema da empresa</b> (o Integra Vendas);</li>
+  <li>monta o <b>orçamento</b> e tira o <b>pedido</b> sem você sair do WhatsApp;</li>
+  <li>lembra você de quem está esperando resposta.</li>
+</ul>
+
+<p>Por que isso ajuda no balcão? Porque você para de pular entre o WhatsApp, o sistema e o papel. O cliente está numa tela, a peça e o preço estão do lado.</p>
+
+<div class="atencao">
+  <p><b>A extensão nunca age sozinha.</b></p>
+  <ul>
+    <li>Ela <b>não envia mensagem</b> para ninguém. Quando ela prepara um texto (um orçamento, uma resposta), ele só vai para a caixa de mensagem do WhatsApp. Quem lê, corrige e aperta <kbd>Enter</kbd> é você.</li>
+    <li>Ela <b>não finaliza pedido</b> sozinha. O pedido só vai para o sistema quando você clica no botão.</li>
+    <li>Ela <b>não apaga nada</b> do seu WhatsApp. Ela só acrescenta marcas e o painel.</li>
+  </ul>
+</div>
+
+<!-- ============================================================ -->
+<h3 id="p1-instalar">Instalar no Chrome</h3>
+
+<p>A extensão só funciona no <b>Google Chrome</b> do computador, com o <b>WhatsApp Web</b> aberto nele. Não funciona no aplicativo WhatsApp para Windows nem no celular. Existem dois jeitos de ela chegar ao seu computador. Descubra qual é o seu antes de começar:</p>
+
+<div class="tabela"><table>
+  <thead><tr><th>Situação</th><th>O que você faz</th></tr></thead>
+  <tbody>
+    <tr><td><b>A) Chrome da empresa</b><br>o responsável cadastrou o seu computador no painel da empresa</td><td>Nada. A extensão se instala e se atualiza sozinha. Só confira (veja abaixo).</td></tr>
+    <tr><td><b>B) Instalador</b><br>você recebeu o arquivo <b>Instalar-IntegraVendas.exe</b></td><td>Roda o instalador uma vez e faz 3 cliques no Chrome. Nas versões novas, roda de novo o instalador novo.</td></tr>
+  </tbody>
+</table></div>
+
+<div class="dica">Na dúvida, pergunte ao responsável: "meu computador está no Chrome da empresa ou eu uso o instalador?". A resposta muda só a instalação; o resto do manual é igual para todo mundo.</div>
+
+<h4 id="p1-instalar-empresa">A) Chrome da empresa: instala e atualiza sozinho</h4>
+
+<p>Quando o computador está cadastrado no painel da empresa, o Chrome baixa a extensão sozinho alguns minutos depois de aberto. Não precisa ligar Modo do desenvolvedor nem escolher pasta. Para conferir:</p>
+
+<ol class="passos">
+  <li>Abra o Chrome e digite <b>chrome://extensions</b> na barra de endereço. Aperte <kbd>Enter</kbd>.</li>
+  <li>Procure o cartão <b>Integra Vendas para WhatsApp</b>. Embaixo dele aparece <b>Instalada pela sua organização</b>.</li>
+  <li>Abra o WhatsApp Web (<b>web.whatsapp.com</b>). O painel aparece do lado direito.</li>
+</ol>
+
+<figure>
+  <img loading="lazy" width="902" height="320" src="img/p1-28-extensao-da-empresa.png" alt="Ilustração da página de Extensões com o cartão Integra Vendas instalado pela organização">
+  <figcaption>(1) <b>Instalada pela sua organização</b>: a extensão veio pelo Chrome da empresa. Nesse caso não há botão Remover, e as versões novas chegam sozinhas.</figcaption>
+</figure>
+
+<div class="atencao">O Chrome da empresa só vale no <b>perfil do Chrome</b> em que o computador foi cadastrado. Se você usa mais de um perfil (a bolinha com sua foto no canto de cima), abra o WhatsApp Web sempre no mesmo perfil.</div>
+
+<p>Não apareceu depois de 10 minutos? Feche <b>todas</b> as janelas do Chrome e abra de novo. Se ainda não vier, avise o responsável: o computador pode não ter entrado no cadastro da empresa.</p>
+
+<h4 id="p1-instalar-exe">B) Com o instalador (Instalar-IntegraVendas.exe)</h4>
+
+<p>O instalador copia a extensão para uma pasta fixa do seu usuário do Windows (<code>%LOCALAPPDATA%\IntegraVendas\extensao</code>), <b>já deixa o caminho copiado</b> para você colar e abre a página de Extensões do Chrome. Você só faz a parte que o Chrome exige que seja feita à mão.</p>
+
+<ol class="passos">
+  <li>Dê dois cliques em <b>Instalar-IntegraVendas.exe</b>. Se o Windows perguntar se quer executar, clique em <b>Mais informações</b> e depois em <b>Executar assim mesmo</b>.</li>
+  <li>Abre uma janela preta com as instruções. Deixe ela aberta para consultar.</li>
+  <li>O Chrome abre sozinho na página <b>Extensões</b>. Se não abrir, abra o Chrome e digite <b>chrome://extensions</b>.</li>
+  <li>No canto de cima, à direita, ligue a chave <b>Modo do desenvolvedor</b> (1).</li>
+  <li>Clique em <b>Carregar sem compactação</b> (2).</li>
+  <li>Na janela de escolher pasta, clique na barra de endereço lá em cima, aperte <kbd>Ctrl</kbd>+<kbd>V</kbd> e <kbd>Enter</kbd>. O caminho já estava copiado.</li>
+  <li>Clique em <b>Selecionar pasta</b>.</li>
+  <li>Confira o cartão <b>Integra Vendas para WhatsApp</b> (3) com a chave ligada e a versão certa.</li>
+  <li>Clique no ícone de quebra-cabeça, ao lado da barra de endereço, e no alfinete ao lado de <b>Integra Vendas para WhatsApp</b>. O ícone fica sempre à vista.</li>
+  <li>Abra o WhatsApp Web (ou aperte <kbd>F5</kbd> nele). O painel aparece à direita.</li>
+  <li>Volte à janela preta e aperte <kbd>Enter</kbd> para fechá-la.</li>
+</ol>
+
+<figure>
+  <img loading="lazy" width="762" height="450" src="img/p1-25-instalador-primeira-vez.png" alt="Janela do instalador com a mensagem de extensão copiada e os passos no Chrome">
+  <figcaption>A janela do instalador na primeira vez. As duas linhas <b>OK</b> dizem que a extensão foi copiada e que o caminho da pasta já está pronto para colar.</figcaption>
+</figure>
+
+<figure>
+  <img loading="lazy" width="902" height="359" src="img/p1-27-extensoes-chrome.png" alt="Ilustração da página de Extensões do Chrome com Modo do desenvolvedor, Carregar sem compactação, o cartão da extensão e o botão de recarregar">
+  <figcaption>(1) Chave <b>Modo do desenvolvedor</b>. (2) <b>Carregar sem compactação</b>. (3) O cartão da extensão, com o número da versão. (4) <b>Recarregar</b> (seta redonda), usado nas atualizações.</figcaption>
+</figure>
+
+<div class="atencao">
+  <ul>
+    <li><b>Não apague nem mova</b> a pasta <code>IntegraVendas</code>. O Chrome lê a extensão dela todos os dias.</li>
+    <li>Ao abrir, o Chrome pode mostrar o aviso <b>Desativar extensões no modo de desenvolvedor</b>. Feche o aviso no <b>X</b>. Não clique em Desativar, senão o painel some.</li>
+  </ul>
+</div>
+
+<div class="dica">Clicar no ícone da extensão, lá em cima no Chrome, leva você direto para a aba do WhatsApp Web. Se ela não estiver aberta, o Chrome abre uma nova. Um número no ícone mostra quantos retornos já venceram (veja a parte 5).</div>
+
+<h4 id="p1-atualizar">Quando chegar uma versão nova</h4>
+
+<p><b>Chrome da empresa:</b> não faça nada. A versão nova chega sozinha em algumas horas. Quando ela chegar, o painel pode mostrar o aviso vermelho abaixo; aperte <kbd>F5</kbd> no WhatsApp.</p>
+
+<p><b>Instalador:</b> o responsável manda o <b>Instalar-IntegraVendas.exe</b> novo. Faça assim:</p>
+
+<ol class="passos">
+  <li>Rode o instalador novo. Ele troca os arquivos na mesma pasta. Suas fichas, retornos e o login <b>não se perdem</b>.</li>
+  <li>A janela mostra <b>ATUALIZAÇÃO</b> e o Chrome abre na página Extensões.</li>
+  <li>No cartão <b>Integra Vendas para WhatsApp</b>, clique na seta redonda (<b>Recarregar</b>). Confira o número da versão.</li>
+  <li>Volte para a aba do WhatsApp Web e aperte <kbd>F5</kbd>.</li>
+  <li>Espere o WhatsApp carregar. O painel volta já na versão nova.</li>
+</ol>
+
+<figure>
+  <img loading="lazy" width="762" height="309" src="img/p1-26-instalador-atualizando.png" alt="Janela do instalador avisando que é uma atualização">
+  <figcaption>Rodando o instalador de novo: a janela diz <b>ATUALIZAÇÃO</b> e lembra de recarregar a extensão e apertar <kbd>F5</kbd>.</figcaption>
+</figure>
+
+<p>Se você esquecer o passo do <kbd>F5</kbd>, o painel antigo continua na tela, mas perde a ligação com a extensão. Ao clicar em qualquer coisa que fala com o sistema, aparece o aviso em vermelho abaixo.</p>
+
+<figure>
+  <img loading="lazy" width="640" height="300" src="img/p1-17-extensao-recarregada.png" alt="Aviso vermelho 'Extensão recarregada — atualize a página do WhatsApp (F5)' dentro do painel">
+  <figcaption>(1) O aviso <b>Extensão recarregada — atualize a página do WhatsApp (F5)</b>. Não é defeito: só aperte <kbd>F5</kbd> no WhatsApp.</figcaption>
+</figure>
+
+<div class="atencao">Antes de apertar <kbd>F5</kbd>, veja se não tem uma mensagem pela metade na caixa do WhatsApp. O que estiver escrito ali e não foi enviado pode se perder. As fichas e orçamentos do painel não se perdem.</div>
+
+<div class="dica">Como saber a versão que está rodando? Olhe o número no cartão da extensão em <b>chrome://extensions</b>. Quando o responsável avisar "saiu a 0.23", compare com esse número.</div>
+
+<!-- ============================================================ -->
+<h3 id="p1-mapa">Visão geral da tela</h3>
+
+<p>Com tudo instalado, a tela fica dividida em três partes: a lista de conversas do WhatsApp (esquerda), a conversa aberta (meio) e o painel da extensão (direita).</p>
+
+<figure>
+  <img loading="lazy" width="1600" height="900" src="img/p1-01-mapa-tela.png" alt="Tela inteira do WhatsApp Web com o painel Integra Vendas à direita, com 8 áreas numeradas">
+  <figcaption>
+    (1) Barra de filtros do WhatsApp, com o botão <b>Precisa de você</b> que a extensão acrescenta.
+    (2) Lista de conversas, com anéis coloridos e etiquetas da extensão.
+    (3) A conversa aberta, do próprio WhatsApp.
+    (4) Cabeçalho do painel: seu nome, a empresa e os botões das abas.
+    (5) O cliente da conversa aberta e a etapa em que ele está (ex.: <b>Orçamento enviado</b>).
+    (6) As partes da ficha: <b>Venda</b>, <b>Retornos</b>, <b>Enviados</b> e <b>Ficha</b>.
+    (7) Área principal: busca de peça, avisos e dados do cliente no sistema.
+    (8) O orçamento que você está montando, com o total e o botão <b>Finalizar pedido</b>.
+  </figcaption>
+</figure>
+
+<p>Os itens 5 a 8 só aparecem quando há uma conversa aberta. A busca de peça, o orçamento e o pedido (itens 7 e 8) estão explicados na <b>parte 2</b>. Os <b>Retornos</b>, <b>Enviados</b> e a <b>Ficha</b> (item 6), na <b>parte 4</b>.</p>
+
+<h4 id="p1-cabecalho">O cabeçalho do painel e as 4 abas</h4>
+
+<p>No topo do painel ficam o nome da extensão, a sua conexão e cinco botões pequenos. Quatro deles são as <b>abas</b>: cada um troca o que aparece no painel. Parando o mouse em cima de um botão, aparece o nome dele.</p>
+
+<figure>
+  <img loading="lazy" width="640" height="90" src="img/p1-02-cabecalho.png" alt="Cabeçalho do painel com 7 itens numerados">
+  <figcaption>
+    (1) Marca <b>IV</b> e o nome <b>Integra Vendas</b>.
+    (2) Sua conexão: bolinha verde com seu nome e a empresa quando está conectado; bolinha cinza e <b>desconectado — entrar</b> quando não está. Clicar aqui abre os <b>Ajustes</b>.
+    (3) <b>Conversa</b>: a ficha e a venda do cliente aberto. É a aba que você mais usa.
+    (4) <b>Hoje</b>: quem você precisa chamar hoje. O número vermelho é a quantidade de retornos já vencidos (veja a parte 5).
+    (5) <b>Respostas</b>: textos prontos para colar na conversa (veja a parte 5).
+    (6) <b>Ajustes</b>: entrar no sistema e dados da loja (explicado abaixo).
+    (7) <b>Recolher painel</b>: esconde o painel.
+  </figcaption>
+</figure>
+
+<p>A aba que está aberta fica com o fundo verde claro.</p>
+
+<!-- ============================================================ -->
+<h3 id="p1-painel">Abrir, fechar e alargar o painel</h3>
+
+<h4>Esconder e mostrar</h4>
+<p>Às vezes você quer o WhatsApp em tela cheia, por exemplo para ver uma foto grande que o cliente mandou.</p>
+<ol class="passos">
+  <li>Clique no botão <b>Recolher painel</b> (o último do cabeçalho, item 7 da figura acima).</li>
+  <li>O painel some e o WhatsApp ocupa a tela toda.</li>
+  <li>Para trazer o painel de volta, clique na etiqueta verde <b>Integra Vendas</b> que fica em pé na borda direita da tela.</li>
+</ol>
+
+<figure>
+  <img loading="lazy" width="1600" height="900" src="img/p1-03-painel-recolhido.png" alt="WhatsApp em tela cheia com a etiqueta vertical 'Integra Vendas' na borda direita">
+  <figcaption>(1) Com o painel recolhido, só sobra esta etiqueta verde na borda direita. Clique nela para abrir o painel de novo.</figcaption>
+</figure>
+
+<div class="dica">Sempre que você abre ou atualiza o WhatsApp Web, o painel começa aberto.</div>
+
+<h4>Deixar o painel mais largo ou mais estreito</h4>
+<p>Na borda esquerda do painel existe uma <b>alça</b> invisível. Quando o mouse passa por cima, aparece uma linha verde fina e a setinha do mouse vira uma seta dupla (↔).</p>
+
+<figure>
+  <img loading="lazy" width="600" height="520" src="img/p1-04-alca-largura.png" alt="Borda esquerda do painel com a linha verde da alça destacada">
+  <figcaption>(1) A alça fica na divisa entre a conversa e o painel. A linha verde aparece quando o mouse passa por ela.</figcaption>
+</figure>
+
+<ol class="passos">
+  <li>Leve o mouse até a divisa entre a conversa e o painel, até aparecer a linha verde.</li>
+  <li>Aperte o botão do mouse e segure.</li>
+  <li>Arraste para a esquerda para alargar o painel, ou para a direita para estreitar.</li>
+  <li>Solte o botão. O painel guarda essa largura para as próximas vezes.</li>
+  <li>Para voltar à largura normal, dê dois cliques rápidos na alça.</li>
+</ol>
+
+<p>Quando o painel fica estreito, o orçamento deixa de ficar ao lado e passa para baixo da busca. Nada some, só muda de lugar. Isso ajuda em monitor pequeno, quando você quer ver mais da conversa.</p>
+
+<figure>
+  <img loading="lazy" width="1600" height="900" src="img/p1-05-painel-estreito.png" alt="Painel estreito, com o orçamento embaixo da busca de peça">
+  <figcaption>Painel no mais estreito possível: a busca fica em cima e o orçamento (com o total e <b>Finalizar pedido</b>) desce para a parte de baixo.</figcaption>
+</figure>
+
+<h4>Tema claro e escuro</h4>
+<p>O painel não tem botão próprio de tema. Ele <b>segue o WhatsApp</b>: se o WhatsApp Web estiver no tema escuro, o painel também fica escuro. Para trocar, mude o tema nas configurações do próprio WhatsApp Web.</p>
+
+<figure>
+  <img loading="lazy" width="640" height="900" src="img/p1-06-tema-escuro.png" alt="Painel Integra Vendas em tema escuro">
+  <figcaption>O mesmo painel com o WhatsApp no tema escuro. Os botões e as cores de aviso são os mesmos.</figcaption>
+</figure>
+
+<!-- ============================================================ -->
+<h3 id="p1-entrar">Entrar no Integra Vendas</h3>
+
+<p>Sem entrar, o painel já guarda fichas e retornos. Mas para buscar peça com preço e estoque, cotar a lista do cliente e tirar pedido, ele precisa estar <b>conectado</b> ao sistema da empresa com o <b>seu</b> usuário de vendedor.</p>
+
+<p>Quando você não está conectado, o cabeçalho avisa:</p>
+
+<figure>
+  <img loading="lazy" width="640" height="150" src="img/p1-07-desconectado-topo.png" alt="Cabeçalho do painel mostrando 'desconectado — entrar'">
+  <figcaption>(1) Bolinha cinza e <b>desconectado — entrar</b>. Clique aí para ir direto à tela de entrar.</figcaption>
+</figure>
+
+<ol class="passos">
+  <li>Clique em <b>desconectado — entrar</b> no cabeçalho (ou no botão <b>Ajustes</b>).</li>
+  <li>No quadro <b>Entrar</b>, clique no campo <b>E-mail</b> e digite o e-mail que você usa no Integra Vendas.</li>
+  <li>Clique no campo <b>Senha</b> e digite a sua senha.</li>
+  <li>Clique no botão verde <b>Entrar</b> (ou aperte <kbd>Enter</kbd> no campo da senha).</li>
+  <li>Espere o botão mostrar <b>Entrando…</b> e depois sumir.</li>
+  <li>Confira: aparece o aviso <b>Conectado ao Integra Vendas.</b> embaixo do painel e a bolinha do cabeçalho fica verde.</li>
+</ol>
+
+<figure>
+  <img loading="lazy" width="640" height="900" src="img/p1-08-tela-entrar.png" alt="Aba Ajustes com o quadro Entrar: campos E-mail, Senha, link Alterar endereço da API e botão Entrar">
+  <figcaption>
+    (1) <b>E-mail</b> do vendedor.
+    (2) <b>Senha</b>.
+    (3) <b>Alterar endereço da API</b>: só mexa se a empresa mandar (veja abaixo).
+    (4) Botão <b>Entrar</b>.
+  </figcaption>
+</figure>
+
+<div class="atencao">
+  <p><b>Uma sessão por vendedor.</b> O sistema só deixa o mesmo usuário conectado num lugar. Se você entrar aqui, a sessão aberta com o mesmo usuário no site ou no aplicativo do celular cai. Não use o usuário de outro colega.</p>
+</div>
+
+<div class="dica">O painel <b>não guarda a sua senha</b>. Ele lembra só o e-mail. Se um dia você sair, vai precisar digitar a senha de novo.</div>
+
+<h4>Endereço do sistema</h4>
+<p>O painel já vem apontando para o endereço certo do Integra Vendas. Só troque se a empresa pedir.</p>
+<ol class="passos">
+  <li>Clique em <b>Alterar endereço da API</b>.</li>
+  <li>Apague o endereço do campo <b>Endereço da API</b> e digite o que a empresa passou.</li>
+  <li>Preencha e-mail e senha e clique em <b>Entrar</b>.</li>
+</ol>
+
+<figure>
+  <img loading="lazy" width="640" height="420" src="img/p1-09-endereco-api.png" alt="Campo Endereço da API aberto com o endereço padrão">
+  <figcaption>(1) O campo <b>Endereço da API</b> aparece depois de clicar no link. O endereço que já vem escrito é o padrão.</figcaption>
+</figure>
+
+<h4>Quando dá erro ao entrar</h4>
+<p>Se algo der errado, o motivo aparece numa faixa vermelha logo abaixo do botão <b>Entrar</b>.</p>
+
+<figure>
+  <img loading="lazy" width="640" height="480" src="img/p1-10-erro-entrar.png" alt="Faixa vermelha de erro abaixo do botão Entrar">
+  <figcaption>(1) A faixa vermelha mostra o motivo. O texto exato vem do sistema; aqui é um exemplo de e-mail ou senha errados. Repare que a senha foi apagada: digite de novo.</figcaption>
+</figure>
+
+<ul>
+  <li><b>E-mail ou senha errados</b>: confira se não tem espaço sobrando no e-mail e se o <kbd>Caps Lock</kbd> está desligado. Digite a senha de novo.</li>
+  <li><b>Muitas requisições seguidas; tente em alguns segundos.</b>: o sistema pediu uma pausa. Espere um pouco e tente de novo.</li>
+  <li><b>O servidor do IntegraVendas deu erro interno.</b>: o problema é no sistema da empresa, não no seu computador. Tente mais tarde ou avise o responsável.</li>
+  <li><b>Sessão expirada — entre de novo no IntegraVendas.</b>: aparece depois de um tempo, ou quando alguém entrou com o seu usuário em outro lugar. Entre de novo.</li>
+  <li><b>Extensão recarregada — atualize a página do WhatsApp (F5).</b>: veja o tópico “Quando chegar uma versão nova”, no começo desta parte.</li>
+</ul>
+
+<h4>Como fica depois de conectado</h4>
+
+<figure>
+  <img loading="lazy" width="640" height="260" src="img/p1-11-conectado.png" alt="Quadro Conta conectado com nome, empresa, limites de desconto e botão Sair">
+  <figcaption>
+    (1) Seu nome, a empresa e o e-mail com que você entrou.
+    (2) Até quanto de <b>desconto</b> e de <b>acréscimo</b> o sistema deixa você dar. O orçamento marca em vermelho o desconto que passa do seu limite (veja a parte 2).
+    (3) Botão <b>Sair</b>: desconecta você do sistema neste computador.
+    (4) No cabeçalho, bolinha verde com seu primeiro nome e a empresa.
+  </figcaption>
+</figure>
+
+<p>Use <b>Sair</b> quando for deixar o computador do balcão para outro vendedor. Assim os pedidos dele não saem no seu nome.</p>
+
+<div class="exemplo">Troca de turno: às 14h o Marcos assume o balcão. Você clica em <b>Sair</b>, ele entra com o e-mail e a senha dele. Dali em diante, os pedidos tirados nesse computador saem no nome do Marcos.</div>
+
+<div class="dica">Se você clicar no botão <b>Cotar</b> de uma mensagem sem estar conectado, o painel abre os <b>Ajustes</b> e avisa <b>Entre no Integra Vendas para cotar.</b> (o <b>Cotar</b> está na parte 3).</div>
+
+<!-- ============================================================ -->
+<h3 id="p1-ajustes">A aba Ajustes em detalhe</h3>
+
+<p>Clique no botão <b>Ajustes</b> do cabeçalho. Ela tem quatro blocos: <b>Integra Vendas</b> (a conta, explicada acima), <b>Loja</b>, <b>Privacidade e dados</b> e <b>Diagnóstico da página</b>.</p>
+
+<div class="dica">Não existe botão "Salvar" nos Ajustes. O que você digita num campo é guardado quando você sai dele (clicando em outro lugar ou apertando <kbd>Tab</kbd>).</div>
+
+<h4>Bloco Loja</h4>
+<p>Preencha estes campos uma vez, no primeiro dia. Eles entram nos textos que o painel prepara para o cliente.</p>
+
+<figure>
+  <img loading="lazy" width="640" height="290" src="img/p1-12-ajustes-loja.png" alt="Bloco Loja com 5 campos numerados">
+  <figcaption>
+    (1) <b>Nome da loja</b>. (2) <b>Seu nome</b>. (3) <b>Chave Pix</b>. (4) <b>Validade do orçamento</b>, em dias. (5) <b>Setor de cadastro</b>.
+  </figcaption>
+</figure>
+
+<ul>
+  <li><b>Nome da loja</b>: vai no título do orçamento que o cliente recebe (“Orçamento – Moto Peças X”) e nas respostas prontas que falam da loja. Mude só se a loja mudar de nome.</li>
+  <li><b>Seu nome</b>: usado nas respostas prontas que assinam com o nome do vendedor. Se estiver vazio, o painel coloca seu primeiro nome sozinho quando você entra no sistema. Mude se preferir um apelido (ex.: "Zé").</li>
+  <li><b>Chave Pix</b>: vai no fim do orçamento e no resumo do pedido, para o cliente já pagar. Mude quando a loja trocar de chave. Confira com cuidado: chave errada é dinheiro indo para o lugar errado.</li>
+  <li><b>Validade do orçamento</b>: quantos dias o preço vale. O orçamento sai com a frase “Válido até” e a data. Mude quando a loja mudar a regra (por exemplo, em época de reajuste, 1 dia). Deixe vazio para não mostrar validade.</li>
+  <li><b>Setor de cadastro</b>: para quem vai o pedido de atualização quando o WhatsApp do cliente não bate com o telefone do cadastro. Pode ser o nome de um contato ou grupo do WhatsApp, um número ou um e-mail. Pergunte à empresa quem cuida do cadastro. Esse pedido está explicado na parte 4.</li>
+</ul>
+
+<h4>Bloco Privacidade e dados</h4>
+
+<figure>
+  <img loading="lazy" width="640" height="250" src="img/p1-13-ajustes-privacidade.png" alt="Bloco Privacidade e dados com chave Desfocar conversas, botões de backup e Diagnóstico">
+  <figcaption>
+    (1) <b>Desfocar conversas</b>. (2) <b>Exportar backup</b>. (3) <b>Importar</b>. (4) <b>Apagar tudo</b>. (5) <b>Diagnóstico da página</b>.
+  </figcaption>
+</figure>
+
+<p><b>Desfocar conversas</b> (1): serve para quando o cliente está no balcão olhando para a sua tela. Ligada, ela embaça os nomes, as fotos e as mensagens do WhatsApp. Para ler, basta passar o mouse por cima da área que você quer ver.</p>
+
+<figure>
+  <img loading="lazy" width="1600" height="900" src="img/p1-16-desfocar.png" alt="WhatsApp com nomes e mensagens embaçados e a chave Desfocar conversas ligada">
+  <figcaption>(1) Com a chave ligada, nomes e mensagens ficam embaçados para quem olha de fora. O painel continua legível.</figcaption>
+</figure>
+
+<p><b>Onde ficam as fichas.</b> A ficha dos clientes, os retornos e as respostas prontas ficam guardados <b>só neste computador, neste Chrome</b>. Só os pedidos e as buscas de peça vão para o sistema da empresa. Por isso existem os botões de cópia:</p>
+<ul>
+  <li><b>Exportar backup</b> (2): baixa um arquivo com tudo o que o painel guardou (o nome começa com “integra-vendas-whatsapp-” e termina com a data). Faça isso de vez em quando e guarde o arquivo num lugar seguro.</li>
+  <li><b>Importar</b> (3): abre um backup salvo antes. Use quando trocar de computador ou reinstalar o Chrome.</li>
+  <li><b>Apagar tudo</b> (4): apaga todos os clientes, orçamentos e respostas deste computador.</li>
+</ul>
+
+<div class="atencao">
+  <p><b>Importar</b> troca os clientes, as respostas, a lista de espera e os ajustes deste computador pelos que estão no arquivo. O que você fez depois daquele backup some. Só importe se tiver certeza de que o arquivo é o mais novo.</p>
+  <p><b>Apagar tudo</b> não tem volta. O painel pede confirmação antes:</p>
+</div>
+
+<figure>
+  <img loading="lazy" width="640" height="276" src="img/p1-14-apagar-confirma.png" alt="Caixa de confirmação 'Apagar todos os clientes, orçamentos e respostas deste navegador? Não dá para desfazer.'">
+  <figcaption>(1) <b>Voltar</b> cancela e não apaga nada. (2) <b>Apagar tudo</b> apaga de verdade. Na dúvida, clique em <b>Voltar</b> e faça um <b>Exportar backup</b> antes.</figcaption>
+</figure>
+
+<h4>Diagnóstico da página</h4>
+<p>O WhatsApp Web muda a sua tela de vez em quando. O <b>Diagnóstico da página</b> mostra se o painel ainda acha as partes do WhatsApp de que ele precisa. Ao lado do título aparece <b>ok</b> (verde) ou <b>atenção</b> (laranja). Clique no título para abrir a lista.</p>
+
+<figure>
+  <img loading="lazy" width="639" height="163" src="img/p1-15-diagnostico.png" alt="Diagnóstico da página aberto com a lista de verificações">
+  <figcaption>Cada linha é uma parte do WhatsApp: “main” (a conversa), “headerTitle” (o nome no topo da conversa), “composer” (a caixa de mensagem) e “chatList” (a lista de conversas). ✓ = achou; ⚠ = achou por outro caminho; ✗ = não achou.</figcaption>
+</figure>
+
+<p>Com ✗ ou ⚠, o painel desliga só o recurso afetado e o resto continua funcionando. Se algo parar de funcionar (por exemplo, o texto não vai para a caixa de mensagem), abra o diagnóstico, tire uma foto da tela e mande para quem cuida da extensão.</p>
+
+<!-- ============================================================ -->
+<h3 id="p1-lista">O que aparece na lista de conversas</h3>
+
+<p>A extensão desenha algumas marcas na própria lista de conversas do WhatsApp. Elas só aparecem nos clientes que já têm ficha no painel. Assim, sem abrir conversa por conversa, você vê quem está esperando e em que pé está cada venda.</p>
+
+<figure>
+  <img loading="lazy" width="360" height="460" src="img/p1-18-lista-marcas.png" alt="Lista de conversas com anéis coloridos nos avatares, símbolos, faixa lateral e etiquetas de ação">
+  <figcaption>
+    (1) <b>Anel vermelho</b>: urgente.
+    (2) <b>Anel âmbar</b> (amarelo-laranja): cliente mandou mensagem e você ainda não leu.
+    (3) <b>Anel verde</b>: chegou a peça que o cliente estava esperando.
+    (4) <b>Símbolo da etapa</b>, no canto da foto.
+    (5) <b>Faixa colorida</b> na borda esquerda, na cor da etapa.
+    (6) <b>Etiqueta de ação</b>: o que fazer agora e há quanto tempo.
+  </figcaption>
+</figure>
+
+<h4>Os anéis em volta da foto</h4>
+<ul>
+  <li><b>Vermelho</b>: um retorno que você combinou já passou da hora (<b>Cobrar retorno</b>), ou um orçamento ou Pix está parado há 2 dias ou mais.</li>
+  <li><b>Verde</b>: a peça que o cliente pediu e estava em falta já tem no estoque (<b>Avisar: peça chegou</b>). O painel confere o estoque sozinho, de tempos em tempos, só quando você está conectado ao sistema.</li>
+  <li><b>Âmbar</b>: tem mensagem não lida desse cliente (<b>Responder</b>).</li>
+  <li><b>Sem anel</b>: nada urgente.</li>
+</ul>
+<p>Se valer mais de uma cor, fica a mais importante: vermelho, depois verde, depois âmbar.</p>
+
+<h4>O símbolo e a faixa: a etapa da venda</h4>
+<p>O símbolo no canto da foto e a faixa na borda mostram em que etapa o cliente está (a etapa é escolhida no painel, veja a parte 4):</p>
+<ul>
+  <li><b>$</b> Orçamento enviado · <b>⧗</b> Aguardando Pix · <b>✓</b> Pago · <b>▦</b> Separando · <b>➜</b> Enviado/Retirado · <b>★</b> Pós-venda · <b>✕</b> Perdido · <b>•</b> Novo</li>
+</ul>
+
+<h4>A etiqueta de ação</h4>
+<p>Na segunda linha, antes da última mensagem, aparece o próximo passo, com uma seta: <b>Cobrar retorno</b>, <b>Responder</b>, <b>Cobrar orçamento</b>, <b>Conferir Pix</b>, <b>Separar pedido</b>, <b>Avisar que está pronto</b>, <b>Confirmar entrega</b> ou <b>Avisar: peça chegou</b>. Ao lado, o tempo (ex.: “· 1h”). Quando é urgente, a etiqueta fica vermelha.</p>
+<p>Clicar na etiqueta abre a conversa desse cliente e o painel já na aba <b>Conversa</b>.</p>
+
+<div class="exemplo">Você volta do almoço e vê o Ricardo Oficina com anel vermelho e <b>→ Cobrar retorno · 1h</b>. Quer dizer: você tinha combinado de chamar ele há uma hora e ainda não chamou. Clique na etiqueta e o painel já abre o cliente.</div>
+
+<h4 id="p1-precisa">O botão "Precisa de você"</h4>
+<p>Na barra de filtros do WhatsApp (onde ficam <b>Tudo</b> e <b>Não lidas</b>), a extensão coloca um botão a mais: <b>Precisa de você</b>, com um número.</p>
+
+<figure>
+  <img loading="lazy" width="360" height="170" src="img/p1-19-chip-precisa.png" alt="Barra de filtros do WhatsApp com o botão 'Precisa de você 3'">
+  <figcaption>(1) <b>Precisa de você 3</b>: três clientes esperam uma ação sua. (2) <b>Tudo</b>, filtro normal do WhatsApp.</figcaption>
+</figure>
+
+<p>O número conta os clientes com retorno atrasado, orçamento parado, peça que chegou e retorno marcado para hoje. Mensagem não lida não entra nessa conta, porque o WhatsApp já mostra isso no filtro <b>Não lidas</b>. Quando não há ninguém, o botão fica cinza com <b>0</b>.</p>
+
+<ol class="passos">
+  <li>Clique em <b>Precisa de você</b>. O botão fica vermelho cheio e uma lista aparece por cima das conversas.</li>
+  <li>Leia a lista: o mais urgente vem primeiro.</li>
+  <li>Clique no nome de um cliente. A conversa dele abre no meio e o painel mostra a ficha dele.</li>
+  <li>Faça o que tem que fazer (responder, cobrar, avisar).</li>
+  <li>Clique no próximo cliente da lista. A lista continua aberta até você fechar.</li>
+  <li>Para voltar à lista normal do WhatsApp, clique no <b>×</b>, em <b>Tudo</b> (ou em outro filtro do WhatsApp), ou de novo em <b>Precisa de você</b>.</li>
+</ol>
+
+<figure>
+  <img loading="lazy" width="380" height="420" src="img/p1-20-filtro-lista.png" alt="Lista 'Precisa de você' aberta por cima das conversas">
+  <figcaption>
+    (1) Botão ligado.
+    (2) Um cliente: bolinha com o anel da urgência, nome e etapa.
+    (3) O que fazer e há quanto tempo.
+    (4) <b>×</b> fecha a lista.
+    (5) <b>Tudo</b> também fecha e volta à lista normal.
+  </figcaption>
+</figure>
+
+<figure>
+  <img loading="lazy" width="1600" height="900" src="img/p1-21-filtro-abriu.png" alt="Depois de clicar em Ana Motos Centro na lista, a conversa dela abre e o painel mostra a ficha">
+  <figcaption>Clicando em <b>Ana Motos Centro</b> na lista: (1) a conversa dela abre no WhatsApp e (2) o painel passa a mostrar a ficha dela. A linha dela fica marcada na lista.</figcaption>
+</figure>
+
+<div class="dica">Se o cliente não aparece na parte visível da lista do WhatsApp, o painel usa a busca do WhatsApp para achar a conversa e depois limpa a busca. Se mesmo assim não achar, aparece o aviso <b>Não achei "…" na lista. Procure pelo nome na busca do WhatsApp.</b></div>
+
+<figure>
+  <img loading="lazy" width="360" height="220" src="img/p1-22-filtro-vazio.png" alt="Lista 'Precisa de você' vazia com a frase 'Ninguém esperando por você agora.'">
+  <figcaption>Quando está tudo em dia: botão cinza com <b>0</b> e a frase <b>Ninguém esperando por você agora.</b></figcaption>
+</figure>
+
+<p>As marcas e o número se atualizam sozinhos enquanto o WhatsApp está aberto (pelo menos uma vez por minuto).</p>
+
+<!-- ============================================================ -->
+<h3 id="p1-trocar">Quando você troca de conversa</h3>
+
+<p>O painel <b>acompanha a conversa aberta</b>. Clicou em outro cliente no WhatsApp, o painel troca sozinho para a ficha desse cliente. Você não precisa procurar nada no painel.</p>
+
+<figure>
+  <img loading="lazy" width="1600" height="900" src="img/p1-23-trocar-conversa.png" alt="Conversa com João Motoboy aberta e o painel mostrando João Motoboy na etapa Novo">
+  <figcaption>
+    (1) Você clicou em <b>João Motoboy</b> na lista.
+    (2) O WhatsApp abriu a conversa dele.
+    (3) O painel trocou para ele.
+    (4) Como ele ainda não tem ficha, aparece na etapa <b>Novo</b>.
+  </figcaption>
+</figure>
+
+<p>O que acontece na troca:</p>
+<ul>
+  <li>O orçamento que você estava montando para o cliente anterior <b>fica guardado na ficha dele</b>. Quando voltar à conversa dele, está lá.</li>
+  <li>A busca de peça é limpa, para não misturar a peça de um cliente com a do outro.</li>
+  <li>Se você estava na aba <b>Conversa</b>, continua nela, já com o novo cliente. Se estava em <b>Hoje</b>, <b>Respostas</b> ou <b>Ajustes</b>, o painel fica onde está. Clique em <b>Conversa</b> para ver o cliente.</li>
+  <li>Cliente que nunca foi atendido pelo painel aparece como <b>Novo</b>, sem ficha. A ficha começa a existir quando você mexe nele (monta orçamento, muda a etapa, preenche a moto).</li>
+</ul>
+
+<div class="atencao">O painel reconhece o cliente pelo <b>nome salvo</b> no celular da loja ou, se o contato não estiver salvo, pelo <b>número</b>. Se você mudar o nome de um contato no celular, o painel passa a tratar como outro cliente, e a ficha antiga fica com o nome velho. Evite renomear contatos que já têm ficha.</div>
+
+<p>Sem nenhuma conversa aberta (logo depois de abrir o WhatsApp, por exemplo), a aba <b>Conversa</b> mostra só um aviso:</p>
+
+<figure>
+  <img loading="lazy" width="640" height="240" src="img/p1-24-sem-conversa.png" alt="Painel com o aviso 'Nenhuma conversa aberta'">
+  <figcaption><b>Nenhuma conversa aberta</b>: clique em qualquer conversa do WhatsApp e o painel carrega o cliente.</figcaption>
+</figure>
+
+<div class="dica">Próximos passos: para vender (buscar peça, montar orçamento e tirar pedido), veja a <b>parte 2</b>. Para o botão <b>Cotar</b> nas mensagens do cliente e os avisos da conversa, a <b>parte 3</b>. Para a ficha, os retornos e as etapas da venda, a <b>parte 4</b>. Para a aba <b>Hoje</b>, as <b>Respostas</b> prontas e as dúvidas comuns, a <b>parte 5</b>.</div>
+
+</section>
+
+<section id="p2" data-titulo="Vender: busca, orçamento e pedido">
+<h2><span class="parte-n">Parte 2</span>Vender: buscar peça, montar orçamento e tirar o pedido</h2>
+
+<p>Esta parte ensina o dia a dia do balcão: o cliente pede uma peça no WhatsApp, você acha a peça, monta o orçamento, manda para ele e, quando ele fechar, tira o pedido no sistema da loja.</p>
+<p>Tudo acontece na aba <b>Conversa</b> (ícone de balão, no alto do painel), sub-aba <b>Venda</b>. Para entrar no painel e conectar ao sistema, veja a parte 1.</p>
+
+<div class="atencao"><b>O painel nunca envia nada sozinho.</b> Todo texto ou foto vai para a caixa do WhatsApp e fica esperando. Quem aperta Enviar é sempre você.</div>
+
+<h4>Quais botões gravam no sistema da loja</h4>
+<p>Quase tudo nesta aba fica só no painel, no seu computador. Só dois botões gravam de verdade no sistema da loja:</p>
+<table>
+<thead><tr><th>Botão</th><th>Grava no sistema da loja?</th><th>O que faz</th></tr></thead>
+<tbody>
+<tr><td><b>Salvar no sistema</b> / <b>Atualizar nº …</b></td><td><b>Sim</b></td><td>Cria (ou atualiza) um pedido em situação de orçamento no sistema.</td></tr>
+<tr><td><b>Finalizar pedido</b> (e <b>Finalizar</b> / <b>Cancelar</b> no Histórico)</td><td><b>Sim</b></td><td>Manda o pedido para o faturamento (ou cancela). Depois disso não dá para mudar pelo painel.</td></tr>
+<tr><td><b>Enviar no chat</b>, enviar preço, arrastar foto</td><td>Não</td><td>Só escreve na caixa do WhatsApp.</td></tr>
+<tr><td><b>Já enviei</b></td><td>Não</td><td>Anota no painel que o orçamento foi mandado e agenda os retornos.</td></tr>
+<tr><td><b>Repetir</b>, <b>Pôr no orçamento</b>, <b>Limpar</b>, Condição</td><td>Não</td><td>Mexem só no orçamento que está na tela.</td></tr>
+</tbody>
+</table>
+
+<figure><img loading="lazy" width="1600" height="900" src="img/p2-01-aba-venda.png" alt="Visão geral da sub-aba Venda"><figcaption><b>1</b> Busca de peça. <b>2</b> Costuma comprar. <b>3</b> Vitrine da loja. <b>4</b> Leve junto. <b>5</b> Item manual e Pesquisar fora. <b>6</b> Cliente do sistema ligado a esta conversa. <b>7</b> Itens do orçamento (coluna da direita). <b>8</b> Condição de pagamento. <b>9</b> Totais. <b>10</b> Botões finais.</figcaption></figure>
+
+<p>A tela tem duas colunas. Na esquerda você <b>procura</b> (peças, cliente, compras antigas). Na direita fica o <b>orçamento</b> que você está montando, com os botões para mandar e tirar o pedido.</p>
+
+<!-- ============================================================ -->
+<h3 id="p2-cliente">Ligar a conversa ao cliente do sistema</h3>
+
+<p>Para tirar pedido, o painel precisa saber <b>qual cliente do sistema</b> é essa pessoa do WhatsApp. Isso se chama <b>vincular</b>. Você faz uma vez; nas próximas conversas ele já lembra.</p>
+
+<h4>O cartão do cliente</h4>
+<figure><img loading="lazy" width="399" height="226" src="img/p2-02-cartao-cliente.png" alt="Cartão do cliente vinculado"><figcaption><b>1</b> Cliente vinculado: razão social, CNPJ, cidade e telefone. <b>2</b> <b>Trocar</b>: escolhe outro cliente. <b>3</b> Outra empresa que usa o mesmo WhatsApp, com o botão <b>Usar</b>. <b>4</b> <b>Procurar mais razões pelo telefone</b>.</figcaption></figure>
+
+<ul>
+  <li><b>Este WhatsApp também compra como…</b>: muita gente compra por mais de uma empresa (a oficina e o nome pessoal, por exemplo). Clique em <b>Usar</b> para o pedido sair nessa outra empresa. A que está valendo mostra "em uso".</li>
+  <li><b>Procurar mais razões pelo telefone</b>: procura no cadastro outras empresas com o mesmo telefone.</li>
+</ul>
+
+<h4>Trocar o cliente</h4>
+<ol class="passos">
+  <li>Clique em <b>Trocar</b>. O cartão vira "Cliente no sistema".</li>
+  <li>Se já houve venda para esse WhatsApp, aparece a lista <b>Já vendeu para este WhatsApp</b>. Clique no nome certo e pronto.</li>
+  <li>Se não, digite no campo <b>Nome, CNPJ/CPF, cidade ou telefone</b>. A lista aparece sozinha a partir da 3ª letra.</li>
+  <li>Use <kbd>↑</kbd> <kbd>↓</kbd> para andar na lista e <kbd>Enter</kbd> para vincular. Ou clique em <b>Vincular</b>. <kbd>Esc</kbd> limpa o campo.</li>
+  <li>Mudou de ideia? Clique em <b>Cancelar</b>. O cliente que estava vinculado continua.</li>
+</ol>
+<figure><img loading="lazy" width="399" height="507" src="img/p2-03-trocar-cliente.png" alt="Trocando o cliente vinculado"><figcaption><b>1</b> Cancelar a troca. <b>2</b> Clientes que já compraram por este WhatsApp. <b>3</b> Busca (aqui, "viagem"). <b>4</b> Resultados, cada um com o botão Vincular.</figcaption></figure>
+
+<p>Ao trocar, aparece o aviso: "Pedido agora sai para X. O orçamento já salvo no sistema continua no cliente anterior." Ou seja: o que você já salvou no sistema <b>não muda de cliente</b>.</p>
+
+<div class="dica">Vincular e trocar só mudam o painel. Nada é alterado no cadastro do sistema.</div>
+
+<h4 id="p2-busca-cliente">Como achar o cliente pelo nome (busca nova)</h4>
+
+<p>A busca de cliente foi refeita na versão 0.23.0 para funcionar do jeito que o vendedor digita no balcão: rápido, sem acento, com erro de digitação e com o nome pela metade. Você não precisa lembrar a razão social exata.</p>
+
+<div class="tabela"><table>
+  <thead><tr><th>Você digita</th><th>A busca entende</th></tr></thead>
+  <tbody>
+    <tr><td><b>joão</b></td><td>Acento não importa: acha JOAO e JOÃO.</td></tr>
+    <tr><td><b>joão da silva</b></td><td>"da", "de", "do", "ltda", "me", "epp" são ignorados: procura "joao silva".</td></tr>
+    <tr><td><b>silva joão</b></td><td>A ordem das palavras não importa.</td></tr>
+    <tr><td><b>fatima pacatuba</b></td><td>Nome + cidade: a cidade ajuda a separar clientes com nome parecido.</td></tr>
+    <tr><td><b>cleyton olivera</b></td><td>Erro de digitação: acha CLEITON ... OLIVEIRA e avisa "parecidos com".</td></tr>
+    <tr><td><b>12.345.678/0001-90</b></td><td>CNPJ ou CPF. Digite com os pontos, como sai na nota.</td></tr>
+    <tr><td><b>(85) 98765-4321</b></td><td>Telefone: acha com ou sem o 9 da frente.</td></tr>
+  </tbody>
+</table></div>
+
+<p>O painel também <b>coloca em ordem</b> o que o sistema devolve. Vêm primeiro:</p>
+<ol>
+  <li>quem <b>já comprou por este WhatsApp</b>;</li>
+  <li>quem tem <b>todas as palavras</b> que você digitou no nome fantasia ou na razão social;</li>
+  <li>quem tem o nome <b>começando</b> pela primeira palavra;</li>
+  <li>depois, quem só tem as palavras na cidade, no bairro ou no e-mail.</li>
+</ol>
+
+<figure><img loading="lazy" width="347" height="626" src="img/p2-27-cliente-pelo-nome.png" alt="Busca de cliente pelo nome com o mais parecido no topo"><figcaption><b>1</b> Digitou só "joão". <b>2</b> <b>20 mais parecidos de 51</b>: havia 51 clientes com "joao"; o painel mostra os 20 melhores. <b>3</b> O mais parecido fica no topo, já marcado: aperte <kbd>Enter</kbd> para vincular.</figcaption></figure>
+
+<figure><img loading="lazy" width="347" height="384" src="img/p2-28-cliente-sem-acento.png" alt="Busca com acento e com a palavra da achando o cliente"><figcaption><b>1</b> "joão da silva", com acento e com "da". <b>2</b> Achou JOAO BATISTA DA SILVA, mesmo com "Batista" no meio.</figcaption></figure>
+
+<figure><img loading="lazy" width="347" height="399" src="img/p2-29-cliente-nome-e-cidade.png" alt="Busca com nome e cidade"><figcaption><b>1</b> Nome + cidade: "fatima pacatuba". <b>2</b> Só a Fátima de Pacatuba sobra, embora existam outras Marias de Fátima no cadastro.</figcaption></figure>
+
+<h4 id="p2-cliente-parecido">Quando você erra uma letra: "parecidos com"</h4>
+<p>Se nada bate exatamente, o painel não desiste. Ele tenta de novo com o começo de cada palavra (4 letras, depois 3) e, se ainda precisar, larga a palavra mais curta. Para no primeiro resultado que tem <b>todas</b> as palavras parecidas com o que você digitou.</p>
+<figure><img loading="lazy" width="347" height="418" src="img/p2-30-cliente-parecido.png" alt="Busca com erro de digitação mostrando parecidos"><figcaption><b>1</b> O aviso <b>Nada com "cleyton olivera" exato; parecidos com "cle oli"</b>. <b>2</b> Achou CLEITON MENEZES OLIVEIRA. Confira o CNPJ e a cidade antes de vincular.</figcaption></figure>
+
+<div class="atencao">Quando aparece "parecidos com", <b>confira</b> o CNPJ, a cidade e o telefone na linha antes de clicar em Vincular. Parecido não é igual: pode ser outra pessoa com nome próximo.</div>
+
+<h4 id="p2-cliente-muitos">Nome muito comum: "digite mais uma palavra"</h4>
+<p>Palavras como "motos", "peças" ou "josé" existem em centenas de clientes. O painel mostra os 20 mais parecidos e avisa quantos existem. Se o cliente certo não está entre os 20, <b>acrescente uma palavra</b>: o sobrenome, o nome da oficina ou a cidade.</p>
+<figure><img loading="lazy" width="347" height="660" src="img/p2-31-cliente-muitos.png" alt="Busca ampla com aviso para digitar mais uma palavra"><figcaption><b>1</b> <b>680 clientes com "moto": digite mais uma palavra do nome ou a cidade.</b> <b>2</b> Só os 20 mais parecidos aparecem.</figcaption></figure>
+
+<div class="exemplo">
+  <p>O cliente escreve: "aqui é o Chico da oficina lá de Eusébio". No cadastro ele é <b>FRANCISCO DAS CHAGAS PEREIRA</b>, fantasia <b>CHAGAS MOTO PECAS</b>.</p>
+  <ul>
+    <li>"chico" não acha: apelido não está no cadastro.</li>
+    <li>"francisco eusebio" ou "chagas" acham na hora.</li>
+  </ul>
+  <p>Quando não souber o nome do cadastro, pergunte ao cliente o <b>CNPJ ou CPF</b>. É o jeito mais certeiro.</p>
+</div>
+
+<h4>Cliente não encontrado</h4>
+<p>Se nem os parecidos aparecem, a mensagem é <b>Nenhum cliente com "…", nem parecido.</b> Antes de concluir que ele não tem cadastro:</p>
+<ol>
+  <li>tente só uma palavra do nome (a mais rara, como o sobrenome);</li>
+  <li>tente o nome da oficina ou da loja (nome fantasia);</li>
+  <li>tente o CNPJ ou o CPF;</li>
+  <li>tente a cidade junto com uma palavra do nome.</li>
+</ol>
+<p>Se ainda assim não achar, o cliente precisa ser cadastrado no sistema. Peça ao setor de cadastro, como sempre. Enquanto isso, você pode montar e mandar o orçamento pelo chat; só o pedido no sistema precisa do cliente vinculado.</p>
+<figure><img loading="lazy" width="347" height="318" src="img/p2-04-cliente-nao-achado.png" alt="Busca de cliente sem resultado"><figcaption><b>1</b> Mensagem de busca sem resultado, nem parecido.</figcaption></figure>
+
+<div class="dica">Vinculou uma vez, o painel lembra. Na próxima conversa com esse WhatsApp, o cliente já aparece em <b>Já vendeu para este WhatsApp</b> e fica no topo de qualquer busca. Vale a pena vincular certo logo no primeiro atendimento.</div>
+
+<h4>Conversa nova: o painel procura pelo telefone</h4>
+<p>Quando a conversa ainda não tem cliente, o painel procura sozinho pelo número do WhatsApp.</p>
+<figure><img loading="lazy" width="1600" height="900" src="img/p2-05-achou-pelo-telefone.png" alt="Cliente achado pelo telefone"><figcaption><b>1</b> "Mesmo telefone no cadastro": confira e clique em <b>Vincular</b>. <b>2</b> Campo para procurar outro cliente.</figcaption></figure>
+<figure><img loading="lazy" width="399" height="254" src="img/p2-06-telefone-fora-do-cadastro.png" alt="Telefone não está no cadastro"><figcaption><b>1</b> Aviso de que o número não está no cadastro. <b>2</b> Procure o cliente pelo nome ou CNPJ.</figcaption></figure>
+
+<h4>Aviso de cadastro desatualizado</h4>
+<p>Às vezes o cliente está vinculado, mas o telefone do cadastro está velho. Aparecem dois avisos possíveis:</p>
+<ul>
+  <li><b>Cadastro com o celular sem o 9</b>: o número é o mesmo, só falta o 9 na frente.</li>
+  <li><b>Este WhatsApp não está no cadastro do cliente</b>: o número é outro.</li>
+</ul>
+<figure><img loading="lazy" width="399" height="272" src="img/p2-07-cadastro-sem-9.png" alt="Aviso de cadastro sem o 9"><figcaption><b>1</b> O aviso. <b>2</b> <b>Pedir atualização do cadastro</b>. <b>3</b> <b>Ignorar</b> (ou "Não é deste cliente").</figcaption></figure>
+<p><b>Pedir atualização do cadastro</b> abre a conversa (ou e-mail) do setor de cadastro, configurado em Ajustes, com o pedido já escrito. Você revisa e envia. O painel não muda o cadastro sozinho.</p>
+
+<!-- ============================================================ -->
+<h3 id="p2-busca">Buscar a peça</h3>
+
+<ol class="passos">
+  <li>Clique em <b>Buscar peça (nome ou código)</b>.</li>
+  <li>Digite pelo menos 3 letras. Ex.: "pastilha", "kit relacao bros" ou o código.</li>
+  <li>A lista aparece sozinha enquanto você digita.</li>
+</ol>
+
+<div class="dica">Selecionou um texto na conversa (ex.: "kit tração cg 160")? O painel já busca essa peça para você.</div>
+
+<figure><img loading="lazy" width="491" height="315" src="img/p2-08-resultados-busca.png" alt="Lista de resultados da busca"><figcaption><b>1</b> Foto da peça (quando tem). <b>2</b> Quadradinho para marcar várias. <b>3</b> Estoque, código, múltiplo e "comprou dd/mm" (quando esse cliente já levou). <b>4</b> Preço a prazo e à vista 5%. <b>5</b> Sino: avisar quando chegar (só sem estoque). <b>6</b> Aviãozinho: escrever o preço no chat. <b>7</b> <b>+</b>: pôr no orçamento. <b>8</b> Atalhos de teclado.</figcaption></figure>
+
+<h4>O que cada linha mostra</h4>
+<ul>
+  <li><b>Estoque</b>: quantas unidades a loja tem agora.</li>
+  <li><b>múlt.</b>: a peça só sai em múltiplos desse número (ex.: de 10 em 10).</li>
+  <li><b>Preço</b>: o de cima é a prazo (preço de tabela). O de baixo é à vista com 5% de desconto. Esse só aparece se o seu limite de desconto permite 5%.</li>
+  <li><b>+</b> vira <b>✓</b> quando a peça já está no orçamento. Clicar de novo soma mais uma.</li>
+  <li><b>Sino</b>: põe o cliente na lista de espera da peça. Quando chegar, o painel lembra você (veja a parte 5).</li>
+</ul>
+
+<h4>Atalhos de teclado</h4>
+<table>
+<thead><tr><th>Tecla</th><th>O que faz</th></tr></thead>
+<tbody>
+<tr><td><kbd>↑</kbd> <kbd>↓</kbd></td><td>Anda na lista.</td></tr>
+<tr><td><kbd>Enter</kbd></td><td>Põe a peça marcada no orçamento. Se ela já está lá, soma mais um múltiplo.</td></tr>
+<tr><td><kbd>Ctrl</kbd>+<kbd>Enter</kbd></td><td>Escreve o preço da peça no chat.</td></tr>
+<tr><td><kbd>Esc</kbd></td><td>Limpa a busca.</td></tr>
+</tbody>
+</table>
+
+<figure><img loading="lazy" width="1600" height="900" src="img/p2-12-enter-poe-no-orcamento.png" alt="Enter coloca a peça no orçamento"><figcaption><b>1</b> Busca "kit relacao bros". <b>2</b> Com <kbd>Enter</kbd>, a peça entra no orçamento. <b>3</b> Aviso "… adicionado.".</figcaption></figure>
+
+<h4>O preço que vai para o cliente</h4>
+<p>O aviãozinho (ou <kbd>Ctrl</kbd>+<kbd>Enter</kbd>) escreve na caixa do WhatsApp: nome da peça, código, preço de tabela, múltiplo e "Pronta entrega." ou "Sem estoque no momento; posso encomendar pra você.". <b>A quantidade do estoque nunca vai para o cliente.</b></p>
+
+<h4>Mandar o preço de várias peças de uma vez</h4>
+<figure><img loading="lazy" width="371" height="398" src="img/p2-17-varios-precos.png" alt="Várias peças marcadas"><figcaption><b>1</b> Marque os quadradinhos. <b>2</b> Clique na barra <b>Mandar 2 preços</b>.</figcaption></figure>
+
+<h4>A ficha da peça</h4>
+<p>Clique no nome da peça para abrir a ficha.</p>
+<figure><img loading="lazy" width="371" height="379" src="img/p2-09-ficha-da-peca.png" alt="Ficha da peça"><figcaption><b>1</b> Foto grande: clique ou arraste para mandar à conversa. <b>2</b> Galeria ("N fotos: clique para ver, arraste para mandar"). <b>3</b> A prazo e à vista 5%, com quanto fica a menos. <b>4</b> O que esse cliente pagou da última vez (quantidade, preço, desconto, nº e data do pedido). <b>5</b> <b>Só o preço</b>: escreve o preço no chat. <b>6</b> <b>Adicionar</b>: põe no orçamento (vira "Mais 1" se já está).</figcaption></figure>
+
+<h4>Filtrar e ordenar</h4>
+<ul>
+  <li><b>Moto da Ficha primeiro</b>: se a Ficha do cliente tem moto (ex.: CG 160 Titan), as peças dessa moto sobem. Aparece "Primeiro as da …". A Ficha está na parte 4.</li>
+  <li><b>Tipo</b>: com muitos resultados, aparecem botões de tipo (ex.: OLEO). Clique para ver só aquele tipo.</li>
+  <li><b>Tirar uma palavra</b>: escreva com um traço na frente. Ex.: "oleo -moto" tira o que tem "moto".</li>
+  <li>A peça que você costuma escolher numa busca vai subindo na lista.</li>
+  <li>Aparecem 30 por vez. Use <b>Mostrar mais</b> para ver o resto.</li>
+</ul>
+<figure><img loading="lazy" width="371" height="460" src="img/p2-10-filtro-tipo.png" alt="Filtro por tipo"><figcaption><b>1</b> Botões de tipo (OLEO ligado). <b>2</b> Quantos itens sobraram.</figcaption></figure>
+
+<h4>Sinônimos</h4>
+<p>Se a busca não acha nada, o painel tenta outro nome da mesma peça (ex.: espelho ↔ retrovisor) ou troca o modelo pela marca. Ele avisa: "Nada com espelho. Mostrando retrovisor."</p>
+<figure><img loading="lazy" width="371" height="261" src="img/p2-11-sinonimo.png" alt="Busca por sinônimo"><figcaption><b>1</b> Aviso de que a busca usou outro nome.</figcaption></figure>
+
+<!-- ============================================================ -->
+<h3 id="p2-sugestoes">Atalhos para achar peça mais rápido</h3>
+
+<h4>Costuma comprar</h4>
+<p>As peças que esse cliente mais compra. Clique numa para buscá-la pelo código.</p>
+<figure><img loading="lazy" width="371" height="169" src="img/p2-13-costuma-comprar.png" alt="Costuma comprar"><figcaption><b>1</b> Quantas unidades ele já comprou (14× = 14 unidades). <b>2</b> ✓: já está no orçamento. <b>3</b> Lupa: clique para buscar. Com mais de 3, aparece "Ver as N".</figcaption></figure>
+
+<h4>Vitrine da loja</h4>
+<p>Duas listas: <b>Mais vendidos</b> e <b>Chegou agora</b>. Só aparecem peças com estoque. Clique numa para buscar, já com o preço deste cliente. A foto pode ser arrastada para a conversa.</p>
+<figure><img loading="lazy" width="371" height="184" src="img/p2-14-vitrine.png" alt="Vitrine da loja"><figcaption><b>1</b> Abas Mais vendidos / Chegou agora. <b>2</b> Foto (arraste para mandar). <b>3</b> Preço e estoque.</figcaption></figure>
+
+<h4>Leve junto</h4>
+<p>Sugere até 3 peças que costumam sair junto com as do orçamento (ex.: quem leva kit relação leva lubrificante de corrente). Passe o mouse para ver "Sai junto em X% dos pedidos…". Clique para buscar.</p>
+<figure><img loading="lazy" width="371" height="145" src="img/p2-15-leve-junto.png" alt="Leve junto"><figcaption><b>1</b> Rótulo Leve junto. <b>2</b> Uma sugestão: clique para buscar.</figcaption></figure>
+<div class="dica">O Leve junto aprende com os pedidos concluídos da loja. Quanto mais pedidos, melhor a sugestão.</div>
+
+<h4>Item manual e Pesquisar fora</h4>
+<ul>
+  <li><b>Item manual</b>: põe uma linha em branco no orçamento para uma peça que não está no sistema (encomenda, peça de outro fornecedor). Você preenche Peça, Marca, Tipo (Original/Paralela), Código e preço.</li>
+  <li><b>Pesquisar fora</b>: abre Google, Mercado Livre, Riffel ou Cofap com a primeira peça do orçamento e a moto do cliente. Serve para descobrir código ou aplicação.</li>
+</ul>
+<figure><img loading="lazy" width="371" height="114" src="img/p2-16-pesquisar-fora.png" alt="Item manual e Pesquisar fora"><figcaption><b>1</b> Item manual. <b>2</b> Pesquisar fora. <b>3</b> Os sites.</figcaption></figure>
+<div class="atencao">Item manual serve para orçamento no chat. Ele <b>não pode ir para o pedido do sistema</b>. Para tirar o pedido, troque pela peça do estoque.</div>
+
+<!-- ============================================================ -->
+<h3 id="p2-arrastar">Arrastar a foto da peça para a conversa</h3>
+
+<p>Mostrar a foto vende. Você pode pegar a foto da peça no painel e soltar na conversa. O painel monta a foto com uma legenda (a "ficha" da peça) e abre a tela de envio do WhatsApp.</p>
+
+<ol class="passos">
+  <li>Clique na foto e segure o botão do mouse.</li>
+  <li>Leve até a conversa, no meio da tela. Aparece uma área tracejada: "Solte para mandar a foto com a ficha da peça".</li>
+  <li>Solte o botão.</li>
+  <li>O WhatsApp abre a prévia da foto com a legenda já escrita. Aparece "Foto com a ficha pronta. Revise e aperte Enviar."</li>
+  <li>Leia a legenda, mude se quiser e aperte Enviar do WhatsApp.</li>
+</ol>
+
+<figure><img loading="lazy" width="1600" height="900" src="img/p2-18-arrastando-foto.png" alt="Arrastando a foto para a conversa"><figcaption><b>1</b> A foto sendo arrastada. A área tracejada cobre a conversa: é ali que se solta.</figcaption></figure>
+<figure><img loading="lazy" width="1600" height="900" src="img/p2-19-foto-com-legenda.png" alt="Prévia da foto com legenda"><figcaption><b>1</b> A foto na prévia do WhatsApp. <b>2</b> A legenda com nome, código e preço de tabela. <b>3</b> O aviso para revisar e enviar.</figcaption></figure>
+
+<h4>A legenda muda conforme de onde vem a foto</h4>
+<figure><img loading="lazy" width="1600" height="900" src="img/p2-20-foto-do-orcamento.png" alt="Foto arrastada do orçamento"><figcaption><b>1</b> Foto de um item do orçamento (2 unidades, 5% de desconto). <b>2</b> A legenda traz quantidade, preço de tabela riscado, preço combinado, desconto e total.</figcaption></figure>
+<figure><img loading="lazy" width="1600" height="900" src="img/p2-21-arrastando-da-vitrine.png" alt="Arrastando da vitrine"><figcaption><b>1</b> Foto da Vitrine sendo arrastada; a área tracejada aparece igual.</figcaption></figure>
+
+<table>
+<thead><tr><th>De onde você arrasta</th><th>Onde soltar</th><th>O que a legenda leva</th></tr></thead>
+<tbody>
+<tr><td>Resultado da busca</td><td>Conversa</td><td>Nome, código, preço de tabela e se tem pronta entrega.</td></tr>
+<tr><td>Ficha da peça (foto grande ou galeria)</td><td>Conversa</td><td>Igual à busca.</td></tr>
+<tr><td>Vitrine da loja</td><td>Conversa</td><td>Igual à busca.</td></tr>
+<tr><td>Item do orçamento</td><td>Conversa</td><td>Quantidade, preço de tabela riscado, preço combinado com % de desconto, total e entrega (pronta, parte ou sob encomenda).</td></tr>
+<tr><td>Item de um pedido aberto (Compras no sistema)</td><td>Conversa</td><td>A peça com o nº e a data do pedido.</td></tr>
+<tr><td>Opção da lista do Cotar</td><td>Conversa</td><td>Veja a parte 3.</td></tr>
+<tr><td>Qualquer uma</td><td>Orçamento, busca ou outra lista</td><td><b>Nada acontece.</b> Só a conversa aceita a foto.</td></tr>
+</tbody>
+</table>
+
+<figure><img loading="lazy" width="1600" height="900" src="img/p2-22-soltar-no-orcamento-nao.png" alt="Orçamento não aceita foto"><figcaption><b>1</b> Foto sendo arrastada. <b>2</b> Sobre o orçamento não aparece área para soltar.</figcaption></figure>
+
+<div class="atencao">Arrastar <b>não</b> põe a peça no orçamento. Para isso use <b>+</b>, <kbd>Enter</kbd>, <b>Adicionar</b>, <b>Pôr no orçamento</b> ou <b>Repetir</b>.</div>
+
+<ul>
+  <li>Só dá para arrastar foto que carregou. Peça sem foto não arrasta.</li>
+  <li>Clicar na foto grande da ficha também manda, sem precisar arrastar.</li>
+  <li>"Já tem uma foto esperando envio": envie ou descarte a prévia aberta antes de arrastar outra.</li>
+  <li>"Foto anexada, mas não achei a legenda": a legenda foi copiada. Clique na legenda e cole com <kbd>Ctrl</kbd>+<kbd>V</kbd>.</li>
+  <li>Tudo que você manda assim fica registrado na sub-aba Enviados (parte 4).</li>
+</ul>
+
+<!-- ============================================================ -->
+<h3 id="p2-orcamento">Montar o orçamento</h3>
+
+<p>O orçamento fica na coluna da direita. Cada peça é uma linha. Clique na linha para abrir e mexer.</p>
+
+<h4>Item do sistema aberto</h4>
+<figure><img loading="lazy" width="319" height="215" src="img/p2-23-item-aberto.png" alt="Item do orçamento aberto"><figcaption><b>1</b> Foto (arraste para a conversa). <b>2</b> Código, preço de tabela, desconto dado e estoque. <b>3</b> Lixeira: tira o item. <b>4</b> − quantidade +. <b>5</b> Preço unitário combinado. <b>6</b> Total da linha. <b>7</b> Desconto neste item, em %.</figcaption></figure>
+
+<ul>
+  <li><b>Quantidade</b>: o − e o + andam de acordo com o múltiplo da peça.</li>
+  <li><b>Preço ou desconto</b>: você pode digitar o preço <i>ou</i> o %. Um calcula o outro.</li>
+  <li>Se você cobra acima da tabela, aparece <b>acrésc.</b> em vez de desc.</li>
+</ul>
+
+<div class="exemplo"><b>Por que o preço mudou 1 centavo?</b> O painel guarda o desconto em % com 2 casas e refaz o preço a partir dele. Tabela R$ 159,90; você digita R$ 149,90. Ele guarda 6,25% e mostra R$ 149,91. É o preço que o sistema vai calcular no pedido.</div>
+
+<h4>Múltiplo e estoque</h4>
+<figure><img loading="lazy" width="319" height="222" src="img/p2-24-multiplo-e-estoque.png" alt="Item com múltiplo e pouco estoque"><figcaption><b>1</b> Anel de vedação vende de 10 em 10: o + foi de 20 para 30. <b>2</b> "só 12 em estoque": pedido maior que o estoque.</figcaption></figure>
+
+<h4>Desconto acima do seu limite</h4>
+<p>Cada vendedor tem um limite de desconto. Passou dele, o desconto fica vermelho. O pedido não pode ser salvo nem finalizado assim.</p>
+<figure><img loading="lazy" width="319" height="215" src="img/p2-25-desconto-acima-do-limite.png" alt="Desconto acima do limite"><figcaption><b>1</b> Preço digitado: R$ 139,90. <b>2</b> "desc. 12,51%" em vermelho: passou do limite. <b>3</b> O % calculado.</figcaption></figure>
+
+<h4>Item manual</h4>
+<p>Fica sempre aberto, com os campos <b>Peça</b>, <b>Marca</b>, <b>Tipo</b> (Original ou Paralela), <b>Código</b>, quantidade e preço. Marca, tipo e código aparecem no texto do orçamento (veja a imagem 27, item manual "Pastilha dianteira").</p>
+
+<h4>Limpar tudo</h4>
+<p>O link <b>Limpar</b>, no alto do orçamento, tira todos os itens. Para não apagar sem querer, o primeiro clique só troca o texto para "Confirmar: limpar tudo". Clique de novo em até 3 segundos para confirmar.</p>
+<figure><img loading="lazy" width="319" height="207" src="img/p2-26-limpar-confirmar.png" alt="Confirmar limpar"><figcaption><b>1</b> Depois do primeiro clique: clique de novo para limpar.</figcaption></figure>
+
+<h4>Condição de pagamento</h4>
+<p>Aparece quando há pelo menos uma peça do sistema. Ela aplica o mesmo desconto em todos os itens do sistema:</p>
+<ul>
+  <li><b>A prazo</b>: preço de tabela.</li>
+  <li><b>À vista 5%</b> e <b>À vista 3%</b>: desconto fixo. O botão fica apagado se passar do seu limite.</li>
+  <li><b>Personalizado</b>: você digita o % em "Desconto em todos os itens".</li>
+</ul>
+<figure><img loading="lazy" width="321" height="682" src="img/p2-27-condicao-a-vista.png" alt="Condição à vista 5%"><figcaption><b>1</b> À vista 5% escolhido. <b>2</b> Os itens do sistema passam a −5%. <b>3</b> <b>Fixar como padrão</b> virou "Padrão do cliente". <b>4</b> Totais recalculados.</figcaption></figure>
+<ul>
+  <li><b>Fixar como padrão</b>: os próximos orçamentos desse cliente já começam nessa condição. Clique de novo para desfazer.</li>
+  <li><b>Antes: …</b> mostra as últimas condições que você usou com ele.</li>
+  <li>Depois de escolher a condição, você ainda pode mudar o desconto de um item abrindo a linha dele.</li>
+</ul>
+<figure><img loading="lazy" width="305" height="225" src="img/p2-28-personalizado.png" alt="Condição personalizada"><figcaption><b>1</b> 12% digitado. <b>2</b> "limite 10%": acima do seu limite.</figcaption></figure>
+
+<h4>Os totais</h4>
+<ul>
+  <li><b>Subtotal</b>: soma pelo preço de tabela.</li>
+  <li><b>Desconto</b>: quanto o cliente economiza, em R$ e %.</li>
+  <li><b>Frete</b>: digite o valor, se houver.</li>
+  <li><b>Total</b>: o que o cliente paga.</li>
+</ul>
+
+<!-- ============================================================ -->
+<h3 id="p2-botoes">Mandar o orçamento e tirar o pedido</h3>
+
+<h4>Enviar no chat</h4>
+<p>Escreve o orçamento completo na caixa do WhatsApp: itens, quantidades, preços, condição, frete e total. Aparece "Texto inserido na conversa. Revise e aperte Enviar." <b>Não grava nada no sistema.</b></p>
+<figure><img loading="lazy" width="1600" height="900" src="img/p2-35-enviar-no-chat.png" alt="Orçamento na caixa do WhatsApp"><figcaption><b>1</b> O texto do orçamento na caixa de mensagem, esperando você enviar. <b>2</b> O aviso.</figcaption></figure>
+
+<h4>Já enviei</h4>
+<p>Depois de enviar o orçamento no WhatsApp, clique em <b>Já enviei</b>. O painel:</p>
+<ul>
+  <li>guarda o orçamento no histórico do painel;</li>
+  <li>muda a etapa para <b>Orçamento enviado</b>;</li>
+  <li>agenda lembretes para cobrar a resposta: 2 horas, dia seguinte, 3 dias e 7 dias (veja a parte 4);</li>
+  <li>esvazia o orçamento para a próxima venda.</li>
+</ul>
+<figure><img loading="lazy" width="1600" height="900" src="img/p2-36-ja-enviei.png" alt="Depois do Já enviei"><figcaption><b>1</b> Etapa "Orçamento enviado". <b>2</b> Orçamento vazio. <b>3</b> "Orçamento de R$ … registrado. Follow-up agendado."</figcaption></figure>
+<div class="atencao"><b>Já enviei não grava no sistema da loja.</b> Se o cliente fechar, use Salvar no sistema ou Finalizar pedido.</div>
+
+<h4>Pedido no sistema</h4>
+<p>Com pelo menos uma peça do sistema, aparece o quadro <b>Pedido no sistema</b> embaixo da Condição.</p>
+<figure><img loading="lazy" width="319" height="675" src="img/p2-29-pedido-no-sistema.png" alt="Campos do pedido no sistema"><figcaption><b>1</b> Faturar para: qual empresa (quando o cliente tem mais de uma). <b>2</b> Forma de pagamento. <b>3</b> Frete: CIF (loja paga) ou FOB (cliente paga). <b>4</b> Transportadora. <b>5</b> Observação que vai junto no pedido. <b>6</b> Finalizar pedido. <b>7</b> Salvar no sistema. <b>8</b> Enviar no chat. <b>9</b> Já enviei. No alto, "novo" quer dizer que ainda não foi salvo.</figcaption></figure>
+
+<h4>Salvar no sistema (grava no sistema)</h4>
+<p>Cria um pedido <b>em situação de orçamento</b> no sistema da loja. Ele ainda pode ser mudado. Aparece "Pedido nº … salvo como orçamento".</p>
+<figure><img loading="lazy" width="319" height="837" src="img/p2-34-salvo-no-sistema.png" alt="Pedido salvo no sistema"><figcaption><b>1</b> O quadro mostra o nº do pedido. <b>2</b> O botão virou <b>Atualizar nº …</b>: salvar de novo atualiza o mesmo pedido, sem criar outro.</figcaption></figure>
+
+<h4>Finalizar pedido (grava no sistema)</h4>
+<ol class="passos">
+  <li>Confira itens, empresa, pagamento e frete.</li>
+  <li>Clique em <b>Finalizar pedido</b>.</li>
+  <li>Aparece a pergunta: "Finalizar o pedido de R$ … para … ? Ele segue para o faturamento e não poderá mais ser alterado daqui."</li>
+  <li>Clique em <b>Sim, finalizar</b>. Ou <b>Voltar</b> para desistir.</li>
+</ol>
+<figure><img loading="lazy" width="319" height="429" src="img/p2-32-confirmar-finalizar.png" alt="Confirmação de finalizar"><figcaption><b>1</b> A pergunta de confirmação, com Voltar e Sim, finalizar.</figcaption></figure>
+
+<p>Depois de finalizado:</p>
+<figure><img loading="lazy" width="1600" height="900" src="img/p2-33-pedido-finalizado.png" alt="Pedido finalizado"><figcaption><b>1</b> A etapa muda para <b>Separando</b>. <b>2</b> O orçamento fica vazio. <b>3</b> "Pedido nº … finalizado". <b>4</b> O pedido aparece no Histórico como finalizado.</figcaption></figure>
+
+<h4>Quando o pedido não sai</h4>
+<p>Se falta algo, o painel mostra uma mensagem vermelha embaixo dos botões e não grava nada. As mais comuns:</p>
+<table>
+<thead><tr><th>Mensagem</th><th>O que fazer</th></tr></thead>
+<tbody>
+<tr><td>Vincule o cliente do sistema (acima).</td><td>Ligue a conversa a um cliente (tópico 1).</td></tr>
+<tr><td>Item N (…) não veio do sistema — busque pelo estoque.</td><td>É um item manual. Tire-o e ponha a peça do estoque.</td></tr>
+<tr><td>Quantidade zerada / precisa ser múltiplo de N</td><td>Corrija a quantidade com − e +.</td></tr>
+<tr><td>Desconto (ou acréscimo) acima do limite</td><td>Baixe o desconto do item ou da condição.</td></tr>
+<tr><td>A empresa exige forma de pagamento. / …transportadora.</td><td>Escolha no quadro Pedido no sistema.</td></tr>
+<tr><td>Boleto 28d exige pedido mínimo de R$ 200,00.</td><td>Aumente o pedido ou troque a forma de pagamento.</td></tr>
+</tbody>
+</table>
+<figure><img loading="lazy" width="319" height="350" src="img/p2-30-finalizar-com-erro.png" alt="Erro de item manual"><figcaption><b>1</b> O item 3 é manual: não pode ir para o pedido.</figcaption></figure>
+<figure><img loading="lazy" width="319" height="844" src="img/p2-31-pedido-minimo.png" alt="Erro de pedido mínimo"><figcaption><b>1</b> Boleto 28d escolhido. <b>2</b> O total não chega ao mínimo dessa forma de pagamento.</figcaption></figure>
+<div class="dica">Se aparecer "Pedido nº … foi criado, mas: …", o pedido <b>foi gravado</b>, mas com algum problema. Confira na web do vendedor antes de tentar de novo, para não duplicar.</div>
+
+<!-- ============================================================ -->
+<h3 id="p2-compras">Compras no sistema e Histórico</h3>
+
+<h4>Compras no sistema</h4>
+<p>Clique no título <b>Compras no sistema</b> para abrir. Mostra os pedidos recentes do cliente, direto do sistema da loja.</p>
+<figure><img loading="lazy" width="395" height="434" src="img/p2-37-compras-no-sistema.png" alt="Compras no sistema"><figcaption><b>1</b> Filtros: Todos, Orçamento, Concluído, Cancelado. <b>2</b> Nº, situação, valor, data e forma de pagamento. <b>3</b> "Parado há N dias: vale cobrar o cliente" (orçamento esquecido). <b>4</b> <b>Repetir</b>. <b>5</b> Explicação e <b>Atualizar</b>.</figcaption></figure>
+<p><b>Repetir</b> monta um orçamento novo com as mesmas peças, <b>com o preço de hoje</b>. Nada é criado no sistema.</p>
+
+<h4>Ver os itens de um pedido</h4>
+<p>Clique no pedido. Ele abre na coluna da direita, no lugar do orçamento (só para ver).</p>
+<figure><img loading="lazy" width="1600" height="1100" src="img/p2-38-pedido-aberto-ao-lado.png" alt="Pedido aberto ao lado"><figcaption><b>1</b> Pedido escolhido. <b>2</b> Nº e situação, com Voltar. <b>3</b> Itens com quantidade, preço e desconto; "fora de linha" = a loja não vende mais. <b>4</b> Detalhes: emissão, pagamento, frete, transportadora, vendedor, observação. <b>5</b> <b>Pôr no orçamento</b>. <b>6</b> Resumo (escreve no chat) e PDF (baixa o arquivo). <b>7</b> Voltar ao orçamento.</figcaption></figure>
+<ul>
+  <li><b>Pôr no orçamento</b> faz o mesmo que Repetir. Peças que saíram de linha ficam de fora e o painel avisa: "Saiu de linha e não entrou: …".</li>
+  <li>O PDF baixa no computador. Para mandar, anexe pelo clipe do WhatsApp.</li>
+  <li>A foto de um item do pedido pode ser arrastada para a conversa (tópico 4).</li>
+</ul>
+
+<h4>Histórico</h4>
+<p>Mostra os últimos pedidos e orçamentos desse cliente.</p>
+<figure><img loading="lazy" width="395" height="456" src="img/p2-39-historico.png" alt="Card Histórico"><figcaption><b>1</b> Pedido com situação (clique para ver os itens ao lado). <b>2</b> Resumo e PDF. <b>3</b> <b>Finalizar</b>: finaliza um pedido salvo como orçamento. <b>4</b> <b>Cancelar</b>: cancela o pedido.</figcaption></figure>
+<div class="atencao"><b>Finalizar</b> e <b>Cancelar</b> no Histórico <b>gravam no sistema da loja</b>. Finalizar pede a forma de pagamento; Cancelar pede confirmação. Leia com calma antes de confirmar.</div>
+
+</section>
+
+<section id="p3" data-titulo="Mensagens do cliente: Cotar e avisos">
+<h2><span class="parte-n">Parte 3</span>Quando o cliente manda mensagem: Cotar e avisos automáticos</h2>
+
+<p>O cliente manda a lista de peças pelo WhatsApp. Você não precisa procurar peça por peça. A extensão lê a mensagem, procura cada peça no sistema e monta uma lista para você conferir.</p>
+<p>Ela também avisa sozinha duas coisas: quando o cliente quer <b>fechar o pedido</b> e quando ele fala de uma <b>moto que não está na Ficha</b> dele.</p>
+
+<div class="atencao">A extensão <b>nunca envia nada sozinha</b>. Ela só escreve na caixa de mensagem. Quem aperta <b>Enviar</b> é sempre você, depois de ler.</div>
+
+<!-- ============================================================ -->
+<h3 id="p3-botao-cotar">O botão verde "Cotar"</h3>
+
+<p>Passe o mouse em cima de uma mensagem do cliente que fala de peça. Aparece um botão verde no canto de cima da mensagem.</p>
+
+<figure><img loading="lazy" width="600" height="530" src="img/p3-01-botao-cotar-bloco.png" alt="Botão verde Cotar 6 peças · 3 msgs em cima da mensagem do cliente"><figcaption>(1) O botão aparece quando o mouse passa na mensagem. Aqui ele diz <b>Cotar 6 peças · 3 msgs</b>: achou 6 peças em 3 mensagens seguidas.</figcaption></figure>
+
+<ol class="passos">
+<li>Abra a conversa do cliente no WhatsApp.</li>
+<li>Passe o mouse em cima da mensagem com as peças.</li>
+<li>Clique no botão verde <b>Cotar</b>.</li>
+<li>A lista <b>Cotar lista</b> abre no painel da direita, na aba <b>Venda</b>.</li>
+</ol>
+
+<p>O botão só aparece:</p>
+<ul>
+<li>nas mensagens do <b>cliente</b> (as brancas, à esquerda). Na sua mensagem (verde, à direita) ele não aparece;</li>
+<li>quando a mensagem tem quantidade ("2 guidon") ou nome de peça ("tem a capa azul da bros?"). "Bom dia" ou "tudo certo?" não ganham botão.</li>
+</ul>
+
+<figure><img loading="lazy" width="600" height="220" src="img/p3-03-botao-cotar-uma.png" alt="Botão Cotar sozinho em uma mensagem"><figcaption>(1) Quando a mensagem está sozinha, o botão diz só <b>Cotar</b>.</figcaption></figure>
+
+<div class="dica">Se você não estiver conectado ao Integra Vendas, o clique abre a tela de entrada com o aviso "Entre no Integra Vendas para cotar." (veja a parte 1).</div>
+
+<h4 id="p3-juntar">Várias mensagens seguidas viram uma lista só</h4>
+<p>Muito cliente manda a lista picada, em várias mensagens. O botão junta tudo o que o cliente mandou em seguida. Você pode clicar em qualquer uma dessas mensagens: o resultado é o mesmo.</p>
+
+<figure><img loading="lazy" width="1200" height="1060" src="img/p3-02-bloco-mensagens.png" alt="Mensagens do cliente marcadas: quais entram na lista e o que fecha o bloco"><figcaption>(1), (2) e (3) entram na lista. (+) A foto do cliente não interrompe. (✗) "Cliente perguntando" fica de fora porque não tem peça. (■) A mensagem do vendedor "ja te mando" fecha o bloco: o que vem depois é outra lista.</figcaption></figure>
+
+<table>
+<thead><tr><th>O que acontece na conversa</th><th>O que a extensão faz</th></tr></thead>
+<tbody>
+<tr><td>Cliente manda outra mensagem com peça</td><td>Junta na mesma lista</td></tr>
+<tr><td>Cliente manda uma foto</td><td>Continua juntando</td></tr>
+<tr><td>Mensagem do cliente sem peça ("Cliente perguntando", "bom dia")</td><td>Pula essa mensagem</td></tr>
+<tr><td>Você manda mensagem ou foto</td><td>Fecha a lista. O que vier depois é outra lista</td></tr>
+<tr><td>Passa mais de 30 minutos entre uma mensagem e outra do cliente</td><td>Fecha a lista</td></tr>
+</tbody>
+</table>
+
+<h4 id="p3-selecionar">Selecionar um pedaço do texto</h4>
+<p>Outro jeito: com o mouse, pinte (selecione) só as linhas que interessam.</p>
+<ol class="passos">
+<li>Clique antes da primeira linha e arraste até o fim da última linha que você quer.</li>
+<li>Solte o mouse e espere um segundo.</li>
+<li>Se o trecho tiver 2 peças ou mais, a <b>Cotar lista</b> abre sozinha com essas linhas.</li>
+</ol>
+<figure><img loading="lazy" width="1600" height="1000" src="img/p3-04-selecionar-trecho.png" alt="Duas linhas selecionadas na mensagem e a Cotar lista com 2 peças"><figcaption>(1) Duas linhas pintadas na mensagem. (2) A Cotar lista abre com só essas 2 peças.</figcaption></figure>
+<div class="dica">Pinte a linha inteira. A extensão usa exatamente o que foi pintado: na figura, o fim ficou "cr" em vez de "cristal". Com uma peça só pintada, ela faz a busca comum de peça (veja a parte 2). O painel precisa estar aberto.</div>
+
+<!-- ============================================================ -->
+<h3 id="p3-cotar-lista">A tela "Cotar lista"</h3>
+
+<p>Cada linha da mensagem do cliente vira uma linha na lista. A extensão procura uma peça de cada vez. Enquanto procura, a linha mostra "na fila" ou "buscando…". Espere alguns segundos até todas terminarem.</p>
+
+<figure><img loading="lazy" width="870" height="2082" src="img/p3-05-cotar-lista.png" alt="Cotar lista com 6 peças e os botões no fim"><figcaption>(1) Título da lista. Embaixo, quantas peças o cliente pediu. (2) Uma linha: uma peça do pedido. (3) Quantas linhas já estão prontas. (4) <b>Responder estoque</b>. (5) <b>Enviar ao cliente</b>. (6) <b>Pôr 6 no orçamento</b>. Para fechar a lista sem fazer nada, clique em <b>fechar</b>, no alto.</figcaption></figure>
+
+<h4 id="p3-linha">Como ler uma linha</h4>
+<figure><img loading="lazy" width="806" height="482" src="img/p3-06-linha-detalhe.png" alt="Uma linha da Cotar lista com as partes numeradas"><figcaption>(1) Quantidade. (2) O nome que foi procurado. (3) Grau de certeza. (4) O que o cliente escreveu, do jeito que veio. (5) A opção escolhida (fundo verde). (6) Outra opção. (7) Aviso de unidade. (8) O <b>X</b> tira a linha da lista.</figcaption></figure>
+
+<ul>
+<li><b>Quantidade</b>: vem da mensagem ("5 par" vira 5). Sem número, fica 1. Clique no número para mudar.</li>
+<li><b>Opções</b>: a primeira é a melhor que a extensão achou. Abaixo vêm até 2 alternativas.</li>
+<li><b>Bolinha cheia ●</b> = tem no estoque. <b>Bolinha vazia ○</b> = sem estoque.</li>
+<li>O preço à direita é o preço de tabela.</li>
+</ul>
+
+<table>
+<thead><tr><th>Etiqueta</th><th>O que quer dizer</th><th>O que você faz</th></tr></thead>
+<tbody>
+<tr><td><b>confere</b> (verde)</td><td>A peça bate com o pedido</td><td>Só dê uma olhada</td></tr>
+<tr><td><b>confira</b> (amarela)</td><td>Achou, mas tem outra parecida, ou achou procurando menos palavras</td><td>Veja se a opção de fundo verde é a certa</td></tr>
+<tr><td><b>duvidoso</b> (vermelha)</td><td>O que achou quase não bate com o pedido</td><td>Corrija o nome (veja abaixo)</td></tr>
+<tr><td><b>não achei</b> (vermelha)</td><td>Nenhum produto com esse nome</td><td>Corrija o nome ou tire a linha</td></tr>
+<tr><td><b>erro</b></td><td>A busca falhou (internet, sistema)</td><td>Tecle <kbd>Enter</kbd> no nome para tentar de novo</td></tr>
+</tbody>
+</table>
+
+<h4 id="p3-trocar">Trocar a opção</h4>
+<ol class="passos">
+<li>Clique na opção certa, dentro da linha.</li>
+<li>Ela fica com fundo verde. É essa que vai para o orçamento e para a mensagem.</li>
+</ol>
+<figure><img loading="lazy" width="806" height="426" src="img/p3-07-trocar-opcao.png" alt="Segunda opção escolhida, com fundo verde"><figcaption>(1) Depois do clique, <b>BOTAO PARTIDA NEW LIBERTY 3</b> passou a ser a escolhida.</figcaption></figure>
+
+<h4 id="p3-unidade">Aviso de unidade: "Pediu em par"</h4>
+<p>Quando o cliente pede em <b>par</b> (ou peça, unidade) e o produto é vendido de outro jeito, aparece em laranja: <i>"Pediu em par; o produto é vendido em PC. Confira a quantidade."</i> (número 7 da figura da linha).</p>
+<div class="exemplo">O cliente escreveu <b>"5 par botao new liberty 3"</b>. O botão é vendido por peça (PC). A extensão põe 5, mas avisa. Se ele quer 5 pares, mude a quantidade para 10.</div>
+
+<h4 id="p3-girias">Gírias e jeitos de escrever</h4>
+<p>O cliente escreve do jeito dele. A extensão troca a palavra antes de procurar. No campo do nome continua aparecendo o que o cliente escreveu, mas o resultado já vem certo.</p>
+<figure><img loading="lazy" width="806" height="582" src="img/p3-08-girias.png" alt="kit tracao achou KIT RELACAO e guidon achou GUIDAO"><figcaption>(1) O cliente escreveu "kit tração"... (2) ...e a extensão achou <b>KIT RELACAO</b>. (3) "guidon"... (4) ...virou <b>GUIDAO</b>.</figcaption></figure>
+
+<table>
+<thead><tr><th>O cliente escreve…</th><th>A extensão entende…</th></tr></thead>
+<tbody>
+<tr><td>tração</td><td>relação</td></tr>
+<tr><td>guidon, guidom, guidam, guidau</td><td>guidão</td></tr>
+<tr><td>maneta</td><td>manete</td></tr>
+<tr><td>pastilia</td><td>pastilha</td></tr>
+<tr><td>coxin</td><td>coxim</td></tr>
+<tr><td>amortecedor</td><td>AMORTEC (como está no catálogo)</td></tr>
+<tr><td>embreagem, embreage, imbreagem</td><td>EMBREAG (como está no catálogo)</td></tr>
+<tr><td>carburador</td><td>CARBUR (como está no catálogo)</td></tr>
+<tr><td>retrovisor (sem resultado)</td><td>tenta "espelho" (e o contrário)</td></tr>
+<tr><td>moto sem resultado, ex.: "espelho bros"</td><td>tenta a marca: "espelho honda" (acha "ESPELHO ... P/HONDA")</td></tr>
+<tr><td>"5 par", "10 un", "3 pç", "2 cx"</td><td>quantidade + unidade</td></tr>
+<tr><td>"tem a capa azul da bros?"</td><td>tira "tem", "a", "da" e procura "capa azul bros"</td></tr>
+</tbody>
+</table>
+<p>Se nada bater, a extensão tenta com menos palavras e avisa na linha: <i>"nada exato, mostrando …"</i>. Nesse caso a etiqueta fica <b>confira</b>.</p>
+<div class="dica">"capa" não tem troca automática, porque pode ser capa de banco, de tanque ou de chuva. Confira sempre.</div>
+
+<h4 id="p3-corrigir">Corrigir uma palavra (e a extensão aprende)</h4>
+<figure><img loading="lazy" width="870" height="1348" src="img/p3-10-lista-problemas.png" alt="Lista com linha duvidosa, linha sem resultado e foto"><figcaption>(1) O cliente escreveu "retrovizor", com Z. (2) A extensão achou pastilha: <b>duvidoso</b>. (3) "capacete": <b>não achei</b>. (4) Foto da peça. (5) Aviso de que dá para arrastar a foto.</figcaption></figure>
+<ol class="passos">
+<li>Clique no nome da linha (a caixa cinza).</li>
+<li>Corrija a palavra. Exemplo: troque "retrovizor" por "retrovisor".</li>
+<li>Tecle <kbd>Enter</kbd>. A linha procura de novo.</li>
+<li>Confira a opção nova.</li>
+</ol>
+<figure><img loading="lazy" width="806" height="324" src="img/p3-11-corrigir-palavra.png" alt="Linha corrigida para retrovisor bros, achou RETROVISOR BROS 160 PAR"><figcaption>(1) Nome corrigido. (2) Agora achou <b>RETROVISOR BROS 160 PAR</b>, com a etiqueta <b>confere</b>.</figcaption></figure>
+<p><b>A extensão aprende:</b> quando você clica em <b>Pôr no orçamento</b> depois de trocar <b>uma palavra só</b>, ela guarda a troca ("retrovizor" → "retrovisor") e usa nas próximas buscas. Ela também lembra qual produto você escolheu para aquele nome.</p>
+
+<h4 id="p3-dela">"Dela", "desse", "da mesma": de qual moto?</h4>
+<p>O cliente pergunta da capa da Bros e depois escreve <b>"e 1 retrovisor dela"</b>. A extensão descobre que "dela" é a Bros e já procura "retrovisor bros". Na linha aparece de onde ela tirou a moto.</p>
+<figure><img loading="lazy" width="870" height="780" src="img/p3-09-dela.png" alt="Linha retrovisor bros com a explicação dela = bros"><figcaption>(1) Ela completou o nome: "retrovisor bros". (2) Explica: <i>"dela" = bros (citada antes na conversa)</i>. (3) A peça achada.</figcaption></figure>
+<p>Onde ela procura a moto, nesta ordem:</p>
+<table>
+<thead><tr><th>Mensagem na linha</th><th>De onde veio a moto</th></tr></thead>
+<tbody>
+<tr><td>(citada acima)</td><td>Da mesma lista, numa linha antes</td></tr>
+<tr><td>(citada antes na conversa)</td><td>Das 20 mensagens anteriores</td></tr>
+<tr><td>(da Ficha)</td><td>Da moto cadastrada na Ficha do cliente</td></tr>
+<tr><td>(citada depois; confira) — em laranja</td><td>De uma linha que vem depois, na mesma lista. É um palpite: confira</td></tr>
+<tr><td>"dela": não achei de qual moto; complete o nome — em laranja</td><td>Não achou. Escreva a moto no nome e tecle <kbd>Enter</kbd></td></tr>
+</tbody>
+</table>
+<div class="atencao">Mensagem que fala de duas motos ao mesmo tempo (ex.: "TIT/BIZ/POP") não serve para descobrir a moto. E "e o preço dela?" falando de uma <b>peça</b> citada antes ainda não funciona.</div>
+
+<h4 id="p3-sem-resultado">Linha sem resultado</h4>
+<p>A linha com <b>não achei</b> não entra no orçamento. Você pode:</p>
+<ul>
+<li>corrigir o nome e teclar <kbd>Enter</kbd>;</li>
+<li>clicar no <b>X</b> para tirar a linha;</li>
+<li>deixar como está: na mensagem para o cliente ela vai em "Não encontrei: … Vou verificar e te retorno."</li>
+</ul>
+
+<!-- ============================================================ -->
+<h3 id="p3-botoes">Os botões da Cotar lista</h3>
+<p>Os botões só funcionam depois que todas as linhas terminam de buscar. Eles usam só as linhas prontas (com uma opção de fundo verde).</p>
+
+<h4 id="p3-por-orcamento">Pôr tudo no orçamento</h4>
+<ol class="passos">
+<li>Confira as linhas.</li>
+<li>Clique em <b>Pôr 6 no orçamento</b> (o número muda conforme as linhas prontas).</li>
+<li>As peças entram no orçamento, na coluna da direita.</li>
+</ol>
+<figure><img loading="lazy" width="1600" height="1000" src="img/p3-12-por-no-orcamento.png" alt="Aviso 6 itens no orçamento e as peças na coluna Orçamento"><figcaption>(1) O aviso "6 itens no orçamento." As peças aparecem na coluna <b>ORÇAMENTO</b>, à direita.</figcaption></figure>
+<ul>
+<li>Se o produto é vendido em múltiplo (caixa com 10, por exemplo), a quantidade sobe para o múltiplo.</li>
+<li>Linhas sem resultado ficam na lista para você resolver. O aviso diz quantas ficaram.</li>
+<li>Para mexer no orçamento e finalizar o pedido, veja a parte 2.</li>
+</ul>
+
+<h4 id="p3-enviar">Enviar ao cliente</h4>
+<ol class="passos">
+<li>Clique em <b>Enviar ao cliente</b>.</li>
+<li>A cotação aparece escrita na caixa de mensagem do WhatsApp.</li>
+<li>Leia. Mude o que quiser.</li>
+<li>Aperte <b>Enviar</b> do WhatsApp (ou <kbd>Enter</kbd>).</li>
+</ol>
+<figure><img loading="lazy" width="1600" height="1000" src="img/p3-13-enviar-ao-cliente.png" alt="Cotação escrita na caixa de mensagem"><figcaption>(1) O botão. (2) A cotação na caixa de mensagem, ainda <b>não enviada</b>. (3) O aviso "Texto inserido na conversa. Revise e aperte Enviar."</figcaption></figure>
+<p>A cotação traz, para cada peça: nome, código, quantidade × preço = total da peça, e se é "Pronta entrega", "Parte a pronta entrega, o restante sob encomenda" ou "Sob encomenda". No fim vem o <b>Total</b> e o que não foi achado.</p>
+<div class="atencao">Nada vai para o cliente até você apertar Enviar no WhatsApp.</div>
+
+<h4 id="p3-estoque">Responder estoque</h4>
+<p>Serve quando o cliente só pergunta "tem?". A resposta não mostra preço nem quantas peças você tem.</p>
+<ol class="passos">
+<li>Clique em <b>Responder estoque</b>.</li>
+<li>A resposta aparece na caixa de mensagem, separada em grupos.</li>
+<li>Leia e aperte <b>Enviar</b> do WhatsApp.</li>
+</ol>
+<figure><img loading="lazy" width="1600" height="1000" src="img/p3-14-responder-estoque.png" alt="Resposta de estoque na caixa de mensagem e aviso de lista de espera"><figcaption>(1) O botão. (2) A resposta: "Tem a pronta entrega", "Tem parte; o restante sob encomenda", "Não tem no momento (te aviso quando chegar)". (3) O aviso diz quantas peças entraram na lista de espera.</figcaption></figure>
+<div class="atencao"><b>Cuidado:</b> no mesmo clique, as peças que faltam (ou que só têm parte) já entram na <b>lista de espera</b> deste cliente, mesmo que você apague a mensagem e não envie. A aba Hoje avisa quando a peça chegar (veja a parte 5). A mesma peça não entra duas vezes.</div>
+
+<h4 id="p3-fotos">Mandar a foto da peça com o preço</h4>
+<p>Quando a peça tem foto no sistema, a foto aparece pequena ao lado da opção, e embaixo da lista vem o aviso "Arraste a foto de uma opção para a conversa".</p>
+<ol class="passos">
+<li>Clique na foto pequena e segure o botão do mouse.</li>
+<li>Arraste até a conversa. A conversa fica com uma borda verde tracejada e o aviso "Solte para mandar a foto com a ficha da peça".</li>
+<li>Solte o mouse.</li>
+<li>O WhatsApp abre a foto pronta para envio, com nome, código, quantidade e preço na legenda.</li>
+<li>Confira e aperte <b>Enviar</b>.</li>
+</ol>
+<figure><img loading="lazy" width="2480" height="2000" src="img/p3-15-arrastar-foto.png" alt="Foto sendo arrastada para a conversa, com borda tracejada verde"><figcaption>A foto sendo arrastada: a conversa fica com borda verde tracejada. Solte ali dentro.</figcaption></figure>
+<div class="dica">Se já tem uma foto esperando envio, envie ou descarte antes de arrastar outra. Se o WhatsApp não mostrar a legenda, a extensão copia o texto: é só colar (<kbd>Ctrl</kbd>+<kbd>V</kbd>).</div>
+
+<!-- ============================================================ -->
+<h3 id="p3-quer-fechar">Faixa "Cliente quer fechar"</h3>
+<p>Quando o cliente escreve que quer fechar, aparece uma faixa verde no alto da aba <b>Venda</b>. Ela mostra a frase dele e o que ainda falta para tirar o pedido.</p>
+<figure><img loading="lazy" width="1600" height="1000" src="img/p3-16-quer-fechar.png" alt="Faixa Cliente quer fechar com a lista do que falta"><figcaption>(1) A mensagem do cliente: "se tiver coloca 1 e pode finalizar". (2) A faixa <b>Cliente quer fechar</b>, com a frase dele. (3) O que falta: em vermelho, o que impede; em laranja, o que é bom conferir. (4) <b>já resolvi</b>.</figcaption></figure>
+
+<table>
+<thead><tr><th>O cliente escreve…</th><th>Abre a faixa?</th></tr></thead>
+<tbody>
+<tr><td>"pode finalizar", "pode fechar", "pode separar", "pode faturar"</td><td>Sim</td></tr>
+<tr><td>"fecha o pedido", "faz o pedido", "tira o pedido", "passa o pedido", "monta o pedido"</td><td>Sim</td></tr>
+<tr><td>"manda o pix", "qual o pix", "me manda a chave pix"</td><td>Sim</td></tr>
+<tr><td>"vou querer tudo", "vou levar esses", "vou ficar com os dois"</td><td>Sim</td></tr>
+<tr><td>Só "fechado", "fechou", "pode mandar", "manda ai", "pode enviar" (a mensagem inteira)</td><td>Sim</td></tr>
+<tr><td>"ainda <b>não</b> pode fechar", "nem precisa fechar o pedido"</td><td>Não (tem negação)</td></tr>
+<tr><td>"pode fazer por 50?"</td><td>Não</td></tr>
+<tr><td>"pode mandar a foto?"</td><td>Não</td></tr>
+</tbody>
+</table>
+<p>Só contam as mensagens do cliente. Vale sempre a mais nova.</p>
+
+<p>O que a faixa pode listar como faltando:</p>
+<ul>
+<li>"Conecte ao Integra Vendas para tirar o pedido." (veja a parte 1)</li>
+<li>"Orçamento vazio: ponha as peças (Cotar na mensagem do cliente)."</li>
+<li>"Vincule o cliente do sistema (acima)."</li>
+<li>Item que não veio do sistema (digitado à mão): "busque pelo estoque".</li>
+<li>Pedido mínimo da forma de pagamento.</li>
+<li>Em laranja: "Forma de pagamento não escolhida." e "Frete sem valor".</li>
+</ul>
+
+<h4 id="p3-ir-finalizar">Quando está tudo certo</h4>
+<p>Quando não sobra nada em vermelho, aparece o botão <b>Ir para Finalizar pedido</b>. O botão <b>Finalizar pedido</b>, no orçamento, pisca algumas vezes para você achar.</p>
+<figure><img loading="lazy" width="1600" height="1000" src="img/p3-17-pronto-para-finalizar.png" alt="Faixa com Ir para Finalizar pedido e botão Finalizar pedido destacado"><figcaption>(1) Só sobrou um aviso laranja. (2) <b>Ir para Finalizar pedido</b> leva a tela até o botão. (3) O botão <b>Finalizar pedido</b> piscando.</figcaption></figure>
+<p>Se tudo estiver certo, a faixa diz: "Tudo pronto: N itens, R$ …. Confira e clique Finalizar pedido."</p>
+<div class="atencao">A extensão <b>não finaliza sozinha</b>. Quem clica em <b>Finalizar pedido</b> é você (veja a parte 2).</div>
+
+<h4 id="p3-ja-resolvi">"já resolvi"</h4>
+<ol class="passos">
+<li>Clique em <b>já resolvi</b> quando já cuidou do pedido.</li>
+<li>A faixa some.</li>
+<li>Ela só volta se o cliente pedir para fechar de novo, numa mensagem nova.</li>
+</ol>
+<p>A faixa também some sozinha quando um pedido é finalizado depois do pedido do cliente.</p>
+<figure><img loading="lazy" width="1240" height="640" src="img/p3-18-nao-ativa.png" alt="Mensagens com negação não abrem a faixa"><figcaption>Depois de "já resolvi", o cliente escreveu (1) "ainda não pode fechar…" e (2) "pode mandar a foto?". Nenhuma das duas abre a faixa.</figcaption></figure>
+<figure><img loading="lazy" width="1240" height="640" src="img/p3-19-volta-a-ativar.png" alt="Nova mensagem fecha o pedido abre a faixa de novo"><figcaption>(1) O cliente escreveu "beleza, fecha o pedido". (2) A faixa voltou, com a frase nova.</figcaption></figure>
+
+<!-- ============================================================ -->
+<h3 id="p3-moto-citada">Faixa "Cliente citou BROS, que não está na Ficha"</h3>
+<p>Quando o cliente fala de uma moto que não está cadastrada na Ficha dele, aparece esta faixa nas abas <b>Venda</b> e <b>Ficha</b>.</p>
+<figure><img loading="lazy" width="1240" height="640" src="img/p3-20-moto-citada.png" alt="Faixa Cliente citou BROS com os botões Adicionar à Ficha e não é dele"><figcaption>(1) O cliente escreveu "tem a capa azul da bros?". (2) A moto citada: <b>BROS</b>. (3) <b>Adicionar à Ficha</b>. (4) <b>não é dele</b>.</figcaption></figure>
+
+<h4>Adicionar à Ficha</h4>
+<ol class="passos">
+<li>Clique em <b>Adicionar à Ficha</b>.</li>
+<li>A moto entra na Ficha com o nome completo do catálogo (ex.: "Honda Bros 160").</li>
+<li>Abra a aba <b>Ficha</b> e confira modelo e ano (veja a parte 4).</li>
+</ol>
+<figure><img loading="lazy" width="640" height="1000" src="img/p3-21-moto-na-ficha.png" alt="Aba Ficha com a Honda Bros 160 adicionada"><figcaption>A Honda Bros 160 entrou na Ficha, embaixo da CG 160 Titan. (1) O aviso: "Honda Bros 160 na Ficha. Confira modelo e ano na aba Ficha."</figcaption></figure>
+
+<h4>não é dele</h4>
+<p>Use quando a moto é de outra pessoa (por exemplo, oficina ou loja que encomenda para os clientes dela). Clique em <b>não é dele</b>: a faixa some e essa moto não é mais sugerida para este cliente.</p>
+
+<ul>
+<li>Só contam mensagens do cliente.</li>
+<li>Só conta mensagem que fala de <b>uma</b> moto. "TIT/BIZ/POP" não conta.</li>
+<li>Aparece a moto citada mais recente. Depois de resolver uma, pode aparecer a próxima.</li>
+</ul>
+<div class="dica">A extensão sabe separar o verbo da moto: "pode <b>fazer</b> por 50?" não conta, mas "retrovisor da <b>Fazer</b>" ou "Fazer 250" contam. Se mesmo assim ela entender errado, clique em <b>não é dele</b>.</div>
+
+</section>
+
+<section id="p4" data-titulo="O cliente: Ficha, etapas e retornos">
+<h2><span class="parte-n">Parte 4</span>O cliente: Ficha, etapa da venda, retornos e enviados</h2>
+
+<p>Quando você abre uma conversa no WhatsApp, o painel da direita mostra quem é esse cliente. Nele você anota <b>em que pé está a venda</b>, recebe <b>lembretes para voltar a falar com o cliente</b>, confere <b>o que já mandou</b> e guarda <b>a moto dele</b>.</p>
+<p>Tudo isso fica na aba <b>Conversa</b> do painel (o ícone de balão, no alto). Esta parte explica o cabeçalho do cliente e as sub-abas <b>Retornos</b>, <b>Enviados</b> e <b>Ficha</b>. A sub-aba <b>Venda</b> (busca de peça, orçamento e pedido) está na parte 2.</p>
+
+<div class="atencao">O painel <b>nunca envia nada sozinho</b>. Quando você clica em <b>Inserir</b>, o texto vai para a caixa de mensagem do WhatsApp. Você lê, corrige se precisar e <b>você</b> aperta Enviar.</div>
+
+<!-- ============================================================ -->
+<h3 id="p4-cabecalho">O cabeçalho do cliente</h3>
+
+<p>Logo abaixo do nome "Integra Vendas" fica o cartão do cliente da conversa aberta.</p>
+
+<figure><img loading="lazy" width="683" height="144" src="img/p4-01-cabecalho.png" alt="Cabeçalho do cliente no painel, com avatar, nome, linha de dados, seletor de etapa e sub-abas"><figcaption><b>1</b> Bolinha com as iniciais do cliente. <b>2</b> Nome e, embaixo, uma linha com os dados principais. <b>3</b> A etapa da venda (clique para trocar). <b>4</b> As sub-abas: Venda, Retornos, Enviados e Ficha. O número vermelho em Retornos quer dizer que tem retorno atrasado.</figcaption></figure>
+
+<h4>O que aparece na linha de dados</h4>
+<p>A linha cinza embaixo do nome junta, separado por pontinhos:</p>
+<ul>
+  <li><b>Como o contato está salvo:</b>
+    <ul>
+      <li><b>salvo pelo nome</b>: o contato está gravado no seu celular com um nome (ex.: "Ricardo Oficina").</li>
+      <li><b>sem nome salvo</b>: o contato não está na sua agenda. No lugar do nome aparece o número do telefone.</li>
+      <li>Às vezes aparece o próprio telefone formatado.</li>
+    </ul>
+  </li>
+  <li>O <b>nome do cliente no sistema</b> (ex.: RICARDO OFICINA LTDA), quando a conversa já está ligada a um cadastro. Veja a parte 2.</li>
+  <li>A <b>primeira moto</b> da Ficha (ex.: CG 160 Titan 2019).</li>
+  <li>O valor do último orçamento (<b>orçado R$ ...</b>).</li>
+  <li>Quantos <b>pedidos</b> esse cliente já tem.</li>
+  <li>Há quanto tempo ele está na etapa atual (ex.: <b>no estágio há 2 d</b>). Não aparece na etapa Novo.</li>
+</ul>
+
+<!-- ============================================================ -->
+<h3 id="p4-etapas">A etapa da venda (o funil)</h3>
+
+<p>O botão à direita do nome mostra <b>em que pé está a negociação</b>. Você mesmo muda a etapa conforme a venda anda. É com ela que o painel sabe quando lembrar você de voltar ao cliente.</p>
+
+<figure><img loading="lazy" width="683" height="228" src="img/p4-02-etapas.png" alt="Lista das etapas aberta: Novo, Orçamento enviado, Aguardando Pix, Pago, Separando, Enviado/Retirado, Pós-venda, Perdido"><figcaption>Ao clicar no botão da etapa, abre a lista com as 8 etapas. Clique na que vale agora.</figcaption></figure>
+
+<h4>Como trocar a etapa</h4>
+<ol class="passos">
+  <li>Abra a conversa do cliente no WhatsApp.</li>
+  <li>No painel, clique no botão da etapa, ao lado do nome.</li>
+  <li>Clique na etapa nova. Pronto: a troca é gravada na hora.</li>
+</ol>
+
+<h4>O que cada etapa quer dizer no balcão</h4>
+<table>
+  <thead><tr><th>Etapa</th><th>Quando usar</th><th>O que o painel faz</th><th>Lembrete na lista de conversas</th></tr></thead>
+  <tbody>
+    <tr><td><b>Novo</b></td><td>Cliente chegou agora, ainda não tem orçamento.</td><td>Nada.</td><td>Nenhum.</td></tr>
+    <tr><td><b>Orçamento enviado</b></td><td>Você mandou o preço/orçamento e está esperando resposta.</td><td>Cria os retornos automáticos (2h, D+1, D+3, D+7), se ainda não houver.</td><td>"Cobrar orçamento"</td></tr>
+    <tr><td><b>Aguardando Pix</b></td><td>Cliente fechou e falta o pagamento cair.</td><td>Também cria os retornos automáticos, se ainda não houver.</td><td>"Conferir Pix"</td></tr>
+    <tr><td><b>Pago</b></td><td>Pagamento confirmado.</td><td>Cancela os retornos automáticos que faltavam.</td><td>"Separar pedido"</td></tr>
+    <tr><td><b>Separando</b></td><td>Você está juntando as peças.</td><td>Cancela os retornos automáticos.</td><td>"Avisar que está pronto"</td></tr>
+    <tr><td><b>Enviado/Retirado</b></td><td>A peça saiu (motoboy, correio ou cliente buscou).</td><td>Cancela os retornos automáticos.</td><td>"Confirmar entrega"</td></tr>
+    <tr><td><b>Pós-venda</b></td><td>Venda encerrada. Cliente para manter contato.</td><td>Cancela os retornos automáticos.</td><td>Nenhum.</td></tr>
+    <tr><td><b>Perdido</b></td><td>O cliente não comprou.</td><td>Cancela os retornos automáticos e pergunta <b>Por que perdeu?</b></td><td>Nenhum.</td></tr>
+  </tbody>
+</table>
+
+<div class="dica">"Cancela os retornos automáticos" quer dizer: os lembretes da cadência (2h, D+1, D+3, D+7) e o "Retorno do preço" que ainda não foram feitos somem. Faz sentido: se o cliente já pagou, não precisa cobrar o orçamento.</div>
+
+<h4>Os retornos automáticos (a "cadência")</h4>
+<p>Quando você coloca o cliente em <b>Orçamento enviado</b> ou <b>Aguardando Pix</b>, o painel agenda 4 lembretes de uma vez. Cada um já vem com uma mensagem pronta:</p>
+<table>
+  <thead><tr><th>Lembrete</th><th>Quando</th><th>Ideia da mensagem</th></tr></thead>
+  <tbody>
+    <tr><td><b>2h</b></td><td>2 horas depois</td><td>Avisa que separou as peças e pergunta se pode confirmar o pedido.</td></tr>
+    <tr><td><b>D+1</b></td><td>1 dia depois</td><td>Lembra que o orçamento continua de pé e tem estoque.</td></tr>
+    <tr><td><b>D+3</b></td><td>3 dias depois</td><td>Oferece uma opção paralela mais em conta, se o preço pesou.</td></tr>
+    <tr><td><b>D+7</b></td><td>7 dias depois</td><td>Despedida educada: encerra o orçamento sem incomodar.</td></tr>
+  </tbody>
+</table>
+
+<figure><img loading="lazy" width="683" height="144" src="img/p4-03-contato-novo.png" alt="Cabeçalho de um contato novo com a etapa Novo"><figcaption><b>1</b> Um contato que acabou de chegar começa na etapa <b>Novo</b>. Repare que ele está "sem nome salvo": aparece o telefone no lugar do nome.</figcaption></figure>
+
+<figure><img loading="lazy" width="640" height="900" src="img/p4-04-cadencia-criada.png" alt="Etapa trocada para Orçamento enviado e aviso de cadência criada"><figcaption><b>1</b> A etapa mudou para Orçamento enviado. <b>2</b> O painel avisa: "Cadência de follow-up criada (2h, D+1, D+3, D+7)". A sub-aba Retornos agora mostra 4. (A faixa verde "Cliente quer fechar" é explicada na parte 3.)</figcaption></figure>
+
+<!-- ============================================================ -->
+<h3 id="p4-perdido">Cliente perdido: "Por que perdeu?"</h3>
+
+<p>Quando o cliente não compra, marque <b>Perdido</b>. O painel pede o motivo. Isso ajuda a loja a ver onde as vendas estão escapando (preço, falta de peça, demora...).</p>
+
+<ol class="passos">
+  <li>Clique no botão da etapa e escolha <b>Perdido</b>.</li>
+  <li>Aparece a faixa vermelha <b>Por que perdeu?</b> com 5 botões.</li>
+  <li>Clique no motivo: <b>Preço</b>, <b>Sem estoque</b>, <b>Sumiu / demorou</b>, <b>Comprou em outro lugar</b> ou <b>Outro</b>.</li>
+  <li>Se quiser, escreva um detalhe no campo que aparece e clique fora dele para gravar.</li>
+</ol>
+
+<figure><img loading="lazy" width="683" height="218" src="img/p4-05-perdido-motivos.png" alt="Faixa Por que perdeu com os cinco motivos"><figcaption><b>1</b> Etapa Perdido escolhida. <b>2</b> A faixa pergunta o motivo. Clique em um dos botões.</figcaption></figure>
+
+<figure><img loading="lazy" width="683" height="221" src="img/p4-06-perdido-escolhido.png" alt="Motivo escolhido Comprou em outro lugar, com valor, link trocar e campo de detalhe"><figcaption><b>1</b> O motivo escolhido e o valor que foi perdido (o do último orçamento). <b>2</b> <b>trocar</b>: volta a mostrar os 5 botões para você escolher outro motivo. <b>3</b> Campo de detalhe, opcional. Em "Comprou em outro lugar" ele pede "Onde comprou e por quanto".</figcaption></figure>
+
+<figure><img loading="lazy" width="683" height="242" src="img/p4-07-perdido-estoque.png" alt="Motivo Sem estoque com lembrete da lista de espera"><figcaption><b>1</b> Quando o motivo é <b>Sem estoque</b>, o painel lembra de colocar a peça na lista de espera (sub-aba Retornos, veja o item 4). Assim você avisa o cliente quando a peça chegar e pode recuperar a venda.</figcaption></figure>
+
+<div class="atencao">Se o cliente voltar e você trocar a etapa de Perdido para qualquer outra (por exemplo, Orçamento enviado), <b>o motivo da perda é apagado</b>. O cliente deixa de contar como perdido.</div>
+
+<!-- ============================================================ -->
+<h3 id="p4-retornos">Sub-aba Retornos: lembretes para voltar ao cliente</h3>
+
+<p>Aqui ficam os lembretes que ainda não foram feitos, do mais antigo para o mais novo, em forma de linha do tempo. Ela tem dois quadros: <b>Próximos contatos</b> e <b>Avisar quando chegar</b>.</p>
+
+<figure><img loading="lazy" width="640" height="900" src="img/p4-11-retornos.png" alt="Sub-aba Retornos com um lembrete atrasado e um futuro"><figcaption><b>1</b> Sub-aba Retornos. O número fica vermelho quando tem lembrete atrasado. <b>2</b> Quando é: "atrasado 1 h" (vermelho), "em 2 d" (futuro). O próximo a vencer fica em verde. <b>3</b> A mensagem pronta, já com o nome do cliente, a moto e o valor. <b>4</b> <b>Inserir</b>. <b>5</b> <b>Feito</b>. <b>6</b> <b>+1 dia</b>. <b>7</b> <b>Cliente respondeu</b>.</figcaption></figure>
+
+<h4>O que cada botão faz</h4>
+<table>
+  <thead><tr><th>Botão</th><th>O que acontece</th></tr></thead>
+  <tbody>
+    <tr><td><b>Inserir</b></td><td>Coloca a mensagem na caixa de texto do WhatsApp. <b>Não envia.</b> O lembrete continua na lista até você clicar em Feito.</td></tr>
+    <tr><td><b>Feito</b></td><td>Tira o lembrete da lista. Use depois de mandar a mensagem (ou se resolveu de outro jeito, por ligação, por exemplo).</td></tr>
+    <tr><td><b>+1 dia</b></td><td>Empurra o lembrete para amanhã. Se estava atrasado, passa a vencer daqui a 24 horas.</td></tr>
+    <tr><td><b>Cliente respondeu</b></td><td>Para a cadência inteira: apaga os lembretes automáticos (2h, D+1, D+3, D+7) e o "Retorno do preço" que faltavam. Use quando o cliente voltou a conversar.</td></tr>
+    <tr><td><b>Iniciar cadência</b></td><td>Só aparece quando não tem nenhum lembrete. Cria os 4 lembretes (2h, D+1, D+3, D+7) a partir de agora.</td></tr>
+  </tbody>
+</table>
+
+<h4>Passo a passo: cobrar um retorno atrasado</h4>
+<ol class="passos">
+  <li>Abra a conversa do cliente.</li>
+  <li>Clique na sub-aba <b>Retornos</b>.</li>
+  <li>No lembrete marcado como "atrasado", leia a mensagem.</li>
+  <li>Clique em <b>Inserir</b>. A mensagem aparece na caixa de texto do WhatsApp.</li>
+  <li>Leia a mensagem na caixa e ajuste o que quiser.</li>
+  <li>Aperte <kbd>Enter</kbd> ou o botão de enviar do WhatsApp.</li>
+  <li>Volte ao painel e clique em <b>Feito</b> nesse lembrete.</li>
+</ol>
+
+<figure><img loading="lazy" width="1600" height="900" src="img/p4-12-inserido.png" alt="Mensagem colocada na caixa do WhatsApp e aviso do painel"><figcaption><b>1</b> A mensagem foi para a caixa de texto do WhatsApp, esperando você enviar. <b>2</b> O painel avisa: "Texto inserido na conversa. Revise e aperte Enviar."</figcaption></figure>
+
+<div class="dica">Se o painel não achar a caixa de mensagem, ele copia o texto e avisa "texto copiado para colar". Aí é só clicar na caixa do WhatsApp e colar (<kbd>Ctrl</kbd>+<kbd>V</kbd>).</div>
+
+<h4>As palavras {nome}, {moto} e {total}</h4>
+<p>As mensagens prontas têm "espaços" que o painel preenche sozinho:</p>
+<ul>
+  <li><b>{nome}</b> vira o primeiro nome do contato (ex.: "Ricardo").</li>
+  <li><b>{moto}</b> vira a primeira moto da Ficha (ex.: "CG 160 Titan 2019"). Sem moto na Ficha, vira "sua moto".</li>
+  <li><b>{total}</b> vira o valor do último orçamento (ex.: "R$ 89,90").</li>
+</ul>
+
+<div class="exemplo">A mensagem guardada é: "Bom dia {nome}! O orçamento da {moto} ({total}) continua de pé."<br>Na tela do Ricardo ela aparece assim: "Bom dia Ricardo! O orçamento da CG 160 Titan 2019 (R$ 89,90) continua de pé."</div>
+
+<figure><img loading="lazy" width="640" height="900" src="img/p4-10-cadencia-4.png" alt="Os quatro lembretes da cadência de um contato sem nome, sem moto e sem orçamento"><figcaption>Os 4 lembretes de um contato <b>sem nome salvo, sem moto e sem orçamento</b>. Veja como as mensagens ficam: "Oi! Consegui separar as peças da sua moto", e no D+1 sobra um "()" vazio no lugar do valor.</figcaption></figure>
+
+<div class="atencao">Quando falta nome, moto ou orçamento, a mensagem fica incompleta (sem o nome, "sua moto", parênteses vazios). <b>Sempre leia a mensagem na caixa antes de enviar.</b> Para melhorar: salve o contato com nome no celular e cadastre a moto na Ficha.</div>
+
+<h4>Outros lembretes que aparecem aqui</h4>
+<ul>
+  <li><b>Retorno do preço</b>: quando você manda o preço de uma peça pelo painel e o envio é confirmado, o painel agenda sozinho uma volta para o dia seguinte ("Conseguiu ver o preço...?"). Só cria se não houver outro retorno de cadência ou de preço pendente.</li>
+  <li><b>Chegou peça</b>: quando a peça da lista de espera é marcada como chegou na aba Hoje (veja a parte 5), o aviso para o cliente aparece aqui, pronto para <b>Inserir</b>.</li>
+</ul>
+
+<figure><img loading="lazy" width="661" height="330" src="img/p4-13-mais-um-dia.png" alt="Lembrete D+1 depois de clicar em mais um dia"><figcaption>Depois de clicar em <b>+1 dia</b> no lembrete atrasado. <b>1</b> Ele deixou de estar atrasado e agora vence "em 24 h".</figcaption></figure>
+
+<figure><img loading="lazy" width="640" height="900" src="img/p4-18-cliente-respondeu.png" alt="Aviso Cadência parada e lista vazia com botão Iniciar cadência"><figcaption>Depois de clicar em <b>Cliente respondeu</b>: os lembretes somem e aparece o aviso <b>1</b> "Cadência parada."</figcaption></figure>
+
+<figure><img loading="lazy" width="640" height="900" src="img/p4-09-retornos-vazio.png" alt="Sub-aba Retornos vazia com o botão Iniciar cadência"><figcaption>Sem nenhum lembrete, aparece "Nenhum follow-up agendado". <b>1</b> <b>Iniciar cadência</b> cria os 4 lembretes na hora, sem precisar mudar a etapa.</figcaption></figure>
+
+<div class="atencao">Não existe botão para criar um lembrete com texto livre. Os lembretes vêm da cadência, do preço enviado ou da peça que chegou.</div>
+
+<h4>Avisar quando chegar (lista de espera de peças)</h4>
+<p>Cliente pediu uma peça que está em falta? Anote aqui. Quando a peça chegar, a loja lembra de avisar esse cliente.</p>
+<ol class="passos">
+  <li>Na sub-aba <b>Retornos</b>, desça até <b>Avisar quando chegar</b>.</li>
+  <li>Clique no campo "Peça em falta" e escreva a peça (ex.: <i>Retrovisor Bros 160 par</i>).</li>
+  <li>Clique em <b>Adicionar</b> (ou aperte <kbd>Enter</kbd>).</li>
+</ol>
+
+<figure><img loading="lazy" width="640" height="900" src="img/p4-17-espera-lista.png" alt="Peça adicionada na lista de espera do cliente"><figcaption><b>1</b> A peça entrou na lista, com a data em que o cliente está esperando. <b>2</b> O <b>X</b> tira a peça da lista (use se o cliente desistiu). <b>3</b> Aviso: "Você será lembrado quando marcar a peça como chegou (aba Hoje)."</figcaption></figure>
+
+<div class="dica">Escreva a peça do jeito que ela aparece no sistema (ex.: "Coroa CG 160"). O painel procura no estoque pelas palavras que você escreveu para descobrir se ela chegou.</div>
+
+<!-- ============================================================ -->
+<h3 id="p4-enviados">Sub-aba Enviados: o que você já mandou</h3>
+
+<p>Tudo o que você coloca na conversa pelo painel (preço, orçamento, pedido, retorno, resposta pronta, lembrete de manutenção, aviso de peça) fica registrado aqui. O painel também confere se a mensagem <b>foi mesmo enviada</b>.</p>
+
+<table>
+  <thead><tr><th>Etiqueta</th><th>O que quer dizer</th></tr></thead>
+  <tbody>
+    <tr><td><b>na caixa, não enviado</b> (amarelo)</td><td>O texto foi para a caixa do WhatsApp, mas ainda não apareceu na conversa. Você esqueceu de apertar Enviar?</td></tr>
+    <tr><td><b>enviado 26/09 13:22</b> (verde)</td><td>A mensagem apareceu na conversa. Mostra o dia e a hora.</td></tr>
+    <tr><td><b>não enviado</b> (cinza)</td><td>Passaram 2 horas e a mensagem não apareceu na conversa. O painel desistiu de esperar.</td></tr>
+  </tbody>
+</table>
+
+<figure><img loading="lazy" width="640" height="900" src="img/p4-14-enviados-na-caixa.png" alt="Sub-aba Enviados com mensagem na caixa ainda não enviada"><figcaption><b>1</b> Sub-aba Enviados. O número amarelo conta as mensagens que estão na caixa e ainda não foram enviadas. <b>2</b> "na caixa, não enviado": o texto foi inserido, mas você ainda não apertou Enviar.</figcaption></figure>
+
+<figure><img loading="lazy" width="1600" height="900" src="img/p4-15-enviados-confirmado.png" alt="Mensagem enviada na conversa e confirmada no painel"><figcaption><b>1</b> A mensagem apareceu na conversa do WhatsApp. <b>2</b> O painel confirma: "enviado", com dia e hora. <b>3</b> <b>Inserir de novo</b> coloca o mesmo texto na caixa outra vez. <b>4</b> <b>Copiar</b> copia o texto para você colar onde quiser.</figcaption></figure>
+
+<h4>Outras coisas desta sub-aba</h4>
+<ul>
+  <li>No alto, a contagem "<b>1 de 1 enviados</b>" mostra quantas das mensagens registradas foram confirmadas.</li>
+  <li>Quando tem mensagens de tipos diferentes, aparecem botões para filtrar (<b>Tudo</b>, <b>Preço</b>, <b>Orçamento</b>, <b>Follow-up</b>...).</li>
+  <li>Clique no texto de uma mensagem para ver ela inteira.</li>
+  <li><b>Limpar histórico</b> apaga essa lista (pede confirmação). <b>Não apaga nada da conversa do WhatsApp.</b></li>
+  <li>O painel guarda as últimas 100 mensagens de cada cliente.</li>
+</ul>
+
+<div class="dica">O painel só dá como enviado quando aparece na conversa uma mensagem <b>nova</b> com o mesmo texto. Se você mandar o mesmo preço duas vezes, ele não se confunde.</div>
+
+<!-- ============================================================ -->
+<h3 id="p4-ficha">Sub-aba Ficha: quem é o cliente e qual a moto dele</h3>
+
+<p>A Ficha guarda o tipo de cliente, as motos, as datas de manutenção e suas anotações. Tudo é gravado assim que você digita.</p>
+
+<figure><img loading="lazy" width="685" height="829" src="img/p4-22-ficha.png" alt="Sub-aba Ficha completa do cliente Ricardo Oficina"><figcaption><b>1</b> Tipo de cliente. <b>2</b> Modelo da moto. <b>3</b> Ano, placa, km atual e km por mês. <b>4</b> Manutenção: data da última troca e a próxima prevista. <b>5</b> Botão de lembrete, quando a troca está perto. <b>6</b> Adicionar outra moto. <b>7</b> Notas. (A faixa verde "Cliente citou..." é explicada na parte 3.)</figcaption></figure>
+
+<h4>Tipo de cliente</h4>
+<p>Escolha um dos 4: <b>Particular</b>, <b>Motoboy</b>, <b>Oficina</b> ou <b>Lojista</b>. Todo contato novo começa como Particular.</p>
+
+<h4>Cadastrar a moto do cliente</h4>
+<ol class="passos">
+  <li>Clique na sub-aba <b>Ficha</b>.</li>
+  <li>Clique em <b>Cadastrar a moto do cliente</b>.</li>
+  <li>Escreva o modelo (ex.: <i>CG 160 Titan</i>). Enquanto você digita, aparecem sugestões de modelos. Pode escolher uma.</li>
+  <li>Preencha <b>Ano</b>, <b>Placa</b> e <b>Km atual</b>, se souber.</li>
+  <li>Preencha <b>Km por mês</b>: quanto o cliente roda por mês. Um motoboy roda perto de 3.000 km.</li>
+</ol>
+
+<figure><img loading="lazy" width="685" height="431" src="img/p4-26-ficha-vazia.png" alt="Ficha de um contato sem moto, com o botão Cadastrar a moto do cliente"><figcaption>Cliente sem moto na Ficha. <b>1</b> Clique aqui para cadastrar a primeira moto.</figcaption></figure>
+
+<ul>
+  <li>Cliente com mais de uma moto (oficina, lojista)? Clique em <b>Adicionar outra moto</b>.</li>
+  <li>A <b>lixeira</b> ao lado do modelo apaga aquela moto da Ficha.</li>
+  <li>A <b>primeira moto</b> da lista é a que aparece no cabeçalho e no lugar de {moto} nas mensagens.</li>
+</ul>
+
+<h4>Manutenção: saber a hora da próxima troca</h4>
+<p>Para cada moto, a Ficha acompanha 4 itens. Você informa só <b>a data da última troca</b>. O painel calcula a próxima.</p>
+<table>
+  <thead><tr><th>Item</th><th>Troca a cada</th><th>ou, no máximo, a cada</th></tr></thead>
+  <tbody>
+    <tr><td>Troca de óleo</td><td>4.000 km</td><td>6 meses</td></tr>
+    <tr><td>Kit relação</td><td>15.000 km</td><td>1 ano</td></tr>
+    <tr><td>Pastilha de freio</td><td>10.000 km</td><td>1 ano</td></tr>
+    <tr><td>Pneu traseiro</td><td>12.000 km</td><td>1 ano e meio</td></tr>
+  </tbody>
+</table>
+<p>O painel usa o <b>km por mês</b> para calcular quando o cliente chega à quilometragem, e vale o que vier primeiro: os km ou o tempo. Sem km por mês, conta só o tempo.</p>
+
+<div class="exemplo">A CG 160 do Ricardo roda 3.000 km por mês. O óleo foi trocado em 19/08. Para rodar 4.000 km ele leva uns 40 dias, então a próxima troca fica para 28/09, bem antes dos 6 meses.</div>
+
+<figure><img loading="lazy" width="655" height="250" src="img/p4-24-manutencao.png" alt="Linha da troca de óleo com a próxima data em vermelho e o botão Lembrar troca de óleo"><figcaption><b>1</b> A data da última troca de óleo. <b>2</b> "próx. 28/09" em vermelho: vence em até 7 dias (ou já venceu). <b>3</b> Aparece o botão <b>Lembrar troca de óleo</b>.</figcaption></figure>
+
+<ol class="passos">
+  <li>Quando a data aparecer em vermelho, clique em <b>Lembrar troca de óleo</b> (ou do item que estiver vencendo).</li>
+  <li>A mensagem vai para a caixa do WhatsApp: "Oi Ricardo! Pelas nossas contas a CG 160 Titan 2019 já está na hora de troca de óleo. Quer que eu separe pra você?"</li>
+  <li>Revise e aperte Enviar no WhatsApp.</li>
+  <li>Quando o cliente fizer a troca, mude a data da última troca para o dia de hoje.</li>
+</ol>
+
+<figure><img loading="lazy" width="1600" height="900" src="img/p4-25-lembrar-oleo.png" alt="Mensagem de lembrete de troca de óleo na caixa do WhatsApp"><figcaption><b>2</b> Clique em Lembrar troca de óleo e <b>1</b> a mensagem aparece na caixa do WhatsApp, esperando você enviar. Ela também fica registrada em Enviados.</figcaption></figure>
+
+<div class="dica">As trocas que estão vencendo em todos os clientes também aparecem juntas na aba Hoje (veja a parte 5). Assim você não precisa abrir cliente por cliente.</div>
+
+<h4>Notas</h4>
+<p>No quadro <b>Notas</b> escreva o que não pode esquecer: condição combinada, marca preferida, oficina que indicou... O texto é gravado quando você clica fora do quadro.</p>
+
+<h4>E os dados do cadastro no sistema?</h4>
+<p>A razão social, o CNPJ, a cidade e o que o cliente mais compra ficam na sub-aba <b>Venda</b>, no cartão do cliente. Veja a parte 2. A lista de peças que o cliente espera fica em <b>Retornos</b> (item 4 acima).</p>
+
+<!-- ============================================================ -->
+<h3 id="p4-anel">O anel colorido na lista de conversas: por que o cliente "precisa de você"</h3>
+
+<p>Na lista de conversas do WhatsApp, o painel desenha um <b>anel colorido</b> em volta da foto dos clientes que precisam de atenção, e escreve ao lado o que fazer. A parte 1 mostra essa tela. Aqui você entende <b>por que</b> cada cliente ganhou o anel.</p>
+
+<figure><img loading="lazy" width="360" height="320" src="img/p4-19-aneis-lista.png" alt="Lista de conversas com anéis vermelho, verde e âmbar em volta das fotos"><figcaption>De cima para baixo: dois anéis <b>vermelhos</b> ("Cobrar retorno"), um <b>verde</b> ("Avisar: peça chegou") e um <b>âmbar</b> ("Responder"). A bolinha no canto da foto mostra a etapa ($ = Orçamento enviado, quadradinho roxo = Separando).</figcaption></figure>
+
+<table>
+  <thead><tr><th>Cor</th><th>Por quê</th><th>O que aparece escrito</th><th>O que fazer</th></tr></thead>
+  <tbody>
+    <tr><td><b>Vermelho</b></td><td>Tem um lembrete da sub-aba Retornos <b>atrasado</b>.</td><td>"Cobrar retorno · 1h" (há quanto tempo está atrasado)</td><td>Abra o cliente, vá em Retornos e use <b>Inserir</b>, depois <b>Feito</b>.</td></tr>
+    <tr><td><b>Vermelho</b></td><td>O cliente está em <b>Orçamento enviado</b> ou <b>Aguardando Pix</b> há <b>2 dias ou mais</b> (orçamento parado).</td><td>"Cobrar orçamento" ou "Conferir Pix", com o tempo na etapa</td><td>Cobre o cliente ou mude a etapa (Pago, Perdido...).</td></tr>
+    <tr><td><b>Verde</b></td><td>Uma peça que o cliente esperava (lista "Avisar quando chegar") <b>tem estoque agora</b>.</td><td>"Avisar: peça chegou"</td><td>Avise o cliente que a peça chegou (veja a parte 5, aba Hoje).</td></tr>
+    <tr><td><b>Âmbar</b> (amarelo)</td><td>O cliente mandou mensagem que você <b>ainda não leu</b>. Não vale para quem está em Perdido.</td><td>"Responder"</td><td>Abra a conversa e responda.</td></tr>
+  </tbody>
+</table>
+
+<ul>
+  <li>Se o cliente tiver mais de um motivo, vale o mais urgente: <b>retorno atrasado</b> vem primeiro, depois <b>peça chegou</b>, depois <b>mensagem não lida</b>.</li>
+  <li>Sem anel, mas com texto ao lado (ex.: "Separar pedido", "Confirmar entrega"): é só a próxima tarefa da etapa, sem pressa.</li>
+  <li>Clientes em <b>Novo</b>, sem mensagem não lida e sem lembrete, ficam sem marcação nenhuma.</li>
+</ul>
+
+<figure><img loading="lazy" width="380" height="470" src="img/p4-21-precisa-de-voce.png" alt="Filtro Precisa de você aberto mostrando três clientes"><figcaption><b>1</b> O botão <b>Precisa de você</b> mostra só esses clientes, os mais urgentes primeiro. Aqui aparecem os dois vermelhos e o verde.</figcaption></figure>
+
+<div class="atencao">O cliente com anel <b>âmbar</b> (mensagem não lida) <b>não entra</b> na contagem de "Precisa de você". Para achar esses, use o filtro <b>Não lidas</b> do próprio WhatsApp. Em compensação, entra na lista quem tem retorno marcado <b>para hoje</b>, mesmo que ainda não esteja atrasado.</div>
+
+<div class="dica">Para o anel vermelho sumir: resolva o motivo. Clique em <b>Feito</b> ou <b>+1 dia</b> no lembrete atrasado, ou mude a etapa do cliente (por exemplo, para <b>Pago</b> ou <b>Perdido</b>).</div>
+
+</section>
+
+<section id="p5" data-titulo="Seu dia: Hoje, Respostas e dúvidas">
+<h2><span class="parte-n">Parte 5</span>Seu dia: aba Hoje, Respostas prontas, segurança e dúvidas</h2>
+
+<p>Esta parte mostra como usar a extensão no dia a dia. Você vai ver a aba <b>Hoje</b>, que diz quem precisa de você. Vai ver as <b>Respostas prontas</b>, que poupam digitação. E vai entender o que a extensão faz sozinha e o que só acontece quando você clica.</p>
+
+<!-- ============================================================ -->
+<h3 id="p5-hoje">A aba Hoje: sua lista do dia</h3>
+
+<p>A aba <b>Hoje</b> junta numa tela só tudo o que está esperando por você: clientes para chamar de volta, orçamentos parados, peças que chegaram e o resultado das suas vendas.</p>
+
+<ol class="passos">
+  <li>No alto do painel, clique no ícone de <b>calendário</b> (ao passar o mouse aparece "Hoje").</li>
+  <li>Leia os quatro números do topo.</li>
+  <li>Desça a tela e resolva os cartões de cima para baixo.</li>
+</ol>
+
+<figure>
+  <img loading="lazy" width="1600" height="900" src="img/p5-01-aba-hoje.png" alt="Painel da extensão aberto na aba Hoje, ao lado de uma conversa do WhatsApp">
+  <figcaption>(1) Ícone da aba Hoje. A bolinha vermelha com número mostra quantos retornos já venceram. (2) Os quatro números do dia. (3) Cartão "Minhas vendas", com o total do mês.</figcaption>
+</figure>
+
+<div class="dica">A bolinha vermelha no ícone da aba Hoje aparece mesmo quando você está em outra aba. Se ela aparecer, tem cliente esperando retorno.</div>
+
+<h4>Os quatro números do topo</h4>
+
+<figure>
+  <img loading="lazy" width="640" height="900" src="img/p5-02-quatro-numeros.png" alt="Quatro quadros com números no topo da aba Hoje">
+  <figcaption>(1) Retornos (follow-ups) para hoje; se algum já passou da hora, aparece "atrasados" e o número fica vermelho. (2) Orçamentos parados. (3) Clientes com manutenção da moto vencendo nos próximos 7 dias. (4) Quantas peças estão na lista de espera.</figcaption>
+</figure>
+
+<table>
+  <thead><tr><th>Número</th><th>O que conta</th></tr></thead>
+  <tbody>
+    <tr><td>follow-ups hoje</td><td>Retornos marcados até o fim do dia de hoje, inclusive os atrasados.</td></tr>
+    <tr><td>orçamentos parados</td><td>Clientes em "Orçamento enviado" ou "Aguardando Pix" há 2 dias ou mais, sem nenhum retorno marcado.</td></tr>
+    <tr><td>manutenção em 7 dias</td><td>Motos da Ficha com troca de óleo, kit relação, pastilha ou pneu vencendo em até 7 dias.</td></tr>
+    <tr><td>esperando peça</td><td>Pedidos de peça em falta anotados na lista de espera.</td></tr>
+  </tbody>
+</table>
+
+<h4>Minhas vendas</h4>
+<p>Só aparece quando você está conectado ao Integra Vendas e já tem venda concluída. Mostra o total vendido no mês, compara com o mês passado (etiqueta verde se subiu, vermelha se caiu) e traz barras dos últimos 6 meses. A barra do mês atual fica mais escura.</p>
+
+<h4>Em orçamento no sistema</h4>
+<p>Lista os pedidos que estão como orçamento no sistema da loja, os mais recentes primeiro. O vendedor vê os dele; o administrador vê os de todos.</p>
+
+<figure>
+  <img loading="lazy" width="668" height="900" src="img/p5-03-orcamentos-e-retornos.png" alt="Cartões Em orçamento no sistema e Follow-ups de hoje">
+  <figcaption>(1) Orçamentos que estão no sistema, com número, valor e há quantos dias. (2) A etiqueta "parado" aparece quando o orçamento tem mais de 2 dias. (3) Retornos de hoje; "atrasado" em vermelho quando a hora já passou.</figcaption>
+</figure>
+
+<ol class="passos">
+  <li>Clique na linha do cliente. A conversa dele abre no WhatsApp.</li>
+  <li>Cobre o cliente, finalize ou cancele o pedido (veja a parte 2).</li>
+</ol>
+<p>Linha sem foto redonda (só um ícone de folha) quer dizer que nenhuma conversa está ligada a esse cliente ainda. Procure o cliente pela busca do WhatsApp.</p>
+<p>Se você não estiver conectado, no lugar deste cartão aparece <b>Salvos no sistema, sem finalizar</b>, com os pedidos que você salvou por este computador.</p>
+
+<h4>Follow-ups de hoje</h4>
+<p>São os retornos combinados: a sequência automática depois de um orçamento (2 horas, 1, 3 e 7 dias), o "retorno do preço" no dia seguinte e os lembretes que você marcou. Clique no cliente, abra a aba <b>Retornos</b> da conversa e mande a mensagem (veja a parte 4).</p>
+
+<h4>Orçamentos parados, Manutenção próxima e Aguardando peça</h4>
+
+<figure>
+  <img loading="lazy" width="668" height="900" src="img/p5-04-parados-manutencao-espera.png" alt="Cartões Orçamentos parados, Manutenção próxima e Aguardando peça">
+  <figcaption>(1) Orçamentos parados: cliente que não respondeu e não tem retorno marcado. (2) Manutenção próxima: qual serviço, qual moto e a data. (3) Aguardando peça: a lista de espera. (4) Botão <b>Chegou</b>, que fica verde quando a extensão acha a peça no estoque.</figcaption>
+</figure>
+
+<h4 id="p5-lista-espera">Lista de espera de peças</h4>
+<p>Quando um cliente pede uma peça que está em falta, ela entra na lista de espera. Isso acontece pelo botão <b>Responder estoque</b>, pelo sininho "Avisar este cliente quando chegar" na busca de peças, ou pelo cartão "Avisar quando chegar" na aba Retornos (veja as partes 2, 3 e 4).</p>
+<p>A aba Hoje confere o estoque sozinha, no máximo a cada 5 minutos, para até 8 peças. Enquanto confere aparece "Conferindo o estoque…". Quando acha, a linha ganha um visto verde e a frase "Tem no estoque: …", e o cartão mostra "1 no estoque".</p>
+
+<ol class="passos">
+  <li>Veja se a peça chegou mesmo (confira na prateleira ou no sistema).</li>
+  <li>Clique em <b>Chegou</b> na linha da peça.</li>
+  <li>Leia o aviso embaixo: "Aviso criado para N cliente(s). Abra cada conversa e envie."</li>
+  <li>Abra a conversa de cada cliente. Na aba <b>Retornos</b> vai estar o lembrete "Chegou peça" com o texto pronto.</li>
+  <li>Revise o texto e envie você mesmo.</li>
+</ol>
+
+<figure>
+  <img loading="lazy" width="668" height="900" src="img/p5-08-chegou-aviso.png" alt="Aviso Aviso criado para 1 cliente(s) depois de clicar em Chegou">
+  <figcaption>(1) Depois de <b>Chegou</b>, a peça sai da lista e aparece o aviso. Nenhuma mensagem foi enviada: só foi criado um lembrete em cada cliente.</figcaption>
+</figure>
+
+<div class="atencao">O botão <b>Chegou</b> não manda mensagem para ninguém. Ele cria o lembrete com o texto "Oi (nome)! Chegou (peça) que você procurou. Quer que eu separe uma pra você?". Quem envia é você.</div>
+
+<h4 id="p5-funil">Funil: quantos clientes em cada etapa</h4>
+<p>O Funil mostra quantos clientes estão em cada etapa agora. Clientes "Novo" não entram. Cada barra é maior quanto mais gente tem na etapa.</p>
+
+<figure>
+  <img loading="lazy" width="679" height="355" src="img/p5-05-funil.png" alt="Cartão Funil com barras por etapa e a linha de perdidos">
+  <figcaption>(1) Uma etapa e quantos clientes estão nela. (2) Perdido: clientes que você marcou como perdidos. (3) Em negociação: soma do último orçamento de quem está em "Orçamento enviado" e "Aguardando Pix". (4) Perdidos por motivo, com a quantidade e o valor.</figcaption>
+</figure>
+
+<div class="exemplo">"Perdidos: Sem estoque 1 (R$ 340,00) · Preço 2 (R$ 307,50) · sem motivo 1" quer dizer: você perdeu uma venda de R$ 340 por falta de peça e duas vendas, somando R$ 307,50, por preço. Uma venda foi marcada como perdida sem dizer o motivo. Os motivos com mais dinheiro aparecem primeiro. "sem motivo" fica em laranja e sempre por último.</div>
+
+<div class="dica">Sempre escolha o motivo quando marcar um cliente como Perdido (a pergunta "Por que perdeu?" aparece na conversa, veja a parte 4). Sem motivo, o funil não mostra onde a venda está escapando.</div>
+
+<h4 id="p5-resultado">Resultado: quanto virou venda</h4>
+<p>O cartão Resultado mostra como foram as negociações que começaram nos últimos 7, 30 ou 90 dias. Conta como negociação quem passou por Orçamento enviado, Aguardando Pix ou foi direto para a venda. Conta como venda quem chegou a Pago, Separando, Enviado/Retirado ou Pós-venda.</p>
+
+<figure>
+  <img loading="lazy" width="679" height="378" src="img/p5-06-resultado.png" alt="Cartão Resultado com porcentagem, período, tempos e aviso">
+  <figcaption>(1) Quantos por cento viraram venda: verde a partir de 50%, amarelo de 25% a 49%, vermelho abaixo de 25%. (2) Escolha o período: 7, 30 ou 90 dias. (3) Quantas viraram venda, quantas foram perdidas (com o valor) e quantas ainda estão em aberto. (4) Tempo típico do orçamento até a venda. (5) Tempo típico em cada etapa. (6) Aviso de desde quando a extensão está contando.</figcaption>
+</figure>
+
+<ul>
+  <li><b>Mediana</b>: é o tempo "do meio". Se três vendas levaram 1 hora, 1 dia e 10 dias, a mediana é 1 dia. Um cliente que demorou muito não bagunça a conta.</li>
+  <li><b>Tempo em cada etapa</b>: quanto o cliente costuma ficar em cada etapa antes de passar para a próxima. Uma barra comprida mostra onde as coisas estão travando.</li>
+  <li><b>"O histórico de estágios começou em …; antes disso não entra."</b>: a extensão só conta a partir do dia em que começou a anotar as mudanças de etapa. Se você escolher um período maior do que isso, os dias de antes não aparecem.</li>
+  <li>Se não houver negociação no período, aparece "Nenhuma negociação no período."</li>
+</ul>
+
+<figure>
+  <img loading="lazy" width="639" height="202" src="img/p5-07-resultado-7-dias.png" alt="Cartão Resultado com o período de 7 dias selecionado">
+  <figcaption>O mesmo cartão com <b>7 dias</b> escolhido. Os números mudam porque só entram as negociações que começaram na última semana.</figcaption>
+</figure>
+
+<h4>Tudo em dia</h4>
+<p>Quando não há nada para fazer, a aba mostra "Tudo em dia — Nenhum cliente para chamar agora."</p>
+
+<h4 id="p5-precisa">"Precisa de você": o atalho na lista do WhatsApp</h4>
+<p>Na barra de filtros do WhatsApp (ao lado de "Tudo" e "Não lidas") aparece o botão <b>Precisa de você</b> com um número. Ele junta os clientes com retorno atrasado ou para hoje, orçamento parado há 2 dias ou mais e peça que chegou.</p>
+
+<figure>
+  <img loading="lazy" width="1600" height="900" src="img/p5-14-precisa-de-voce.png" alt="Filtro Precisa de você aberto sobre a lista de conversas">
+  <figcaption>(1) Botão <b>Precisa de você</b> com o número de clientes. (2) A lista que abre por cima das conversas; o × volta para a lista normal. (3) O que fazer com cada cliente e há quanto tempo (ex.: "Cobrar orçamento · 3d"). (4) A aba Hoje traz os mesmos clientes com mais detalhes.</figcaption>
+</figure>
+<p>Clique num cliente da lista para abrir a conversa dele. Os mais urgentes (vermelho) aparecem primeiro.</p>
+
+<h4 id="p5-rotina">Como usar a aba Hoje como rotina</h4>
+<ol class="passos">
+  <li>De manhã, abra o WhatsApp Web no Chrome e espere o painel aparecer.</li>
+  <li>Clique na aba <b>Hoje</b>.</li>
+  <li>Resolva primeiro os retornos em vermelho ("atrasado").</li>
+  <li>Cobre os orçamentos com etiqueta "parado" e os de "Orçamentos parados".</li>
+  <li>Em "Aguardando peça", clique em <b>Chegou</b> nas peças que entraram e avise cada cliente.</li>
+  <li>Chame quem está em "Manutenção próxima" (a troca de óleo que vence é venda certa).</li>
+  <li>No fim do dia, dê uma olhada no Funil e no Resultado para ver onde está perdendo venda.</li>
+</ol>
+
+<div class="dica">Mesmo com o painel fechado, o Chrome avisa (a cada 5 minutos, no canto da tela) quando um retorno vence: "Follow-up: nome do cliente". Clicar no aviso abre a conversa. O ícone da extensão na barra do Chrome também mostra quantos retornos estão vencidos.</div>
+
+<!-- ============================================================ -->
+<h3 id="p5-respostas">Aba Respostas: mensagens prontas</h3>
+
+<p>Respostas prontas são textos que você usa todo dia ("qual a moto?", "chave Pix", "pronto pra retirar"). Você clica e o texto vai para a caixa de mensagem, já com o nome do cliente.</p>
+
+<figure>
+  <img loading="lazy" width="668" height="900" src="img/p5-09-aba-respostas.png" alt="Aba Respostas com busca, categorias e cartões de resposta">
+  <figcaption>(1) Ícone da aba Respostas (um raio). (2) Busca: procura no título, na categoria e no texto. (3) Botão <b>+</b> para criar uma resposta nova. (4) Categorias: clique para ver só as de uma categoria; "Todas" mostra tudo. (5) Uma resposta pronta, já com o nome do cliente e a moto preenchidos. (6) <b>Inserir na conversa</b>. (7) Lixeira para apagar.</figcaption>
+</figure>
+
+<p>A extensão já vem com 7 respostas: "Qual moto?", "Confere a aplicação", "Pastilha orig x paralela", "Kit relação completo", "Óleo recomendado", "Chave Pix" e "Pronto pra retirar".</p>
+
+<h4 id="p5-variaveis">Variáveis: as palavras entre chaves</h4>
+<p>Palavras entre chaves são trocadas pelos dados do cliente na hora de inserir.</p>
+<table>
+  <thead><tr><th>Escreva</th><th>Vira</th><th>De onde vem</th></tr></thead>
+  <tbody>
+    <tr><td><kbd>{nome}</kbd></td><td>Primeiro nome do cliente</td><td>Nome do contato no WhatsApp</td></tr>
+    <tr><td><kbd>{moto}</kbd></td><td>Modelo e ano da primeira moto da Ficha; se não tiver, "sua moto"</td><td>Ficha do cliente (parte 4)</td></tr>
+    <tr><td><kbd>{ano}</kbd></td><td>Ano da primeira moto da Ficha</td><td>Ficha do cliente</td></tr>
+    <tr><td><kbd>{total}</kbd></td><td>Valor do último orçamento registrado</td><td>Último orçamento marcado com "Já enviei"</td></tr>
+    <tr><td><kbd>{peca}</kbd></td><td>Primeira peça do último orçamento</td><td>Último orçamento registrado</td></tr>
+    <tr><td><kbd>{loja}</kbd></td><td>Nome da loja</td><td>Aba Ajustes</td></tr>
+    <tr><td><kbd>{pix}</kbd></td><td>Chave Pix</td><td>Aba Ajustes</td></tr>
+    <tr><td><kbd>{vendedor}</kbd></td><td>Seu nome</td><td>Aba Ajustes</td></tr>
+  </tbody>
+</table>
+<p>Se a informação não existir (por exemplo, cliente sem orçamento), a palavra some do texto. Confira antes de enviar.</p>
+
+<h4>Criar uma resposta</h4>
+<ol class="passos">
+  <li>Na aba Respostas, clique no botão verde <b>+</b>.</li>
+  <li>Em "Categoria", escreva o grupo (ex.: Entrega). Se deixar vazio, vira "Geral".</li>
+  <li>Em "Título", escreva um nome curto. Se deixar vazio, o título vira o começo do texto.</li>
+  <li>Escreva o texto, usando as variáveis se quiser.</li>
+  <li>Clique em <b>Salvar resposta</b>.</li>
+</ol>
+
+<figure>
+  <img loading="lazy" width="679" height="289" src="img/p5-10-nova-resposta.png" alt="Formulário Nova resposta preenchido">
+  <figcaption>(1) Categoria. (2) Título. (3) Texto com variáveis: {nome}, {total}, {vendedor}, {loja}. (4) <b>Salvar resposta</b>. O botão × no alto fecha o formulário sem salvar.</figcaption>
+</figure>
+
+<figure>
+  <img loading="lazy" width="668" height="900" src="img/p5-11-resposta-salva.png" alt="Resposta nova salva, com a categoria Entrega escolhida">
+  <figcaption>(1) A categoria nova aparece na fila de categorias. (2) O aviso "Resposta salva." Repare que o texto já mostra "Ricardo" e "R$ 89,90" no lugar das variáveis, porque há uma conversa aberta.</figcaption>
+</figure>
+
+<h4>Usar uma resposta</h4>
+<ol class="passos">
+  <li>Abra a conversa do cliente no WhatsApp.</li>
+  <li>Na aba Respostas, ache a resposta (pela busca ou pela categoria).</li>
+  <li>Clique em <b>Inserir na conversa</b>.</li>
+  <li>O texto aparece na caixa de mensagem do WhatsApp. Leia e corrija se precisar.</li>
+  <li>Aperte <kbd>Enter</kbd> ou o botão de enviar do WhatsApp.</li>
+</ol>
+
+<figure>
+  <img loading="lazy" width="1600" height="900" src="img/p5-12-inserir-na-conversa.png" alt="Texto da resposta pronta na caixa de mensagem do WhatsApp">
+  <figcaption>(1) <b>Inserir na conversa</b>. (2) O texto foi para a caixa de mensagem, ainda não enviado. (3) O aviso "Texto inserido na conversa. Revise e aperte Enviar."</figcaption>
+</figure>
+
+<p>A mensagem inserida fica anotada na aba <b>Enviados</b> da conversa. Quando ela aparece na conversa, a extensão marca como enviada (veja a parte 4).</p>
+
+<h4>Mudar ou apagar uma resposta</h4>
+<p>Não existe botão de editar. Para mudar um texto, crie a resposta nova do jeito certo e apague a antiga.</p>
+<ol class="passos">
+  <li>Clique na lixeira da resposta.</li>
+  <li>Aparece a pergunta "Apagar a resposta …?".</li>
+  <li>Clique em <b>Apagar</b> para confirmar, ou em <b>Voltar</b> para desistir.</li>
+</ol>
+<figure>
+  <img loading="lazy" width="669" height="288" src="img/p5-13-apagar-resposta.png" alt="Confirmação para apagar uma resposta pronta">
+  <figcaption>A resposta só some depois do clique em <b>Apagar</b>.</figcaption>
+</figure>
+
+<div class="atencao">As respostas prontas ficam guardadas só neste Chrome. Em outro computador elas não aparecem. Use <b>Exportar backup</b> na aba Ajustes para levar tudo junto.</div>
+
+<!-- ============================================================ -->
+<h3 id="p5-seguranca">Regras de segurança: o que a extensão faz e o que não faz</h3>
+
+<h4>Regra de ouro: nada sai sem o seu clique</h4>
+<ul>
+  <li><b>A extensão nunca envia mensagem sozinha.</b> Todo texto (preço, orçamento, resposta pronta, aviso de peça) vai para a caixa de mensagem. Quem aperta Enviar é você.</li>
+  <li>Os lembretes e avisos do Chrome só avisam. Eles não mandam nada para o cliente.</li>
+  <li>Nenhum pedido é salvo, finalizado ou cancelado no sistema sem você clicar. Finalizar e cancelar ainda pedem uma segunda confirmação.</li>
+  <li>Se a extensão não achar a caixa de mensagem, ela copia o texto e avisa: "Não achei a caixa de mensagem; texto copiado para colar." Aí é só colar (<kbd>Ctrl</kbd>+<kbd>V</kbd>) e enviar.</li>
+</ul>
+
+<h4>Botões que gravam no sistema da loja</h4>
+<p>Só estes botões mexem no sistema Integra Vendas. Todo o resto só prepara texto ou anota neste computador.</p>
+<table>
+  <thead><tr><th>Botão</th><th>Onde fica</th><th>O que grava no sistema</th><th>Pede confirmação?</th></tr></thead>
+  <tbody>
+    <tr><td><b>Salvar no sistema</b> / <b>Atualizar nº …</b></td><td>Orçamento da conversa (parte 2)</td><td>Cria ou atualiza o pedido como orçamento</td><td>Não; pode atualizar depois</td></tr>
+    <tr><td><b>Finalizar pedido</b></td><td>Orçamento da conversa (parte 2)</td><td>Envia o pedido para o faturamento. Depois disso ele não pode mais ser alterado pela extensão</td><td>Sim: <b>Sim, finalizar</b></td></tr>
+    <tr><td><b>Finalizar</b></td><td>Histórico de pedidos da conversa</td><td>Finaliza um orçamento que já estava salvo</td><td>Sim: <b>Sim, finalizar</b></td></tr>
+    <tr><td><b>Cancelar</b></td><td>Histórico de pedidos da conversa</td><td>Cancela o pedido; ele não vai para o faturamento</td><td>Sim: <b>Sim, cancelar</b></td></tr>
+  </tbody>
+</table>
+
+<figure>
+  <img loading="lazy" width="475" height="344" src="img/p5-18-confirmar-finalizar.png" alt="Pergunta de confirmação antes de finalizar o pedido">
+  <figcaption>(1) Clique em <b>Finalizar pedido</b>. (2) A extensão pergunta: "Finalizar o pedido de R$ … para …? Ele segue para o faturamento e não poderá mais ser alterado daqui." (3) Só com <b>Sim, finalizar</b> o pedido vai. Para desistir, clique em <b>Voltar</b>.</figcaption>
+</figure>
+
+<h4>Botões que só preparam texto ou anotam neste computador</h4>
+<table>
+  <thead><tr><th>Botão</th><th>O que faz de verdade</th></tr></thead>
+  <tbody>
+    <tr><td><b>Enviar no chat</b>, <b>Enviar ao cliente</b>, <b>Inserir na conversa</b>, <b>Resumo</b></td><td>Põem o texto na caixa de mensagem. Você revisa e envia.</td></tr>
+    <tr><td><b>Responder estoque</b></td><td>Põe na caixa de mensagem a resposta "tem em estoque?" (sem preço) e anota na lista de espera as peças em falta. A lista de espera fica neste computador; nada vai para o sistema.</td></tr>
+    <tr><td>Sininho "Avisar este cliente quando chegar"</td><td>Anota a peça na lista de espera, neste computador.</td></tr>
+    <tr><td><b>Chegou</b></td><td>Cria um lembrete "Chegou peça" em cada cliente da lista. Não envia nada.</td></tr>
+    <tr><td><b>Já enviei</b></td><td>Anota o orçamento no histórico do cliente, muda a etapa para "Orçamento enviado" e marca os retornos (2 h, 1, 3 e 7 dias). Fica neste computador.</td></tr>
+    <tr><td><b>Adicionar à Ficha</b></td><td>Põe a moto que o cliente citou na Ficha dele, neste computador.</td></tr>
+    <tr><td><b>PDF</b></td><td>Baixa o PDF do pedido. Você anexa na conversa pelo clipe.</td></tr>
+    <tr><td>Arrastar a foto da peça</td><td>Anexa a foto com a ficha da peça na conversa. Você revisa e envia.</td></tr>
+  </tbody>
+</table>
+
+<h4 id="p5-onde-fica">Onde cada coisa fica guardada</h4>
+<table>
+  <thead><tr><th>Só neste Chrome (este computador)</th><th>No sistema Integra Vendas (da loja)</th></tr></thead>
+  <tbody>
+    <tr><td>Ficha do cliente: motos, anotações, etapa, retornos</td><td>Pedidos e orçamentos salvos, finalizados ou cancelados</td></tr>
+    <tr><td>Orçamento que você está montando e os orçamentos marcados com "Já enviei"</td><td>Clientes (cadastro), produtos, preços e estoque</td></tr>
+    <tr><td>Lista de espera de peças</td><td>Formas de pagamento e transportadoras</td></tr>
+    <tr><td>Respostas prontas</td><td>Suas vendas do mês</td></tr>
+    <tr><td>Ajustes da loja (nome, Pix, seu nome) e o que a busca aprendeu</td><td>Seu usuário, seu limite de desconto e de acréscimo</td></tr>
+  </tbody>
+</table>
+
+<figure>
+  <img loading="lazy" width="680" height="900" src="img/p5-15-ajustes-limites-dados.png" alt="Aba Ajustes com a conta, os limites e a parte de privacidade">
+  <figcaption>(1) Seus limites, vindos do sistema: "Desconto até …" e "Acréscimo até …". (2) O lembrete de que a ficha do cliente fica só neste navegador. (3) <b>Exportar backup</b> baixa um arquivo com tudo o que está neste Chrome; <b>Importar</b> traz de volta.</figcaption>
+</figure>
+
+<div class="atencao">Se você limpar os dados do Chrome, trocar de computador ou clicar em <b>Apagar tudo</b> (aba Ajustes), as fichas, a lista de espera e as respostas somem deste computador. <b>Apagar tudo</b> pede confirmação e não dá para desfazer. Faça <b>Exportar backup</b> de vez em quando. Os pedidos do sistema não somem.</div>
+
+<ul>
+  <li><b>Sua senha não é guardada.</b> Ela só é usada na hora de entrar.</li>
+  <li><b>Uma sessão por vendedor:</b> entrar pela extensão desconecta a web ou o app do Integra Vendas aberto com o mesmo usuário.</li>
+  <li><b>Desfocar conversas</b> (aba Ajustes): embaça as conversas para o cliente no balcão não ler. Passe o mouse em cima para ver.</li>
+</ul>
+
+<h4 id="p5-limites">Limite de desconto e de acréscimo</h4>
+<p>Cada vendedor tem um limite de desconto e um de acréscimo, definidos no sistema da loja. A extensão respeita esses limites:</p>
+<ul>
+  <li>No orçamento, o desconto de cada item aparece numa etiqueta. Fica verde se está dentro do limite e vermelha se passou.</li>
+  <li>Os botões de condição (ex.: "À vista 5%") acima do seu limite ficam apagados, com o aviso "Acima do seu limite de desconto".</li>
+  <li>Se passar do limite, <b>Salvar no sistema</b> e <b>Finalizar pedido</b> não deixam seguir e mostram, por exemplo: "Item 1: desconto de 12% passa do seu limite (10%)." O mesmo vale para acréscimo.</li>
+</ul>
+
+<h4>Por que o desconto aparece com vírgula (ex.: 6,25%)</h4>
+<p>O sistema da loja trabalha com desconto em porcentagem, não em reais. Quando você digita um preço, a extensão calcula a porcentagem de desconto sobre o preço de tabela e arredonda para 2 casas depois da vírgula (ex.: 6,25%). É essa porcentagem que vai para o sistema. Por causa do arredondamento, o valor no sistema pode diferir alguns centavos do que você digitou. O desconto extra em reais do orçamento também é espalhado entre os itens em porcentagem, para o total do sistema bater com o que o cliente viu.</p>
+
+<!-- ============================================================ -->
+<h3 id="p5-faq">Perguntas frequentes e problemas</h3>
+
+<details><summary>O painel sumiu. Como trago de volta?</summary>
+<p>Você deve ter clicado em "Recolher painel" (o último ícone no alto do painel). Procure na borda direita da tela uma aba verde escrita <b>Integra Vendas</b> e clique nela. Se nem a aba aparecer, atualize a página do WhatsApp com <kbd>F5</kbd>.</p>
+<figure>
+  <img loading="lazy" width="1600" height="900" src="img/p5-19-painel-recolhido.png" alt="Painel recolhido com a aba Integra Vendas na borda direita">
+  <figcaption>(1) Com o painel recolhido, clique na aba <b>Integra Vendas</b> na borda direita para abrir de novo.</figcaption>
+</figure>
+</details>
+
+<details><summary>Apareceu "Extensão recarregada — atualize a página do WhatsApp (F5)."</summary>
+<p>A extensão foi atualizada ou reiniciada, e a página do WhatsApp ainda está com a versão antiga. Aperte <kbd>F5</kbd> no WhatsApp Web. O que você já tinha anotado não se perde.</p>
+</details>
+
+<details><summary>Não consigo entrar (login) ou aparece "desconectado — entrar".</summary>
+<p>Clique em "desconectado — entrar" no alto do painel (ou abra a aba Ajustes), digite o e-mail e a senha do Integra Vendas e clique em <b>Entrar</b>. Mensagens que podem aparecer:</p>
+<ul>
+  <li>"Sem conexão com o IntegraVendas." — confira a internet. Se a loja usa outro endereço, clique em "Alterar endereço da API" e peça o endereço certo ao responsável.</li>
+  <li>"Sessão expirada — entre de novo no IntegraVendas." — entre de novo. Isso acontece, por exemplo, quando você entra com o mesmo usuário na web ou no app.</li>
+  <li>"O servidor do IntegraVendas deu erro interno." — o problema é no sistema da loja. Tente mais tarde e avise o responsável.</li>
+</ul>
+</details>
+
+<details><summary>Apareceu "Muitas requisições seguidas; tente em alguns segundos."</summary>
+<p>O sistema limita quantos pedidos de informação chegam por segundo. Espere alguns segundos e clique de novo.</p>
+</details>
+
+<details><summary>O produto não aparece na busca.</summary>
+<p>Digite pelo menos 3 letras; a busca só começa a partir daí. Se aparecer "Nada no estoque com …", tente outra palavra (ex.: "kit relacao" em vez do apelido) ou o código da peça. Se a busca trocou sua palavra, aparece "Nada com … Mostrando …". Veja a parte 2 para dicas de busca.</p>
+</details>
+
+<details><summary>O cliente não está vinculado ao sistema.</summary>
+<p>Se aparecer "Este telefone não está no cadastro de nenhum cliente. Busque pelo nome.", clique em <b>Trocar</b> (ou use o campo de busca) e procure pelo nome, pela cidade ou pelo CNPJ. Sem cliente vinculado, o pedido não finaliza: aparece "Vincule o cliente do sistema (acima)." Veja <a href="#p2-busca-cliente">Como achar o cliente pelo nome</a>.</p>
+</details>
+
+<details><summary>Não acho o cliente pelo nome.</summary>
+<p>A busca já ignora acento, "da/de/ltda" e erro de uma ou duas letras. Se mesmo assim não vier:</p>
+<ul>
+  <li>Use a palavra mais rara do nome (o sobrenome) ou o nome da oficina.</li>
+  <li>Junte uma palavra do nome com a cidade: "chagas eusebio".</li>
+  <li>Peça o CNPJ ou CPF ao cliente e digite com os pontos.</li>
+  <li>Apelido ("Chico", "Zé da moto") só funciona se estiver no cadastro.</li>
+</ul>
+<p>Se aparecer <b>Nenhum cliente com "…", nem parecido.</b>, o cliente não tem cadastro com esse nome. Peça o cadastro ao setor responsável.</p>
+</details>
+
+<details><summary>A busca de cliente mostra "20 mais parecidos de 680". Onde estão os outros?</summary>
+<p>O painel mostra só os 20 melhores para a lista caber na tela. Se o cliente certo não está entre eles, <b>acrescente uma palavra</b> (sobrenome, oficina ou cidade). Com mais de 500 resultados aparece o aviso "digite mais uma palavra do nome ou a cidade".</p>
+</details>
+
+<details><summary>Apareceu "Nada com … exato; parecidos com …". Posso vincular?</summary>
+<p>Pode, depois de conferir. Esse aviso quer dizer que você provavelmente errou uma letra e o painel achou nomes parecidos. Confira o CNPJ, a cidade e o telefone da linha antes de clicar em <b>Vincular</b>.</p>
+</details>
+
+<details><summary>O botão Cotar não aparece na mensagem.</summary>
+<p>O botão <b>Cotar</b> aparece ao passar o mouse sobre uma mensagem <b>do cliente</b> que parece ter peças. Nas suas mensagens (as da direita) ele não aparece nunca. Se o cliente escreveu algo que não parece peça ("bom dia"), também não aparece. Se ao clicar aparecer "Não achei peças nessa mensagem.", busque a peça à mão. Se aparecer "Entre no Integra Vendas para cotar.", entre primeiro. Veja a parte 3.</p>
+</details>
+
+<details><summary>Troquei de conversa. O orçamento que eu estava montando sumiu?</summary>
+<p>Não. Cada cliente tem o seu orçamento em montagem, guardado neste Chrome. Volte à conversa dele e o orçamento estará lá. Ele só é esvaziado quando você clica em <b>Já enviei</b> (vira histórico), quando o pedido é finalizado com sucesso, ou quando você clica em <b>Limpar</b> e depois em <b>Confirmar: limpar tudo</b>.</p>
+</details>
+
+<details><summary>O Finalizar pedido não deixa. O que falta?</summary>
+<p>A extensão mostra embaixo dos botões, em vermelho, tudo o que impede. As mensagens possíveis são:</p>
+<ul>
+  <li>"Vincule o cliente do sistema (acima)."</li>
+  <li>"Item N (…) não veio do sistema — busque pelo estoque." — item digitado à mão ("Item manual") não pode ir para o pedido. Apague e busque a peça no estoque.</li>
+  <li>"Item N: quantidade zerada."</li>
+  <li>"Item N: quantidade precisa ser múltiplo de …" — a peça é vendida em caixas ou pacotes (veja Múltiplo no glossário).</li>
+  <li>"Item N: desconto de …% passa do seu limite (…%)." ou o mesmo para acréscimo.</li>
+  <li>"A empresa exige forma de pagamento." / "A empresa exige transportadora."</li>
+  <li>"(forma de pagamento) exige pedido mínimo de R$ …"</li>
+  <li>"Orçamento sem itens."</li>
+</ul>
+<p>Avisos em laranja (ex.: "Forma de pagamento não escolhida.", "Frete sem valor") não impedem; são só para conferir.</p>
+<figure>
+  <img loading="lazy" width="1600" height="900" src="img/p5-17-finalizar-bloqueado.png" alt="Mensagem de erro embaixo do botão Finalizar pedido">
+  <figcaption>(1) Clicou em <b>Finalizar pedido</b>. (2) A extensão explica o que falta: aqui, um item foi digitado à mão e não veio do sistema.</figcaption>
+</figure>
+</details>
+
+<details><summary>Apareceu "Pedido nº … foi criado, mas: … Confira na web do vendedor."</summary>
+<p>O pedido foi criado no sistema, mas algum item ou dado não entrou. Abra o pedido na web do vendedor do Integra Vendas e confira. Se clicar de novo em salvar, a extensão atualiza o mesmo pedido; não cria outro.</p>
+</details>
+
+<details><summary>A foto da peça não arrasta.</summary>
+<p>Só dá para arrastar quando a peça tem foto no sistema (a miniatura mostra a imagem, não o ícone de caixa). Arraste e solte em cima da conversa aberta. Se aparecer "Já tem uma foto esperando envio: envie ou descarte antes de arrastar outra.", envie ou feche a foto que já está na tela. Se aparecer "Foto anexada, mas não achei a legenda: cole a ficha à mão.", a ficha foi copiada: cole no campo de legenda. Veja a parte 2.</p>
+</details>
+
+<details><summary>O anel colorido e a etiqueta de "próximo passo" não aparecem na lista de conversas.</summary>
+<p>Eles só aparecem para clientes que já têm algo anotado (etapa, orçamento, retorno). Cliente na etapa "Novo" não ganha marca. O anel só aparece quando há urgência (vermelho, amarelo ou verde). Se nenhum cliente ganha marca, abra a aba Ajustes, clique em <b>Diagnóstico da página</b> e veja se há ✗ ou ⚠. Veja a parte 4 sobre as cores.</p>
+<figure>
+  <img loading="lazy" width="663" height="207" src="img/p5-16-diagnostico.png" alt="Diagnóstico da página com itens marcados como ok e com atenção">
+  <figcaption>✓ quer dizer que a extensão achou aquela parte do WhatsApp. ✗ ou ⚠ quer dizer que o WhatsApp mudou a página; a extensão desliga só o recurso afetado. Tente <kbd>F5</kbd> e, se continuar, avise o responsável pela extensão.</figcaption>
+</figure>
+</details>
+
+<details><summary>Cliquei num cliente na aba Hoje e a conversa não abriu.</summary>
+<p>Se aparecer "Não achei "…" na lista. Procure pelo nome na busca do WhatsApp.", o cliente não está visível na lista de conversas. Digite o nome dele na busca do WhatsApp e abra a conversa.</p>
+</details>
+
+<details><summary>Cliquei em Inserir e o texto não apareceu na caixa de mensagem.</summary>
+<p>Se aparecer "Não achei a caixa de mensagem; texto copiado para colar.", clique na caixa de mensagem do WhatsApp e cole com <kbd>Ctrl</kbd>+<kbd>V</kbd>. Isso acontece quando nenhuma conversa está aberta.</p>
+</details>
+
+<details><summary>Marquei "Chegou", mas o cliente não recebeu nada.</summary>
+<p>Está certo: o <b>Chegou</b> não envia mensagem. Ele cria um lembrete "Chegou peça" em cada cliente. Abra a conversa de cada um, vá em <b>Retornos</b> e envie.</p>
+</details>
+
+<details><summary>A peça chegou, mas a aba Hoje não mostra "Tem no estoque".</summary>
+<p>A conferência roda no máximo a cada 5 minutos e só para as 8 primeiras peças da lista. Ela também precisa que você esteja conectado. Se você já sabe que chegou, clique em <b>Chegou</b> mesmo assim.</p>
+</details>
+
+<details><summary>O cartão "Minhas vendas" ou "Em orçamento no sistema" não aparece.</summary>
+<p>Os dois vêm do sistema da loja. Você precisa estar conectado. "Minhas vendas" só aparece se houver venda concluída nos últimos meses.</p>
+</details>
+
+<details><summary>O Resultado mostra "Nenhuma negociação no período".</summary>
+<p>Só entram clientes que tiveram a etapa mudada no período escolhido (orçamento enviado, Pix, venda). Tente 30 ou 90 dias. Lembre de mudar a etapa dos clientes na conversa; é isso que alimenta o Funil e o Resultado.</p>
+</details>
+
+<details><summary>Troquei de computador e minhas fichas e respostas sumiram.</summary>
+<p>Elas ficam só no Chrome onde foram criadas. No computador antigo, use <b>Exportar backup</b> (aba Ajustes). No novo, use <b>Importar</b> e escolha o arquivo. Os pedidos do sistema continuam lá, em qualquer computador.</p>
+</details>
+
+<details><summary>Instalei, mas o painel não aparece no WhatsApp.</summary>
+<ul>
+  <li>Aperte <kbd>F5</kbd> na aba do WhatsApp Web. O painel só entra quando a página carrega.</li>
+  <li>Confira em <b>chrome://extensions</b> se o cartão <b>Integra Vendas para WhatsApp</b> está com a chave ligada.</li>
+  <li>Use o WhatsApp <b>Web</b> no Chrome (web.whatsapp.com). No aplicativo do Windows a extensão não funciona.</li>
+  <li>Se você usa o instalador e clicou em "Desativar" no aviso do Chrome sobre modo de desenvolvedor, ligue a chave do cartão de novo.</li>
+</ul>
+</details>
+
+<details><summary>O Chrome mostra "Desativar extensões no modo de desenvolvedor".</summary>
+<p>É um aviso normal do Chrome para extensões instaladas pelo instalador. Feche no <b>X</b>. Não clique em <b>Desativar</b>. Nos computadores do Chrome da empresa esse aviso não aparece.</p>
+</details>
+
+<details><summary>Como sei se estou na versão mais nova?</summary>
+<p>Abra <b>chrome://extensions</b> e veja o número no cartão <b>Integra Vendas para WhatsApp</b>. Compare com o número que o responsável avisou. No Chrome da empresa a atualização é sozinha; com o instalador, rode o instalador novo, clique em <b>Recarregar</b> no cartão e aperte <kbd>F5</kbd> no WhatsApp.</p>
+</details>
+
+<details><summary>Rodar o instalador de novo apaga minhas fichas?</summary>
+<p>Não. O instalador troca só os arquivos da extensão. Fichas, etapas, retornos, respostas prontas e o seu e-mail continuam no Chrome. Mesmo assim, fazer <b>Exportar backup</b> de vez em quando é uma boa ideia.</p>
+</details>
+
+<!-- ============================================================ -->
+<h3 id="p5-glossario">Glossário</h3>
+<dl>
+  <dt>Orçamento</dt>
+  <dd>Lista de peças com preço que você manda ao cliente. Pode ficar só no painel ou ser salvo no sistema como pedido em orçamento (<b>Salvar no sistema</b>).</dd>
+  <dt>Vincular</dt>
+  <dd>Ligar a conversa do WhatsApp a um cliente do cadastro do sistema. É o que permite tirar o pedido no nome dele.</dd>
+  <dt>Razão social / Nome fantasia</dt>
+  <dd>Razão social é o nome oficial da empresa (o da nota). Nome fantasia é o nome da fachada, como o cliente é conhecido. A busca de cliente procura nos dois.</dd>
+  <dt>Parecidos</dt>
+  <dd>Resultado que a busca de cliente mostra quando nada bate exatamente, tolerando erro de digitação. Confira antes de vincular.</dd>
+  <dt>Chrome da empresa</dt>
+  <dd>Computador cadastrado no painel de gerenciamento da empresa: a extensão chega e se atualiza sozinha e aparece como "Instalada pela sua organização".</dd>
+  <dt>Pedido</dt>
+  <dd>O orçamento salvo no sistema Integra Vendas, com número (ex.: "Pedido nº 119900").</dd>
+  <dt>Finalizar</dt>
+  <dd>Mandar o pedido para o faturamento. Depois de finalizado, ele não pode mais ser mudado pela extensão.</dd>
+  <dt>Etapa</dt>
+  <dd>Em que ponto o cliente está: Novo, Orçamento enviado, Aguardando Pix, Pago, Separando, Enviado/Retirado, Pós-venda ou Perdido.</dd>
+  <dt>Retorno (follow-up)</dt>
+  <dd>Lembrete para voltar a falar com o cliente numa data e hora, com um texto pronto.</dd>
+  <dt>Cadência</dt>
+  <dd>A sequência automática de retornos depois de um orçamento: 2 horas, 1 dia, 3 dias e 7 dias. Para quando o cliente compra ou é marcado como perdido.</dd>
+  <dt>Ficha</dt>
+  <dd>O cadastro do cliente dentro da extensão: motos, quilometragem, anotações. Fica só neste Chrome.</dd>
+  <dt>Lista de espera</dt>
+  <dd>Peças em falta que um cliente quer. A aba Hoje avisa quando elas entram no estoque.</dd>
+  <dt>Múltiplo</dt>
+  <dd>Quantidade mínima de venda de uma peça. Se o múltiplo é 10, só dá para vender 10, 20, 30…</dd>
+  <dt>CIF / FOB</dt>
+  <dd>Quem paga o frete. CIF: a loja paga (deixe 0 se for grátis). FOB: o cliente paga.</dd>
+  <dt>Tabela</dt>
+  <dd>O preço de tabela da peça no sistema. O desconto e o acréscimo são calculados em cima dele.</dd>
+  <dt>Mínimo</dt>
+  <dd>Valor mínimo de pedido exigido por algumas formas de pagamento ("exige pedido mínimo de R$ …").</dd>
+  <dt>Limite de desconto / acréscimo</dt>
+  <dd>A maior porcentagem que você pode dar de desconto ou cobrar a mais. Vem do sistema e aparece na aba Ajustes.</dd>
+  <dt>Mediana</dt>
+  <dd>O valor "do meio" de uma lista. Usada no Resultado para dizer o tempo típico.</dd>
+</dl>
+
+<!-- ============================================================ -->
+<h3 id="p5-um-dia">Um dia no balcão com a extensão</h3>
+
+<div class="exemplo">
+<p><b>8h — abrindo o dia.</b> Você abre o WhatsApp Web no Chrome. O painel aparece à direita (parte 1). Clica na aba <b>Hoje</b>: 3 retornos, 1 orçamento parado e a coroa da CG 160 marcada como "Tem no estoque". Clica em <b>Chegou</b> e depois avisa o cliente pela aba Retornos (esta parte e a parte 4).</p>
+
+<p><b>9h05 — número novo.</b> Chega "bom dia, aqui é a Fátima da oficina de Pacatuba". O painel procura pelo telefone e não acha. Você clica em <b>Trocar</b>, digita "fatima pacatuba" e a oficina dela aparece no topo; <kbd>Enter</kbd> vincula. Da próxima vez, esse WhatsApp já vem reconhecido (parte 2).</p>
+
+<p><b>9h15 — chega uma lista.</b> A "Oficina do Zé" manda: "2 kit tração cg 160, 1 guidon titan". Você passa o mouse na mensagem e clica em <b>Cotar</b> (parte 3). O painel busca as peças; você confere e clica para pôr tudo no orçamento (partes 2 e 3).</p>
+
+<p><b>9h20 — mandando o orçamento.</b> Você escolhe a condição (a prazo ou à vista), confere o total e clica em <b>Enviar no chat</b>. O texto vai para a caixa de mensagem; você lê e aperta Enviar. Depois clica em <b>Já enviei</b>: o cliente vai para "Orçamento enviado" e os retornos são marcados (partes 2 e 4).</p>
+
+<p><b>11h — o cliente fecha.</b> O Zé responde "pode fechar". O painel mostra "Cliente quer fechar" e o que ainda falta (parte 3). Você confere o cliente vinculado, escolhe a forma de pagamento e o frete, clica em <b>Finalizar pedido</b> e confirma em <b>Sim, finalizar</b> (parte 2). A etapa muda sozinha para "Separando".</p>
+
+<p><b>14h — pedido pronto.</b> Você muda a etapa para "Enviado/Retirado" e usa a resposta pronta "Pronto pra retirar" pela aba <b>Respostas</b> (esta parte e a parte 4).</p>
+
+<p><b>Dias depois — pós-venda.</b> Você passa o cliente para "Pós-venda". Com a moto na Ficha, a aba Hoje avisa quando a troca de óleo estiver perto (parte 4 e esta parte).</p>
+
+<p><b>18h — fechando o dia.</b> Você olha o <b>Funil</b> e o <b>Resultado</b> na aba Hoje, marca o motivo dos perdidos e faz <b>Exportar backup</b> na aba Ajustes de vez em quando.</p>
+</div>
+
+</section>
+
+  </main>
+</div>
+<button class="topo" type="button" id="topo" hidden>↑ Topo</button>
+<script>
+  document.querySelectorAll('main table').forEach((t) => { if (!t.parentElement.classList.contains('tabela')) { const w = document.createElement('div'); w.className = 'tabela'; t.before(w); w.append(t); } });
+  document.addEventListener('click', (e) => {
+    const img = e.target.closest('figure img');
+    if (img) { const z = document.createElement('div'); z.className = 'zoom'; z.setAttribute('role', 'dialog'); z.setAttribute('aria-label', img.alt || 'Imagem ampliada'); const i = new Image(); i.src = img.src; i.alt = img.alt; z.append(i); z.addEventListener('click', () => z.remove()); document.body.append(z); return; }
+    if (e.target.closest('#toc-titulo')) document.getElementById('toc').classList.toggle('aberto');
+    if (e.target.closest('#toc a') && innerWidth <= 900) document.getElementById('toc').classList.remove('aberto');
+  });
+  document.addEventListener('keydown', (e) => { if (e.key === 'Escape') document.querySelector('.zoom')?.remove(); });
+  const topo = document.getElementById('topo');
+  topo.addEventListener('click', () => scrollTo({ top: 0 }));
+  addEventListener('scroll', () => { topo.hidden = scrollY < 900; }, { passive: true });
+</script>
